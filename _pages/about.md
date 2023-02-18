@@ -6,7 +6,7 @@ author_profile: true
 ---
 
 
-This is some sample text. $Ax=b$
+This is some sample text. $$Ax=b$$
 
 $$Ax=b$$
 
