@@ -1,6 +1,14 @@
 # main links
 main:
-  - title: "Blog posts"
+  - title: "Publications and posters"
+    url: /publications/
+  #- title: "Blog posts"
+  #  url: /blogs/
+  - title: "Hyperspectral Thermal Imaging"
+    url: /HSTI/
+  - title: "Photography"
+    url: /Photography/
+  - title: "All posts"
     url: /blogs/
   - title: "About"
     url: /about/

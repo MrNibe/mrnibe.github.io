@@ -1,0 +1,1289 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="last_modified_at" content="2018-03-20T16:00:34-04:00">
+<meta name="permalink" content="/docs/docs-2-2/">
+<meta name="excerpt" content="&quot;Setup and installation instructions for Minimal Mistakes 2.2 (deprecated).&quot;">
+<meta name="toc" content="true"><style>body {
+  max-width: 980px;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 45px;
+}
+
+@font-face {
+  font-family: fontawesome-mini;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+.markdown-body {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body b,
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body sub,
+.markdown-body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.markdown-body sup {
+  top: -0.5em;
+}
+.markdown-body sub {
+  bottom: -0.25em;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body .codehilitetable,
+.markdown-body .highlighttable {
+  border: 0;
+  border-spacing: 0;
+}
+
+.markdown-body .codehilitetable tr,
+.markdown-body .highlighttable {
+  border: 0;
+}
+
+.markdown-body .codehilitetable pre,
+.markdown-body .codehilitetable div.codehilite,
+.markdown-body .highlighttable pre,
+.markdown-body .highlighttable div.highlight {
+  margin: 0;
+}
+
+.markdown-body .linenos,
+.markdown-body .code,
+.markdown-body .codehilitetable td,
+.markdown-body .highlighttable td {
+  border: 0;
+  padding: 0;
+}
+
+.markdown-body td:not(.linenos) .linenodiv {
+  padding: 0 !important;
+}
+
+.markdown-body .code {
+  width: 100%;
+}
+
+.markdown-body .linenos div pre,
+.markdown-body .linenodiv pre,
+.markdown-body .linenodiv {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.markdown-body .code div pre,
+.markdown-body .code div {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.4;
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before,
+.markdown-body hr:after {
+  display: table;
+  content: " ";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -moz-linear-gradient(#fefefe, #e7e7e7);
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  border-radius: 2px;
+  border: 1px solid #cfcfcf;
+  color: #000;
+  padding: 3px 5px;
+  line-height: 10px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  display: inline-block;
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .headerlink {
+  font: normal 400 16px fontawesome-mini;
+  vertical-align: middle;
+  margin-left: -16px;
+  float: left;
+  display: inline-block;
+  text-decoration: none;
+  opacity: 0;
+  color: #333;
+}
+
+.markdown-body .headerlink:focus {
+  outline: none;
+}
+
+.markdown-body h1 .headerlink {
+  margin-top: 0.8rem;
+}
+
+.markdown-body h2 .headerlink,
+.markdown-body h3 .headerlink {
+  margin-top: 0.6rem;
+}
+
+.markdown-body h4 .headerlink {
+  margin-top: 0.2rem;
+}
+
+.markdown-body h5 .headerlink,
+.markdown-body h6 .headerlink {
+  margin-top: 0;
+}
+
+.markdown-body .headerlink:hover,
+.markdown-body h1:hover .headerlink,
+.markdown-body h2:hover .headerlink,
+.markdown-body h3:hover .headerlink,
+.markdown-body h4:hover .headerlink,
+.markdown-body h5:hover .headerlink,
+.markdown-body h6:hover .headerlink {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre,
+.markdown-body .admonition {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code,
+.markdown-body samp {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .codehilite,
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+/* Admonition */
+.markdown-body .admonition {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  border-left: 6px solid #333;
+  padding: 10px 10px 10px 30px;
+}
+
+.markdown-body .admonition table {
+  color: #333;
+}
+
+.markdown-body .admonition p {
+  padding: 0;
+}
+
+.markdown-body .admonition-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.markdown-body .admonition>.admonition-title {
+  color: #333;
+}
+
+.markdown-body .attention>.admonition-title {
+  color: #a6d796;
+}
+
+.markdown-body .caution>.admonition-title {
+  color: #d7a796;
+}
+
+.markdown-body .hint>.admonition-title {
+  color: #96c6d7;
+}
+
+.markdown-body .danger>.admonition-title {
+  color: #c25f77;
+}
+
+.markdown-body .question>.admonition-title {
+  color: #96a6d7;
+}
+
+.markdown-body .note>.admonition-title {
+  color: #d7c896;
+}
+
+.markdown-body .admonition:before,
+.markdown-body .attention:before,
+.markdown-body .caution:before,
+.markdown-body .hint:before,
+.markdown-body .danger:before,
+.markdown-body .question:before,
+.markdown-body .note:before {
+  font: normal normal 16px fontawesome-mini;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.markdown-body .admonition:before {
+  content: "\f056\00a0";
+  color: 333;
+}
+
+.markdown-body .attention:before {
+  content: "\f058\00a0";
+  color: #a6d796;
+}
+
+.markdown-body .caution:before {
+  content: "\f06a\00a0";
+  color: #d7a796;
+}
+
+.markdown-body .hint:before {
+  content: "\f05a\00a0";
+  color: #96c6d7;
+}
+
+.markdown-body .danger:before {
+  content: "\f057\00a0";
+  color: #c25f77;
+}
+
+.markdown-body .question:before {
+  content: "\f059\00a0";
+  color: #96a6d7;
+}
+
+.markdown-body .note:before {
+  content: "\f040\00a0";
+  color: #d7c896;
+}
+
+.markdown-body .admonition::after {
+  content: normal;
+}
+
+.markdown-body .attention {
+  border-left: 6px solid #a6d796;
+}
+
+.markdown-body .caution {
+  border-left: 6px solid #d7a796;
+}
+
+.markdown-body .hint {
+  border-left: 6px solid #96c6d7;
+}
+
+.markdown-body .danger {
+  border-left: 6px solid #c25f77;
+}
+
+.markdown-body .question {
+  border-left: 6px solid #96a6d7;
+}
+
+.markdown-body .note {
+  border-left: 6px solid #d7c896;
+}
+
+.markdown-body .admonition>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body .admonition>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* progress bar*/
+.markdown-body .progress {
+  display: block;
+  width: 300px;
+  margin: 10px 0;
+  height: 24px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #ededed;
+  position: relative;
+  box-shadow: inset -1px 1px 3px rgba(0, 0, 0, .1);
+}
+
+.markdown-body .progress-label {
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  width: 100%; margin: 0;
+  line-height: 24px;
+  color: #333;
+  text-shadow: 1px 1px 0 #fefefe, -1px -1px 0 #fefefe, -1px 1px 0 #fefefe, 1px -1px 0 #fefefe, 0 1px 0 #fefefe, 0 -1px 0 #fefefe, 1px 0 0 #fefefe, -1px 0 0 #fefefe, 1px 1px 2px #000;
+  -webkit-font-smoothing: antialiased !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.markdown-body .progress-bar {
+  height: 24px;
+  float: left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #96c6d7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .1);
+  background-size: 30px 30px;
+  background-image: -webkit-linear-gradient(
+    135deg, rgba(255, 255, 255, .4) 27%,
+    transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%,
+    transparent 77%, transparent
+  );
+  background-image: -moz-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -ms-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -o-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+}
+
+.markdown-body .progress-100plus .progress-bar {
+  background-color: #a6d796;
+}
+
+.markdown-body .progress-80plus .progress-bar {
+  background-color: #c6d796;
+}
+
+.markdown-body .progress-60plus .progress-bar {
+  background-color: #d7c896;
+}
+
+.markdown-body .progress-40plus .progress-bar {
+  background-color: #d7a796;
+}
+
+.markdown-body .progress-20plus .progress-bar {
+  background-color: #d796a6;
+}
+
+.markdown-body .progress-0plus .progress-bar {
+  background-color: #c25f77;
+}
+
+.markdown-body .candystripe-animate .progress-bar{
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+  animation: animate-stripes 3s linear infinite;
+}
+
+@-webkit-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@-moz-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+.markdown-body .gloss .progress-bar {
+  box-shadow:
+    inset 0 4px 12px rgba(255, 255, 255, .7),
+    inset 0 -12px 0 rgba(0, 0, 0, .05);
+}
+
+/* MultiMarkdown Critic Blocks */
+.markdown-body .critic_mark {
+  background: #ff0;
+}
+
+.markdown-body .critic_delete {
+  color: #c82829;
+  text-decoration: line-through;
+}
+
+.markdown-body .critic_insert {
+  color: #718c00 ;
+  text-decoration: underline;
+}
+
+.markdown-body .critic_comment {
+  color: #8e908c;
+  font-style: italic;
+}
+
+.markdown-body .headeranchor {
+  font: normal normal 16px fontawesome-mini;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.headeranchor:before {
+  content: '\e157';
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 4px 0.25em -20px;
+  vertical-align: middle;
+}
+
+.markdown-body diagram-div, .markdown-body div.uml-sequence-diagram, .markdown-body, div.uml-flowchart {
+  overflow: auto;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  .markdown-body {
+    font-size:14px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .markdown-body {
+    font-size:16px;
+  }
+}
+
+@media print {
+  .markdown-body * {
+    background: transparent !important;
+    color: black !important;
+    filter:none !important;
+    -ms-filter: none !important;
+  }
+
+  .markdown-body {
+    font-size:12pt;
+    max-width:100%;
+    outline:none;
+    border: 0;
+  }
+
+  .markdown-body a,
+  .markdown-body a:visited {
+    text-decoration: underline;
+  }
+
+  .markdown-body .headeranchor-link {
+    display: none;
+  }
+
+  .markdown-body a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  .markdown-body abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .markdown-body .ir a:after,
+  .markdown-body a[href^="javascript:"]:after,
+  .markdown-body a[href^="#"]:after {
+    content: "";
+  }
+
+  .markdown-body pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .markdown-body pre,
+  .markdown-body blockquote {
+    border: 1px solid #999;
+    padding-right: 1em;
+    page-break-inside: avoid;
+  }
+
+  .markdown-body .progress,
+  .markdown-body .progress-bar {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .markdown-body .progress {
+    border: 1px solid #ddd;
+  }
+
+  .markdown-body .progress-bar {
+    height: 22px;
+    border-right: 1px solid #ddd;
+  }
+
+  .markdown-body tr,
+  .markdown-body img {
+    page-break-inside: avoid;
+  }
+
+  .markdown-body img {
+    max-width: 100% !important;
+  }
+
+  .markdown-body p,
+  .markdown-body h2,
+  .markdown-body h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .markdown-body h2,
+  .markdown-body h3 {
+    page-break-after: avoid;
+  }
+}
+</style><style>/*GitHub*/
+.highlight {background-color:#fff;color:#333333;}
+.highlight .hll {background-color:#ffffcc;}
+.highlight .c{color:#999988;font-style:italic}
+.highlight .err{color:#a61717;background-color:#e3d2d2}
+.highlight .k{font-weight:bold}
+.highlight .o{font-weight:bold}
+.highlight .cm{color:#999988;font-style:italic}
+.highlight .cp{color:#999999;font-weight:bold}
+.highlight .c1{color:#999988;font-style:italic}
+.highlight .cs{color:#999999;font-weight:bold;font-style:italic}
+.highlight .gd{color:#000000;background-color:#ffdddd}
+.highlight .ge{font-style:italic}
+.highlight .gr{color:#aa0000}
+.highlight .gh{color:#999999}
+.highlight .gi{color:#000000;background-color:#ddffdd}
+.highlight .go{color:#888888}
+.highlight .gp{color:#555555}
+.highlight .gs{font-weight:bold}
+.highlight .gu{color:#800080;font-weight:bold}
+.highlight .gt{color:#aa0000}
+.highlight .kc{font-weight:bold}
+.highlight .kd{font-weight:bold}
+.highlight .kn{font-weight:bold}
+.highlight .kp{font-weight:bold}
+.highlight .kr{font-weight:bold}
+.highlight .kt{color:#445588;font-weight:bold}
+.highlight .m{color:#009999}
+.highlight .s{color:#dd1144}
+.highlight .n{color:#333333}
+.highlight .na{color:teal}
+.highlight .nb{color:#0086b3}
+.highlight .nc{color:#445588;font-weight:bold}
+.highlight .no{color:teal}
+.highlight .ni{color:purple}
+.highlight .ne{color:#990000;font-weight:bold}
+.highlight .nf{color:#990000;font-weight:bold}
+.highlight .nn{color:#555555}
+.highlight .nt{color:navy}
+.highlight .nv{color:teal}
+.highlight .ow{font-weight:bold}
+.highlight .w{color:#bbbbbb}
+.highlight .mf{color:#009999}
+.highlight .mh{color:#009999}
+.highlight .mi{color:#009999}
+.highlight .mo{color:#009999}
+.highlight .sb{color:#dd1144}
+.highlight .sc{color:#dd1144}
+.highlight .sd{color:#dd1144}
+.highlight .s2{color:#dd1144}
+.highlight .se{color:#dd1144}
+.highlight .sh{color:#dd1144}
+.highlight .si{color:#dd1144}
+.highlight .sx{color:#dd1144}
+.highlight .sr{color:#009926}
+.highlight .s1{color:#dd1144}
+.highlight .ss{color:#990073}
+.highlight .bp{color:#999999}
+.highlight .vc{color:teal}
+.highlight .vg{color:teal}
+.highlight .vi{color:teal}
+.highlight .il{color:#009999}
+.highlight .gc{color:#999;background-color:#EAF2F5}
+</style><title>"2.2 Documentation"</title></head><body><article class="markdown-body"><h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link"></a></h2>
+<p>Minimal Mistakes now requires <a href="http://jekyllrb.com/">Jekyll</a> 3.0. Make sure to run <code>bundle update</code> if you aren&rsquo;t on the latest version to update all gem dependencies.</p>
+<p>If you are creating a new Jekyll site using Minimal Mistakes follow these steps:</p>
+<ol>
+<li>Fork the <a href="http://github.com/mmistakes/minimal-mistakes/fork">Minimal Mistakes repo</a>.</li>
+<li>Clone the repo you just forked and rename it.</li>
+<li><a href="http://bundler.io">Install Bundler</a> <code>gem install bundler</code> and Run <code>bundle install</code> to install all dependencies (Jekyll, <a href="https://github.com/jekyll/jekyll-sitemap">Jekyll-Sitemap</a>, <a href="https://github.com/octopress/octopress">Octopress</a>, etc)</li>
+<li>Update <code>config.yml</code>, add navigation, and replace demo posts and pages with your own. Full details below.</li>
+</ol>
+<p>If you want to use Minimal Mistakes with an existing Jekyll site follow these steps:</p>
+<ol>
+<li><a href="https://github.com/mmistakes/minimal-mistakes/releases/tag/2.2.1">Download Minimal Mistakes</a> and unzip.</li>
+<li>Rename <code>minimal-mistakes-master</code> to something meaningful ie: <code>new-site</code></li>
+<li>Run <code>bundle install</code> to install all dependencies (Jekyll, <a href="https://github.com/jekyll/jekyll-sitemap">Jekyll-Sitemap</a>, <a href="https://github.com/octopress/octopress">Octopress</a>, etc)</li>
+<li>Remove demo posts/pages and replace with your own posts, pages, and any other content you want to move over.</li>
+<li>Update posts&rsquo; and pages&rsquo; YAML to match variables used by Minimal Mistakes. Full details below.</li>
+<li>Update <code>_config.yml</code> and add navigation links. Full details below.</li>
+</ol>
+<p class="notice"><strong>Pro-tip:</strong> Delete the <code>gh-pages</code> branch after cloning and start fresh by branching off <code>master</code>. There is a bunch of garbage in <code>gh-pages</code> used for the theme&rsquo;s demo site that I&rsquo;m guessing you won&rsquo;t want.</p>
+<h2 id="running-jekyll">Running Jekyll<a class="headerlink" href="#running-jekyll" title="Permanent link"></a></h2>
+<p>The preferred method for running Jekyll is with <code>bundle exec</code>, but if you&rsquo;re willing to deal gem conflicts feel free to go cowboy with a <code>jekyll serve</code> or <code>jekyll build</code>.</p>
+<blockquote>
+<p>In some cases, running executables without bundle exec may work, if the executable happens to be installed in your system and does not pull in any gems that conflict with your bundle.</p>
+<p>However, this is unreliable and is the source of considerable pain. Even if it looks like it works, it may not work in the future or on another machine.</p>
+</blockquote>
+<div class="highlight"><pre>bundle <span class="nb">exec </span>jekyll serve
+</pre></div>
+
+<h2 id="scaffolding">Scaffolding<a class="headerlink" href="#scaffolding" title="Permanent link"></a></h2>
+<p>How Minimal Mistakes is organized and what the various files are. All posts, layouts, includes, stylesheets, assets, and whatever else is grouped nicely under the root folder. The compiled Jekyll site outputs to <code>_site/</code>.</p>
+<div class="highlight"><pre>minimal-mistakes/
+├── _includes/
+<span class="p">|</span>    ├── author-bio.html        <span class="c1"># bio stuff layout. pulls optional owner data from _config.yml</span>
+<span class="p">|</span>    ├── browser-upgrade   <span class="c1"># prompt to install a modern browser for &lt; IE9</span>
+<span class="p">|</span>    ├── disqus-comments   <span class="c1"># Disqus comments script</span>
+<span class="p">|</span>    ├── footer            <span class="c1"># site footer</span>
+<span class="p">|</span>    ├── head              <span class="c1"># site head</span>
+<span class="p">|</span>    ├── navigation        <span class="c1"># site top navigation</span>
+<span class="p">|</span>    ├── open-graph.html        <span class="c1"># Twitter Cards and Open Graph meta data</span>
+<span class="p">|</span>    └── scripts           <span class="c1"># site scripts</span>
+├── _layouts/
+<span class="p">|</span>    ├── home.html               <span class="c1"># homepage layout</span>
+<span class="p">|</span>    ├── page.html               <span class="c1"># page layout</span>
+<span class="p">|</span>    ├── post-index.html         <span class="c1"># post index layout</span>
+<span class="p">|</span>    └── post.html               <span class="c1"># single post layout</span>
+├── _posts/                      <span class="c1"># MarkDown formatted posts</span>
+├── _sass/                       <span class="c1"># Sass stylesheets</span>
+├── _templates/                  <span class="c1"># used by Octopress to define YAML variables for new posts/pages</span>
+├── about/                       <span class="c1"># sample about page</span>
+├── assets/
+<span class="p">|</span>    ├── css/                    <span class="c1"># compiled stylesheets</span>
+<span class="p">|</span>    ├── fonts/                  <span class="c1"># webfonts</span>
+<span class="p">|</span>    ├── js/
+<span class="p">|</span>    <span class="p">|</span>   ├── _main.js            <span class="c1"># main JavaScript file, plugin settings, etc</span>
+<span class="p">|</span>    <span class="p">|</span>   ├── plugins/            <span class="c1"># scripts and jQuery plugins to combine with _main.js</span>
+<span class="p">|</span>    <span class="p">|</span>   ├── scripts.min.js      <span class="c1"># concatenated and minified _main.js + plugin scripts</span>
+<span class="p">|</span>    <span class="p">|</span>   └── vendor/             <span class="c1"># vendor scripts to leave alone and load as is</span>
+<span class="p">|</span>    └── less/
+├── images/                      <span class="c1"># images for posts and pages</span>
+├── 404.md                       <span class="c1"># 404 page</span>
+├── feed.xml                     <span class="c1"># Atom feed template</span>
+├── index.md                     <span class="c1"># sample homepage. lists 5 latest posts</span>
+├── posts/                       <span class="c1"># sample post index page. lists all posts in reverse chronology</span>
+└── theme-setup/                 <span class="c1"># theme setup page. safe to remove</span>
+</pre></div>
+
+<h2 id="site-setup">Site Setup<a class="headerlink" href="#site-setup" title="Permanent link"></a></h2>
+<p>A quick checklist of the files you&rsquo;ll want to edit to get up and running.</p>
+<h3 id="site-wide-configuration">Site Wide Configuration<a class="headerlink" href="#site-wide-configuration" title="Permanent link"></a></h3>
+<p><code>_config.yml</code> is your friend. Open it up and personalize it. Most variables are self explanatory but here&rsquo;s an explanation of each if needed:</p>
+<h4 id="title">title<a class="headerlink" href="#title" title="Permanent link"></a></h4>
+<p>The title of your site&hellip; shocker!</p>
+<p>Example <code>title: My Awesome Site</code></p>
+<h4 id="url">url<a class="headerlink" href="#url" title="Permanent link"></a></h4>
+<p>Used to generate absolute urls in <code>sitemap.xml</code>, <code>feed.xml</code>, and for generating canonical URLs in <code>&lt;head&gt;</code>. When developing locally either comment this out or use something like <code>http://localhost:4000</code> so all assets load properly. <em>Don&rsquo;t include a trailing <code>/</code></em>.</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">http://mmistakes.github.io/minimal-mistakes</span>
+<span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">http://localhost:4000</span>
+<span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">//cooldude.github.io</span>
+<span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span>
+</pre></div>
+
+<h4 id="google-analytics-and-webmaster-tools">Google Analytics and Webmaster Tools<a class="headerlink" href="#google-analytics-and-webmaster-tools" title="Permanent link"></a></h4>
+<p>Google Analytics UA and Webmaster Tool verification tags can be entered under <code>owner</code> in <code>_config.yml</code>. For more information on obtaining these meta tags check <a href="http://support.google.com/webmasters/bin/answer.py?hl=en&amp;answer=35179">Google Webmaster Tools</a> and <a href="https://ssl.bing.com/webmaster/configure/verify/ownership">Bing Webmaster Tools</a> support.</p>
+<h3 id="navigation-links">Navigation Links<a class="headerlink" href="#navigation-links" title="Permanent link"></a></h3>
+<p>To set what links appear in the top navigation edit <code>_data/navigation.yml</code>. Use the following format to set the URL and title for as many links as you&rsquo;d like. <em>External links will open in a new window.</em></p>
+<div class="highlight"><pre><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Portfolio</span>
+  <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/portfolio/</span>
+
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Made Mistakes</span>
+  <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">http://mademistakes.com</span>
+</pre></div>
+
+<h2 id="adding-new-content-with-octopress">Adding New Content with Octopress<a class="headerlink" href="#adding-new-content-with-octopress" title="Permanent link"></a></h2>
+<p>While completely optional, I&rsquo;ve included Octopress and some starter templates to automate the creation of new posts and pages. To take advantage of it start by installing the <a href="https://github.com/octopress/octopress">Octopress</a> gem if it isn&rsquo;t already.</p>
+<div class="highlight"><pre><span class="nv">$ </span>gem install octopress
+</pre></div>
+
+<h3 id="new-post">New Post<a class="headerlink" href="#new-post" title="Permanent link"></a></h3>
+<p>Default command</p>
+<div class="highlight"><pre><span class="nv">$ </span>octopress new post <span class="s2">&quot;Post Title&quot;</span>
+</pre></div>
+
+<p>Default works great if you want all your posts in one directory, but if you&rsquo;re like me and want to group them into subfolders like <code>/posts</code>, <code>/portfolio</code>, etc. Then this is the command for you. By specifying the DIR it will create a new post in that folder and populate the <code>categories:</code> YAML with the same value.</p>
+<div class="highlight"><pre><span class="nv">$ </span>octopress new post <span class="s2">&quot;New Portfolio Post Title&quot;</span> --dir portfolio
+</pre></div>
+
+<h3 id="new-page">New Page<a class="headerlink" href="#new-page" title="Permanent link"></a></h3>
+<p>To create a new page use the following command.</p>
+<div class="highlight"><pre><span class="nv">$ </span>octopress new page new-page/
+</pre></div>
+
+<p>This will create a page at <code>/new-page/index.md</code></p>
+<h2 id="layouts-and-content">Layouts and Content<a class="headerlink" href="#layouts-and-content" title="Permanent link"></a></h2>
+<p>Explanations of the various <code>_layouts</code> included with the theme and when to use them.</p>
+<h3 id="post-and-page">Post and Page<a class="headerlink" href="#post-and-page" title="Permanent link"></a></h3>
+<p>These two layouts are very similar. Both have an author sidebar, allow for large feature images at the top, and optional Disqus comments. The only real difference is the post layout includes related posts at the end of the page.</p>
+<h3 id="post-index-page">Post Index Page<a class="headerlink" href="#post-index-page" title="Permanent link"></a></h3>
+<p>A <a href="/Users/madslarsen/MrNibe_git/mrnibe.github.io/docs/_docs/%7B%7B%20site.url%20%7D%7D/posts">sample index page</a> listing all posts grouped by the year they were published has been provided. The name can be customized to your liking by editing a few references. For example, to change <strong>Posts</strong> to <strong>Writing</strong> update the following:</p>
+<p>In <code>_config.yml</code> under <code>links:</code> rename the title and URL to the following:</p>
+<div class="highlight"><pre>  <span class="l l-Scalar l-Scalar-Plain">links</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Writing</span>
+    <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/writing/</span>
+</pre></div>
+
+<ul>
+<li>Rename <code>posts/index.md</code> to <code>writing/index.md</code> and update the YAML front matter accordingly.</li>
+<li>Update the <strong>View all posts</strong> link in the <code>post.html</code> layout found in <code>_layouts</code> to match title and URL set previously.</li>
+</ul>
+<h3 id="feature-images">Feature Images<a class="headerlink" href="#feature-images" title="Permanent link"></a></h3>
+<p>A good rule of thumb is to keep feature images nice and wide so you don&rsquo;t push the body text too far down. An image cropped around around 1024 x 256 pixels will keep file size down with an acceptable resolution for most devices. If you want to serve these images responsively I&rsquo;d suggest looking at the <a href="https://github.com/robwierzbowski/jekyll-picture-tag">Jekyll Picture Tag</a> plugin<sup id="fnref:plugins"><a class="footnote-ref" href="#fn:plugins">1</a></sup>.</p>
+<p>The post and page layouts make the assumption that the feature images live in the <code>images/</code> folder. To add a feature image to a post or page just include the filename in the front matter like so. It&rsquo;s probably best to host all your images from this folder, but you can hotlink from external sources if you desire.</p>
+<div class="highlight"><pre><span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">feature</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">feature-image-filename.jpg</span>
+  <span class="l l-Scalar l-Scalar-Plain">thumb</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">thumbnail-image.jpg</span> <span class="c1">#keep it square 200x200 px is good</span>
+</pre></div>
+
+<p>To add attribution to a feature image use the following YAML front matter on posts or pages. Image credits appear directly below the feature image with a link back to the original source if supplied.</p>
+<div class="highlight"><pre><span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">feature</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">feature-image-filename.jpg</span>
+  <span class="l l-Scalar l-Scalar-Plain">credit</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Michael Rose</span> <span class="c1">#name of the person or site you want to credit</span>
+  <span class="l l-Scalar l-Scalar-Plain">creditlink</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">http://mademistakes.com</span> <span class="c1">#url to their site or licensing</span>
+</pre></div>
+
+<h3 id="thumbnails-for-og-and-twitter-cards">Thumbnails for OG and Twitter Cards<a class="headerlink" href="#thumbnails-for-og-and-twitter-cards" title="Permanent link"></a></h3>
+<p>Feature and thumbnail images are used by <a href="https://developers.facebook.com/docs/opengraph/">Open Graph</a> and <a href="https://dev.twitter.com/docs/cards">Twitter Cards</a> as well. If you don&rsquo;t assign a thumbnail the default graphic <em>(default-thumb.png)</em> is used. I&rsquo;d suggest changing this to something more meaningful &mdash; your logo or avatar are good options.</p>
+<p class="notice"><strong>Pro-Tip</strong>: You need to <a href="https://dev.twitter.com/docs/cards">apply for Twitter Cards</a> before they will begin showing up when links to your site are shared.</p>
+<h3 id="author-override">Author Override<a class="headerlink" href="#author-override" title="Permanent link"></a></h3>
+<p>By making use of data files you can assign different authors for each post.</p>
+<p>Start by modifying <code>authors.yml</code> file in the <code>_data</code> folder and add your authors using the following format.</p>
+<div class="highlight"><pre><span class="c1"># Authors</span>
+
+<span class="l l-Scalar l-Scalar-Plain">billy_rick</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span>        <span class="p p-Indicator">:</span> <span class="s">&quot;Billy</span><span class="nv"> </span><span class="s">Rick&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">web</span>         <span class="p p-Indicator">:</span> <span class="s">&quot;http://thewhip.com&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">email</span>       <span class="p p-Indicator">:</span> <span class="s">&quot;billy@rick.com&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">bio</span>         <span class="p p-Indicator">:</span> <span class="s">&quot;What</span><span class="nv"> </span><span class="s">do</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">want,</span><span class="nv"> </span><span class="s">jewels?</span><span class="nv"> </span><span class="s">I</span><span class="nv"> </span><span class="s">am</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">very</span><span class="nv"> </span><span class="s">extravagant</span><span class="nv"> </span><span class="s">man.&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">avatar</span>      <span class="p p-Indicator">:</span> <span class="s">&quot;bio-photo-2.jpg&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">twitter</span>     <span class="p p-Indicator">:</span> <span class="s">&quot;extravagantman&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">google_plus</span> <span class="p p-Indicator">:</span> <span class="s">&quot;BillyRick&quot;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">cornelius_fiddlebone</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span>        <span class="p p-Indicator">:</span> <span class="s">&quot;Cornelius</span><span class="nv"> </span><span class="s">Fiddlebone&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">email</span>       <span class="p p-Indicator">:</span> <span class="s">&quot;cornelius@thewhip.com&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">bio</span>         <span class="p p-Indicator">:</span> <span class="s">&quot;I</span><span class="nv"> </span><span class="s">ordered</span><span class="nv"> </span><span class="s">what?&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">avatar</span>      <span class="p p-Indicator">:</span> <span class="s">&quot;bio-photo.jpg&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">twitter</span>     <span class="p p-Indicator">:</span> <span class="s">&quot;rhymeswithsackit&quot;</span>
+  <span class="l l-Scalar l-Scalar-Plain">google_plus</span> <span class="p p-Indicator">:</span> <span class="s">&quot;CorneliusFiddlebone&quot;</span>
+</pre></div>
+
+<p>To assign Billy Rick as an author for our post. We&rsquo;d add the following YAML front matter to a post:</p>
+<div class="highlight"><pre><span class="l l-Scalar l-Scalar-Plain">author</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">billy_rick</span>
+</pre></div>
+
+<h3 id="kramdown-table-of-contents">Kramdown Table of Contents<a class="headerlink" href="#kramdown-table-of-contents" title="Permanent link"></a></h3>
+<p>To include an auto-generated <strong>table of contents</strong> for posts and pages, add the following <code>_include</code> before the actual content. <a href="http://kramdown.rubyforge.org/converter/html.html#toc">Kramdown will take care of the rest</a> and convert all headlines into list of links.</p>
+<div class="highlight"><pre>{% raw %}{% include toc.html %}{% endraw %}
+</pre></div>
+
+<h3 id="paragraph-indentation">Paragraph Indentation<a class="headerlink" href="#paragraph-indentation" title="Permanent link"></a></h3>
+<p>By default the margin below paragraphs has been removed and indent added to each. This is an intentional design decision to mimic the look of type set in a printed book or manuscript.</p>
+<figure>
+  <img src="/Users/madslarsen/MrNibe_git/mrnibe.github.io/docs/_docs/%7B%7B%20%27/assets/images/paragraph-indent.png%27%20%7C%20relative_url%20%7D%7D" alt="screen shot of paragraphs with default indent style set">
+  <figcaption>Example of the default paragraph style (indented first line and bottom margin removed).</figcaption>
+</figure>
+
+<p>To disable the indents and add spacing between paragraphs change the following line in <code>_sass/variables.scss</code> from <code>true !default</code> to <code>false</code> like so.</p>
+<div class="highlight"><pre><span class="nv">$paragraph-indent</span><span class="o">:</span> <span class="n n-Pseudo">false</span><span class="p">;</span>
+</pre></div>
+
+<figure>
+  <img src="/Users/madslarsen/MrNibe_git/mrnibe.github.io/docs/_docs/%7B%7B%20%27/assets/images/paragraph-no-indent.png%27%20%7C%20relative_url%20%7D%7D" alt="screen shot of paragraphs with indent style disabled">
+  <figcaption>Example of paragraphs with $paragraph-indent disabled.</figcaption>
+</figure>
+
+<h3 id="videos">Videos<a class="headerlink" href="#videos" title="Permanent link"></a></h3>
+<p>Video embeds are responsive and scale with the width of the main content block with the help of <a href="http://fitvidsjs.com/">FitVids</a>.</p>
+<p>Not sure if this only effects Kramdown or if it&rsquo;s an issue with Markdown in general. But adding YouTube video embeds causes errors when building your Jekyll site. To fix add a space between the <code>&lt;iframe&gt;</code> tags and remove <code>allowfullscreen</code>. Example below:</p>
+<div class="highlight"><pre><span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;560&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;315&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://www.youtube.com/embed/PWf4WUoMXwg&quot;</span> <span class="na">frameborder</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</pre></div>
+
+<h3 id="social-sharing-links">Social Sharing Links<a class="headerlink" href="#social-sharing-links" title="Permanent link"></a></h3>
+<p>Social sharing links for Twitter, Facebook, and Google+ are included on posts/pages by default. To hide them on specific posts or pages add <code>share: false</code> to the YAML Front Matter. If you&rsquo;d like to use different social networks modify <code>_includes/social-share</code> to your liking. Icons are set using <a href="http://fontawesome.io">Font Awesome</a>.</p>
+<h2 id="further-customization">Further Customization<a class="headerlink" href="#further-customization" title="Permanent link"></a></h2>
+<p>Jekyll 2.x added support for Sass files making it much easier to modify a theme&rsquo;s fonts and colors. By editing values found in <code>_sass/variables.scss</code> you can fine tune the site&rsquo;s colors and typography.</p>
+<p>For example if you wanted a red background instead of white you&rsquo;d change <code>$bodycolor: #fff;</code> to <code>$bodycolor: $cc0033;</code>.</p>
+<p>To modify the site&rsquo;s JavaScript files I setup a Grunt build script to lint/concatenate/minify all scripts into <code>scripts.min.js</code>. <a href="http://nodejs.org/">Install Node.js</a>, then <a href="http://gruntjs.com/getting-started">install Grunt</a>, and then finally install the dependencies for the theme contained in <code>package.json</code>:</p>
+<div class="highlight"><pre>npm install
+</pre></div>
+
+<p>From the theme&rsquo;s root, use <code>grunt</code> concatenate JavaScript files, and optimize .jpg, .png, and .svg files in the <code>images/</code> folder. You can also use <code>grunt dev</code> in combination with <code>jekyll build --watch</code> to watch for updates JS files that Grunt will then automatically re-build as you write your code which will in turn auto-generate your Jekyll site when developing locally.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:plugins">
+<p>If you&rsquo;re using GitHub Pages to host your site be aware that plugins are disabled. You&rsquo;ll need to build your site locally and then manually deploy if you want to use this sweet plugin.&#160;<a class="footnote-backref" href="#fnref:plugins" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></body></html>
