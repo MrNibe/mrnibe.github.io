@@ -1,6 +1,8 @@
 # main links
 main:
-  - title: "Publications and posters"
+  - title: "Posters"
+    url: /posters/
+  - title: "Publications"
     url: /publications/
   #- title: "Blog posts"
   #  url: /blogs/
