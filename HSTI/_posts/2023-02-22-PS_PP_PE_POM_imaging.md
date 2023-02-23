@@ -78,7 +78,7 @@ Which results in the cube from where the image in Fig. 5 has been extracted.
 
 ## Principal component analysis (PCA)
 
-The principal components (PCs) of Fig. 5 are calculated and presented in Fig. 6. Notice that the vast majority of the variance is explained by the first component. This is because the data has not been scaled
+The principal components (PCs) of Fig. 5 are calculated and presented in Fig. 6. Notice that the vast majority of the variance is explained by the first component. This is because the data has not been scaled. This also affects the loadings, which are presented in Fig. 7, where the first component has the same shape as the interferogram from the vanta black sample. This is off cause present in all pixels to some extend since it represents the black body radiation. The 2nd component might be very reminiscent of the POM spectrum since it is the only part of the image which 'light up' in this component. 
 
 <figure>
     <img src="/HSTI/images/preliminary_plastics_and_vanta_black/pca.png" alt="PCA of subtracted spectra">
@@ -87,15 +87,21 @@ The principal components (PCs) of Fig. 5 are calculated and presented in Fig. 6.
 
 <figure>
     <img src="/HSTI/images/preliminary_plastics_and_vanta_black/pca_loadings.png" alt="PCA loadings">
-    <figcaption>Fig. 7: </figcaption>
+    <figcaption>Fig. 7: PC loadings corresponding the the PCA scores presented in Fig. 6. </figcaption>
 </figure>
+
+## Compare individual plastic interferograms to simulations
+
+The plastic interferograms are extracted and presented in Fig. 8. 
 
 <figure>
     <img src="/HSTI/images/preliminary_plastics_and_vanta_black/compensated_plastic_spectra.png" alt="Compensated spectra">
-    <figcaption>Fig. 8: </figcaption>
+    <figcaption>Fig. 8: Interferogram of each plastic type. Each interferogram represents the difference between the plastic interferogram and the vanta black sample. </figcaption>
 </figure>
+
+Now, the extracted interferograms are compared to the simulated interferograms as presented in Fig. 1. SNV is applied to both the measured and simulated interferograms (not the entire cube - only the graph itself). Very good agreement between simulated and measured data is observed for the POM sample. PP also shows good agreement, but PE and PS less so.  
 
 <figure>
     <img src="/HSTI/images/preliminary_plastics_and_vanta_black/compare_to_sims.png" alt="Comparison between measured and simulated interferograms">
-    <figcaption>Fig. 9: </figcaption>
+    <figcaption>Fig. 9: Comparison between measured and simulated interferograms. </figcaption>
 </figure>
