@@ -8,6 +8,8 @@ main:
   #  url: /blogs/
   - title: "Hyperspectral Thermal Imaging"
     url: /HSTI/
+  - title: "Hyperspectral viewer"
+    url: /HSTI_viewer/
   #- title: "Photography"
   #  url: /photography/
   - title: "All posts"
