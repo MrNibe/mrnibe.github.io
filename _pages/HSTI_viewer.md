@@ -10,7 +10,7 @@ I have made a hyperspectral image viewer/analyser has been programmed in python 
 
 Here is an example of a hyperspectral thermal image of a collection of different gemstones being displayed in the viewer. 
 
-<center><img src="/assets/images/hsti_viewer/example_screen_shot.png" alt="HSTI viewer" width="100%" height="100%">
+<center><img src="/assets/images/hsti_viewer/example_screen_shot2.png" alt="HSTI viewer" width="100%" height="100%">
 <figcaption>Screen shot of hyperspectral viewer showing a hyperspectral thermal image of different gemstones. A red and green selection has been made to extract mean interferograms.</figcaption></center>
 
 ## Basic operations
@@ -22,6 +22,13 @@ Using the leftmost slider with *Band number* written above it, it is possible to
 
 ### Extracting mean spectrum/interferograms
 It is possible to use the mouse to draw a selection directly on the image on the right. By left clicking and dragging the mouse, a colored mask is drawn and shown on top of the image. Once the mouse button is released, the mean spectrum is plotted in the corresponding color in the plot on the right. The size of the brush (measured in pixels) can be changed with the slider, *Radius*, and the opacity of the mask can be changed with the *Selection opacity* slider. Right clicking on the image can be used to erase existing color mask, and the *Clear selection* button can be used to clear all selections at once and the *Invert selection* button converts all selections to the same color after which the mask is inverted. Different colors can be selected using the *Pick color* button. Once a color has been added to the mask, it will appear as a color swatch under the plot on the right. By clicking a swatch, the associated color is 'brought to the front' and is made active again - making it possible to add to the mask without having to enter the exact same RGB value again. 
+
+#### Calibrated x-axis
+By default, the x-axis of the data cube is simply a list of integers corresponding to the number of channels in the cube. By checking the *Select calibrated x axis* check box, the user is presented with a number of options as presented in the screen shot below.  
+<center><img src="/assets/images/hsti_viewer/calibrated_xaxis_screen_shot.png" alt="HSTI viewer calibrated x-axis" width="70%" height="100%">
+<figcaption>Screen shot of dialog box for giving a calibrated x-axis.</figcaption></center>
+The first two options are proprietary for the hyperspectral thermal camera. The *Relative mirror separation* option is the easiest as this automatically calculates how far the mirrors have moved based on the interferograms of the three laser diodes, which are used to maintain smooth and consistent movement of the mirrors. If this option is chosen, the user is prompted to enter a offset value. This offset value is often not known, and an offset of 0.0 µm is used instead. From the screenshot below it is evident that the mirrors have not moved an equal distance between each channel of the data cube. 
+
 
 ### Removing data
 It is possible to remove entire sections of a data cube based on a selection. Simply paint the parts of the image you would like to exclude from the analysis, then hit the *Remove data* button, and the data will be replaced by NaNs, effectively excluding them from the preprocessing.     
