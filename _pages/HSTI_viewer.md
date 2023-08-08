@@ -46,76 +46,112 @@ It is possible to save different forms of images using the viewer. The *Save cur
 At this moment it is not possible to save preprocessing steps or color masks applied in the viewer. 
 
 ## Adding preprocessing and data analysis
-The hyperspectral image viewer makes it possible to apply different forms of preprocessing to the entire image. Preprocessing steps labeled with **(Only HSTC)** can only be applied to data coming from the hyperspectral thermal camera. In the following, $S(x,y)$ refers to the spectrum found in the pixel located at $(x,y)$. If $S$ is presented with a subscript, $S_\lambda$, then it refers to a specific spectral channel. E.g., $S_0(x,y)$ refers to the first spectral channel at pixel $(x,y)$. If $(x,y)$ is not given, then all pixels in the channel are considered. Similarly, if no subscript is given, then the entire spectrum is considered. 
+The hyperspectral image viewer makes it possible to apply different forms of preprocessing to the entire image. Preprocessing steps labeled with **(Only HSTC)** can only be applied to data coming from the hyperspectral thermal camera. In the following, $\mathbf{s}(x,y)$ refers to the spectrum found in the pixel located at $(x,y)$ and is a vector. $\mathbf{S_\lambda}$ refers to a specific spectral channel and is a matrix. E.g., $\mathbf{S_0}$ refers to the first spectral channel. $s_5(x,y)$ refers to the pixel at location $(x,y)$ in the fifth spectral channel- this is a scalar. If neither subscript $\lambda$ nor coordinates $(x,y)$ are given, then $\mathbf{S}$ refers to the entire data cube at once. 
 
 ### Apply NUC (Only HSTC)
 
 ### Autoscale
+The autoscale function is used to center and scale each spectral channel in the data cube. Firstly, each channel is mean centered after which it is scaled by its standard deviation. 
+\begin{equation} \label{eq:autoscale}
+    \mathbf{S}\_{\lambda, new} = \frac{\mathbf{S}\_\lambda - \bar{\mathbf{S}}\_{\lambda}}{\sigma\_{\mathbf{S}\_\lambda}},  
+\end{equation}
+where $\bar{\mathbf{S}}\_{\lambda}$ and $\sigma\_{\mathbf{S}\_\lambda}$ are the mean and standard deviation of the $\lambda^\textrm{th}$ channel respectively. 
 
-\begin{align} \label{eq:autoscale}
-    S_{\lambda, new} = \frac{S_\lambda - \bar{S_\lambda}}{\sigma_{S_\lambda}},  
-\end{align}
 
 ### Convert to wavelength (Only HSTC)
 
 ### Debend cube (Only HSTC)
 
 ### Correct laser spot (Only HSTC)
+This function is used to remove some pixels affected by exposure to a 10.6 µm laser as described [here]({% link HSTI/_posts/20-08-30-looking_at_lasers.md %}).
+In this case 30 pixels are replaced by a linear interpolation based on their closest neigbourhood - 10×10 pixels including the affected 30 pixels). This is done for each channel in the data cube. 
 
 ### Correct laser spot LARGE (Only HSTC)
+Same as the one above, but instead of just 30 pixels, a 16×16 pixel region is selected. The two outermost rows/columns are used to interpolate the values of the central 14×14 pixels.
 
 ### Mean center bands
+As the name suggests, this function takes each spectral channel and subtracts its mean. 
 
 \begin{align} \label{eq:mean_center_bands}
-    S_{\lambda, new} = S_\lambda - \bar{S_\lambda}  
+    \mathbf{S}\_{\lambda, new} = \mathbf{S}\_\lambda - \bar{\mathbf{S}}\_\lambda  
 \end{align}
 
 ### Mean center spectra
+Similarly, this function subtracts the mean of each spectrum. 
 
 \begin{align} \label{eq:mean_center_spec}
-    S_{new}(x,y) = S(x,y) - \bar{S}_{selection}(x,y)  
+    \mathbf{s}\_{new}(x,y) = \mathbf{s}(x,y) - \bar{\mathbf{s}}(x,y)  
 \end{align}
 
 ### Normalize band norms
+This function divides each spectral channel by its norm.
 
 \begin{align} \label{eq:norm_band_norms}
-    S_{\lambda, new} = \frac{S_\lambda}{|S_\lambda|},  
+    \mathbf{S}\_{\lambda, new} = \frac{\mathbf{S}\_\lambda}{|\mathbf{S}\_\lambda|},  
 \end{align}
 
 
-### Normalize by reference spectrum
+### Normalize by reference spectrum (Only HSTC)
 
 ### Normalize cube
+This function takes the entire cube and offsets it and scales it to span from a minimum value of 0 to a maximum value of 1. 
+
+\begin{align} \label{eq:normalize_cube_offset}
+    \mathbf{S}\_{offset} = \mathbf{S} - \textrm{min}\left(\mathbf{S}\right),  
+\end{align}
+
+\begin{align} \label{eq:normalize_cube}
+    \mathbf{S}\_{new} = \frac{\mathbf{S}\_{offset}}{\textrm{max}\left(\mathbf{S}\_{offset}\right)},  
+\end{align}
 
 ### Normalize spectra
+This function scales each individual spectrum in the data cube to span from a minimum of 0 to a maximum of 1. 
+
+\begin{align} \label{eq:norm_specs_offset}
+    \mathbf{s}\_{offset}(x,y) = \mathbf{s}(x,y) - \textrm{min}\left(\mathbf{s}(x,y)\right),  
+\end{align}
+
+\begin{align} \label{eq:norm_specs}
+    \mathbf{s}\_{new}(x,y) = \frac{\mathbf{s}\_{offset}(x,y)}{\textrm{max}\left(\mathbf{s}\_{offset}(x,y)\right)},  
+\end{align}
 
 ### Normalize spectra norms
+This function divides each spectrum in the data cube by its norm. 
 
 \begin{align} \label{eq:norm_spec_norms}
-    S_{\lambda, new}(x,y) = \frac{S_\lambda (x,y)}{|S_\lambda (x,y)|},  
+    \mathbf{s}\_{new}(x,y) = \frac{\mathbf{s}(x,y)}{|\mathbf{s}(x,y)|},  
 \end{align}
 
 ### Savitzky-Golay filter
+This function is a simple implementation of the Scipy [savgol_filter() function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.savgol_filter.html). The user is prompted to enter the number of samples, the polynomial order as well as the derivative degree of the filter which is then applied to the spectral axis. 
+
 
 ### Set first band to 0
-This subtracts the first spectral channel of the cube from all channels
+The first spectral channel is subtracted from each layer of the cube. For a single layer this looks like:
+\begin{align} \label{eq:set_first_2_0}
+    \mathbf{S}\_{\lambda, new} = \mathbf{S}\_\lambda - \mathbf{S}\_0
+\end{align}
+This is repeated for all spectral channels.
 
 ### Spatial median filter
+This is an implementation of the Scipy [median_filter() function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.median_filter.html). The user is prompted to input a kernel size, which must be an odd integer. Afterwards, this filter is applied to each spectral channel of the data cube. 
 
 ### Standard Normal Variate
 Also sometimes referred to by its abbreviation, SNV. This step is used to minimize differences between pixels due to intensity variations such that spectral differences are enhanced. 
 
 \begin{align} \label{eq:SNV}
-    S_{new}(x,y) = \frac{S(x,y) - \bar{S}(x,y)}{\sigma_S(x,y)},  
+    \mathbf{s}\_{new}(x,y) = \frac{\mathbf{s}(x,y) - \bar{\mathbf{s}}(x,y)}{\sigma_{\mathbf{s}(x,y)}},  
 \end{align}
-where $\bar{S}(x,y)$ and $\sigma_S(x,y)$ are the mean and standard deviation of the spectrum in pixel $(x,y)$ respectively.
+where $\bar{\mathbf{s}}(x,y)$ and $\sigma_{\mathbf{s}(x,y)}$ are the mean and standard deviation of the spectrum in pixel $(x,y)$ respectively.
 
 ### Subtract TMM reference spectrum (Only HSTC)
 
+
 ### Use selection as reference spectrum
+This function takes the mean of the most recent selection and compares the rest of the data cube to this spectrum. This implies that the difference between this reference and every other spectrum is calculated as follows. 
 
 \begin{align} \label{eq:reference_spec_selection}
-    S_{new}(x,y) = S(x,y) - \bar{S}_{selection}  
+    \mathbf{s}\_{new}(x,y) = \bar{\mathbf{s}}\_{selection}  - \mathbf{s}(x,y) 
 \end{align}
 
 
