@@ -63,7 +63,7 @@ where $\bar{\mathbf{S}}\_{\lambda}$ and $\sigma\_{\mathbf{S}\_\lambda}$ are the 
 ### Debend cube (Only HSTC)
 
 ### Correct laser spot (Only HSTC)
-This function is used to remove some pixels affected by exposure to a 10.6 µm laser as described [here]({% link HSTI/_posts/20-08-30-looking_at_lasers.md %}).
+This function is used to remove some pixels affected by exposure to a 10.6 µm laser as described [here]({% link HSTI/_posts/2023-08-01-looking_at_lasers.md %}).
 In this case 30 pixels are replaced by a linear interpolation based on their closest neigbourhood - 10×10 pixels including the affected 30 pixels). This is done for each channel in the data cube. 
 
 ### Correct laser spot LARGE (Only HSTC)
