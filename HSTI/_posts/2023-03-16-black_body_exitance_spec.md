@@ -11,7 +11,8 @@ A _black body_ is an idealized object, which absorbs all incident radiation. As 
     M_{BB, \lambda}(T) = \frac{2\pi hc^2}{\lambda^5} \frac{1}{\exp{\frac{hc}{k_B \lambda T}} - 1}, 
 \end{align}
 
-... and in terms of wavenumbers:
+To convert the spectral axis from wavelength to wavenumbers, the following substitutions must be made: $\lambda = 1/\tilde{\nu}$ and $\left|\frac{\partial \lambda}{\partial \tilde{\nu}}\right | = \frac{1}{\tilde{\nu}^2}$
+Replacing this into Eq. (1) yields:
 
 \begin{align} \label{eq:BB_exitance_nu}
     M_{BB, \tilde{\nu}}(T) = 2\pi hc^2\tilde{\nu}^3 \frac{1}{\exp{\frac{hc\tilde{\nu}}{k_B T}} - 1}, 
