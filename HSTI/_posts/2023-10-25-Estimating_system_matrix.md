@@ -153,12 +153,73 @@ This form of regularization aims to suppress oscillations in the solution along 
 <center><img src="/HSTI/images/Estimating_system_matrix/newA_M_reg_random_guess_smaller.png" alt="Calculated A matrix, identity regularization, random initial guess" width="100%" height="100%">
 <figcaption><b>Fig 8:</b> $\mathbf{A}$ calculated using Eq. (\ref{eq:direct_solve}) with $\mathbf{M} = $ Eq. (\ref{eq:M_reg}) and with RANDOM initial guess. </figcaption></center>
 
-So it is possible to find a solution which comes close to what is expected theoretically. But how close is it actually. Some deviation from theory are to be expected, but to get a better feeling for how different the solutions are, I have overlaid the Airy matrix on top of one of the solutions for $\mathbf{A}$ with a random initial guess (Fig. 9). I have also found a theoretical solution using the transfer matrix method (TMM) (MORE INFORMATION ABOUT THIS SHOULD PROBABLY BE GIVEN IN ANOTHER POST). The least squares solution has been plotted in gray-scale, while only the maxima of the theoretical matrices are displayed in color. Notice here, that there is almost a perfect fit between the TMM matrix and the solution, whereas the Airy matrix in comparison deviates much more. This indicates that the TMM estimate is actually quite close to what would be the true solution.  
+So it is possible to find a solution which comes close to what is expected theoretically. But how close is it actually. Some deviation from theory are to be expected, but to get a better feeling for how different the solutions are, I have overlaid the Airy matrix on top of one of the solutions for $\mathbf{A}$ with a random initial guess (Fig. 9). I have also found a theoretical solution using the transfer matrix method (TMM) as described in more detail [here]({% link HSTI/_posts/2023-12-23-gmm.md %}). The least squares solution has been plotted in gray-scale, while only the maxima of the theoretical matrices are displayed in color. Notice here, that there is almost a perfect fit between the TMM matrix and the solution, whereas the Airy matrix in comparison deviates much more. This indicates that the TMM estimate is actually quite close to what would be the true solution.  
 
 <center><img src="/HSTI/images/Estimating_system_matrix/airy_overlay.png" alt="Airy and TMM solution overlay on least squares solution" width="100%" height="100%">
 <figcaption><b>Fig 9:</b> $\mathbf{A}$ calculated with 2nd order difference regularization, random initial guess and $\gamma_{init} = 1$ and $\gamma_{reg} = 10$. </figcaption></center>
 
 
 
+## Can't we just measure it using FTIR?
+
+Wouldn't it be nice if we could just measure the response of the SFPI directly and then worry about the sensor response later? An obvious solution is to throw the SFPI into an FTIR and then measure its transmittance at several different mirror separations. But (and there always is a 'but') one of the main problems with this that we do not know the absolute mirror separation distance. Secondly, controlling the piezo actuators in small steps and then maintaining their position also turns out to be quite a challenge (Fig. 9). I pieced together a python GUI which makes it possible to control the mirrors and can be downloaded [here](/HSTI/other_files/mirror_stepper_pid_all_piezos3.py).
 
 
+<center><img src="/HSTI/images/Estimating_system_matrix/mirror_holding_no_pid.png" alt="Photo diode output, no PID" width="80%" height="80%">
+<figcaption><b>Fig 9:</b> Output from one of the photo diodes which are used to monitor the reflected signal of a laser diode. The 'Moving' action indicates where the mirrors are moved intentinally using the piezo actuators and the 'Holding' action is when the piezos just sit with a constant voltage being applied to them. Even though the piezos are note actively being moved they clearly expand further after they have initially been stopped. </figcaption></center>
+
+
+The piezo expansion is controlled by applying a voltage to all three actuators. When employed in the camera, this voltage is unique to each piezo to ensure they all expand the same amount. This is not that much of an issue here even though it would be nice, but the effect is assumed to be of minor importance here. Instead the same voltage is simply applied to all three at once. The next thing is maintaining a certain separation while performing the FTIR measurement. A PID-controller is implemented in the code where the outputs of the photo diodes are monitored while the mirrors are supposed to be held steady (Fig. 10). This makes it possible to perform minute adjustments to ensure that they do not drift from their previous position. This is however not perfect and the controller sometimes gets 'confused' and instead moves the mirror by an additional fringe (usually that means further apart).
+
+
+<center><img src="/HSTI/images/Estimating_system_matrix/mirror_holding_w_pid.png" alt="Photo diode output, with PID" width="80%" height="80%">
+<figcaption><b>Fig 10:</b> Similar to Fig. 9, but this time with the PID code implementation used to maintain constant mirror separation while the FTIR measurements are performed. </figcaption></center>
+
+
+### How far have the mirrors moved between measurements
+
+One would think that I would be rather straight forward to look at the diode interferograms and give a precise estimate of how far the mirrors have moved... At least that is what I thought. However, almost always, the mirrors are displaced less than a complete period which make automatic fitting procedures quite unreliable. Also, the interferogram is not quite a sine curve... rather it is based on the Airy function (Eq. \ref{eq:airy}). I spend a long time trying to automate this, but ended up painstakingly sitting and giving my best guess for every single step (Fig. 11). Luckily, every so often, the end of a step lines of with either a peak or a trough which means I am able to 'check' my estimates along the way. 
+I do this for each of the three diodes such that I end up with a list of how far each piezo displaces the mirror at each step. The average of all three diodes is then used as the measure for the entire SFPI as a whole. It is assumed that the effective wavelength (combination of wavelength and angle of reflection) is the same for all three laser diodes ($\lambda_\mathrm{eff} = 686$ nm). Moving the mirrors $\lambda_\mathrm{eff}/2$ further apart will cause the diode interferogram to move a single period. Knowing this it is possible to calculate the relative displacement of the mirrors based on the fractional fringed counted at each step. 
+
+
+<center><img src="/HSTI/images/Estimating_system_matrix/diode_fractions.png" alt="sfpi steps" width="80%" height="80%">
+<figcaption><b>Fig 11:</b> Diode output of only the moving steps. Each step is colored in alternating brown and orange colors. The numbers indicate how much of a complete period is estimated to be covered by the current step. The black vertical bars are just to emphasize the transition from one step to another. This is just a couple of steps shown here - in total 51 steps have been performed.  </figcaption></center>
+
+
+Based on the output from the photo diodes it is possible to construct the curve in Fig. 12, which illustrate how much the mirrors are displaced during each step. The sudden jump at index 17 is due to a missing measurement.  
+
+<center><img src="/HSTI/images/Estimating_system_matrix/relative_mmd_from_diodes.png" alt="relative sfpi displacement from diodes" width="80%" height="80%">
+<figcaption><b>Fig 12:</b> The relative mirror displacement during each step is estimated based on the fractional fringes (as those in Fig. 11). Here an effective wavelength of 686 nm has been used. </figcaption></center>
+
+We also have the FTIR measurement at each mirror position (Fig. 13). Each row represents a single FTIR transmission spectrum (only in the range from 600 to 1300 cm<sup>-1</sup>) taken at a given mirror separation. Each row is associated with a certain relative mirror separation based on Fig. 12. 
+
+<center><img src="/HSTI/images/Estimating_system_matrix/ftir_sfpi.png" alt="FTIR SFPI" width="50%" height="50%">
+<figcaption><b>Fig 13:</b> FTIR transmission measurements of SFPI at different mirror separations. The relative mirror separation axis is based on the curve shown in Fig. 12. As previously, only data ranging from 600 to 1300 cm<sup>-1</sup> is shown here. </figcaption></center>
+
+
+But HEY! Isn't it possible to calculate the absolute mirror separation from the FTIR spectra directly? I'm glad you asked because it is... sort of (There's that 'but' once again). 
+
+Let's start out by looking at the conditions for maximum transmission based on Eq. (\ref{eq:transmission_condition}). From here we can get:
+
+$$
+\begin{align} \label{eq:k_fsr}
+	&m = 2d\tilde{\nu} \\[1.1em]
+	\Rightarrow & \frac{m + 1}{\tilde{\nu} + \tilde{\nu}_\textrm{FSR}} = 2d \\[1.1em]
+	\Rightarrow & d = \frac{1}{2 \tilde{\nu}_\textrm{FSR}},
+\end{align} 
+$$
+
+where $\tilde{\nu}\_\textrm{FSR}$ is the "Free Spectral Range" of the SFPI - the distance (measured in cm<sup>-1</sup>) between two neighboring peaks. This means that the peaks are equidistant (again measured in cm<sup>-1</sup>) at a given mirror separation, $d$. If we then measure the distance between peaks, we should be able to derive the absolute mirror separation. But here is the issue: We are working with dielectric mirrors - that is, their reflectance vary across the spectrum. This effect is seen in Fig. 14 where the $\tilde{\nu}\_\textrm{FSR}$ is measured twice across the spectrum. In this case I have allowed myself to increase the range to include parts of the spectrum which have previously not been included as the camera sensor is not sensitive in these regions. Nonetheless, this illustrates the effect that the $\tilde{\nu}\_\textrm{FSR}$ decreases with shorter wavelengths. This results in the mirror separation distance being estimated longer than it actually is. This effect is also predicted by the TMM calculations so it is not simply due to a broken calculator (nor broken fingers). As mentioned previously, this is caused by the mirrors being dielectric rather than metallic. The 'plane of reflection' changes with wavelength due to changing refractive indices. This is therefore not a reliable way of predicting the absolute mirror separation. 
+
+
+<center><img src="/HSTI/images/Estimating_system_matrix/single_ftir.png" alt="Single FTIR measurement" width="80%" height="80%">
+<figcaption><b>Fig 14:</b> Part of a single FTIR transmission measurement at a relative displacement of 12.2 µm. The range shown here is a little wider compared to what has previously been shown to fit more peaks within the same frame at once. </figcaption></center>
+
+
+Comparing the FTIR measurements to TMM calculations reveal good agreement between measurements an theory. However once again it is difficult to match the exact peak positions across the entire wavelength range. Also, in these calculations, the effective diode wavelength used for calculating the relative mirror separation distance is set to $\lambda_\mathrm{eff} = 670$ nm as this yields the best match. The initial offset of the mirror separation is 3 µm. The SFPI used for the FTIR measurements is a different and newer model compared to previous parts of this post. The effective wavelength quoted earlier is calculated based on measurements of the old SFPI. It is therefore very likely, that the angles between laser- and photo diodes is different between versions.  
+
+<center><img src="/HSTI/images/Estimating_system_matrix/TMM_overlay_on_FTIR.png" alt="FTIR SFPI" width="50%" height="50%">
+<figcaption><b>Fig 15:</b> Same data as in Fig. 13, but now with an overlay of the peak positions (in red) calculated using TMM. </figcaption></center>
+
+
+The small disagreements between theory and measurements can be due to slight angle variations. Firstly, it cannot be guaranteed that the SFPI was placed completely perpendicular to the beam of the FTIR. Secondly, the mirrors of the SFPI are not perfectly flat due to bending of the mirrors. How much this affects the transmittance spectra have not yet been estimated. It will of course broaden the peaks, but if it also affects their position is yet to be investigated theoretically. 
