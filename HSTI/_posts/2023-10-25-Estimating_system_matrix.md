@@ -292,7 +292,7 @@ Here, a regularization term is included as the last element of each 'column vect
 <center><img src="/HSTI/images/Estimating_system_matrix/sensor_response.png" alt="Sensor response" width="80%" height="80%">
 <figcaption><b>Fig 17:</b> Calculated sensor and optics response based on FNNLS solution of Eq. (\ref{eq:i_concat}) </figcaption></center>
 
-Note that he response does not go to 0 above 16 µm as expected... Not quite sure why that is. It is also slightly positive below 7.6 µm, but not quite as much. To evaluate the performance of the found response, we can plug it into Eq. (\ref{eq:sensor_response_Ax=b}). The results are quite extensive and can therefore be seen [HERE](/HSTI/images/Estimating_system_matrix/interferogram_predictions.png). In this case, RRMSE is defined as
+Note that he response does not go to 0 above 16 µm as expected... Not quite sure why that is. It is also slightly positive below 7.6 µm, but not quite as much. To evaluate the performance of the found response, we can plug it into Eq. (\ref{eq:sensor_response_Ax=b}). [The results are quite extensive and can therefore be seen here](/HSTI/images/Estimating_system_matrix/interferogram_predictions.png). In this case, RRMSE is defined as
 
 $$
 \begin{align} \label{eq:RRMSE}
