@@ -223,3 +223,87 @@ Comparing the FTIR measurements to TMM calculations reveal good agreement betwee
 
 
 The small disagreements between theory and measurements can be due to slight angle variations. Firstly, it cannot be guaranteed that the SFPI was placed completely perpendicular to the beam of the FTIR. Secondly, the mirrors of the SFPI are not perfectly flat due to bending of the mirrors. How much this affects the transmittance spectra have not yet been estimated. It will of course broaden the peaks, but if it also affects their position is yet to be investigated theoretically. 
+
+### BIG NEWS!!!! BEST SYSTEM MATRIX SO FAR USING TMM
+
+It seems that TMM is still a good candidate to simulate the mirror transmission - let's continue in that direction. Recently (January 2024) I have figured out how to include the mirror substrate as well as its anti-reflective coating in the calculations ([see here]({% link HSTI/_posts/2023-12-23-gmm.md %})).
+
+We're going to work with the same combination of FTIR transmission measurements and hyperspectral images of samples as has previously been used to estimate the system matrix by solving the inverse problem - however, some of the measurements have been discarded (further explanation to come). Now, we use the results of TMM calculations as the foundation of the system matrix. Then, we "just" need to calculate the combined response function of the sensor and the germanium optics. This is off course easier said than done, but let's crack on.
+
+We'll calculate the transmission and reflection matrices of the SFPI by TMM using the same wavenumbers and mirror separations as presented in Fig. 4. Broadening is included in these calculations to account for the bent mirrors. This effect simulates spherical mirrors with a total height difference of 150 nm between the center and edges of the Ø43 mm mirrors. The transmission matrix is presented in Fig. 16. 
+
+<center><img src="/HSTI/images/Estimating_system_matrix/transmission_matrix.png" alt="transmission matrix" width="50%" height="50%">
+<figcaption><b>Fig 16:</b> Transmission matrix of SFPI calculated from TMM. Broadening simulating mirror bending of 150 nm has been applied. </figcaption></center>
+
+We assume that Fig. 16 as an (approximately) accurate description of the transmission through the SFPI at relevant combinations of wavelengths and mirror separations. Next, we need to account for the response of the sensor and optics. Firstly, we need to setup an expression describing the contributions to the recorded signal. 
+
+$$
+\begin{align} \label{eq:fpi_flux}
+	\mathbf{\Phi} = \mathbf{T_{SFPI}}\circ(\mathbf{t_{samp}}\odot\mathbf{m_{BB}}(T_{BB}) + (\mathbf{1} - \mathbf{r_{samp}})\odot\mathbf{m_{env}}(T_{env})) + \mathbf{R_{SFPI}} \circ \mathbf{m_{sens}}(T_{sens}) 
+\end{align} 
+$$
+
+Here, $\odot$ and $\circ$ represent element-wise and row/element-wise multiplication respectively. By row/element-wise I mean that each row of the matrix is multiplied element-wise by each element in the vector. $\mathbf{T_{SFPI}}$ and $\mathbf{R_{SFPI}}$ are the transmission and reflection matrices of the SFPI calculated using TMM. $\mathbf{t_{samp}}$ is the FTIR transmission spectrum of the sample. Since I do not have the reflectance spectra of the samples, these are estimated simply by $(\mathbf{1} - \mathbf{r_{samp}})$ (assuming the samples are loss-less). $\mathbf{m_{BB}}(T_{BB})$, $\mathbf{m_{env}}(T_{env})$, and $\mathbf{m_{sens}}(T_{sens})$ are the black body spectra of the black body behind the sample, the environmental background emission and the sensor. $T_{BB}$, $T_{env}$, and $T_{sens}$ are the temperatures of the black body, the environment, and the sensor respectively. 
+
+This expression does not include the emission spectrum of the sample itself. Also, $(\mathbf{1} - \mathbf{r_{samp}})$ is probably not a correct estimation of the sample reflectance. Furthermore, the sensor is probably not a true black body, but this works for the estimation. 
+
+$\mathbf{\Phi}$ represents the radiation incident on the sensor at different combinations of wavelengths and mirror separations for different samples. Because the microbolometer sensor measures the difference between the incident flux to its own outgoing flux, we need to subtract it from Eq. (\ref{eq:fpi_flux}) to get an expression for the recorded signal. 
+
+$$
+\begin{align} \label{eq:fpi_signal}
+	\mathbf{\Delta\Phi} = \mathbf{\Phi} - \mathbf{m_{sens}}(T_{sens}) 
+\end{align} 
+$$
+
+Note here that the subtraction happens row/element-wise.
+
+Before we arrive at the recorded interferogram, $\mathbf{i}$, we just need to take the dot product of $\mathbf{\Delta\Phi}$ and the sensor response, $\mathbf{x}$. 
+
+$$
+\begin{align} \label{eq:sensor_response_Ax=b}
+	\mathbf{i} = \mathbf{\Delta\Phi} \mathbf{x} 
+\end{align} 
+$$
+
+We are now again working with an $\mathbf{Ax}=\mathbf{b}$ problem, but luckily we are only looking for $\mathbf{x}$ which probably is an easier problem (even though it is still under-determined). Since the response we are looking for cannot contain negative values, we will use the fast nonnegative least squares (FNNLS) [implementation in python](https://pypi.org/project/fnnls/). To get a better representation of $\mathbf{x}$, multiple data sets are included in the calculation. This is done by concatenating all the $\mathbf{i}$'s and $\mathbf{\Delta\Phi}$'s from each sample. 
+
+$$
+\begin{align} \label{eq:i_concat}
+	\begin{bmatrix}
+	\mathbf{i_{acetone}} \\
+	\mathbf{i_{ammonia}}\\
+	\vdots\\
+	\mathbf{i_{toluene}}\\
+	\mathbf{0}
+	\end{bmatrix} = 
+	\begin{bmatrix}
+	\mathbf{\Delta\Phi_{acetone}} \\
+	\mathbf{\Delta\Phi_{ammonia}}\\
+	\vdots\\
+	\mathbf{\Delta\Phi_{toluene}}\\
+	\gamma_{reg}\mathbf{M}\\
+	\end{bmatrix}
+	\mathbf{x}
+\end{align} 
+$$
+
+Here, a regularization term is included as the last element of each 'column vector'. The $\mathbf{0}$-vector has as many elements as the number of rows in $\mathbf{M}$, which is defined as previously. Using the FNNLS solver to solve for $\mathbf{x}$ in Eq. (\ref{eq:i_concat}) yields a sensor response presented in Fig. 17. In these estimations a number of samples have been omitted. These are for example some of the paper and plastic film samples as these exhibit severe scattering and absorptive losses which decrease the model fit. 
+
+<center><img src="/HSTI/images/Estimating_system_matrix/sensor_response.png" alt="Sensor response" width="80%" height="80%">
+<figcaption><b>Fig 17:</b> Calculated sensor and optics response based on FNNLS solution of Eq. (\ref{eq:i_concat}) </figcaption></center>
+
+Note that he response does not go to 0 above 16 µm as expected... Not quite sure why that is. It is also slightly positive below 7.6 µm, but not quite as much. To evaluate the performance of the found response, we can plug it into Eq. (\ref{eq:sensor_response_Ax=b}). The results are quite extensive and can therefore be seen [HERE](/HSTI/images/Estimating_system_matrix/interferogram_predictions.png). In this case, RRMSE is defined as
+
+$$
+\begin{align} \label{eq:RRMSE}
+	\mathrm{RRMSE} = \sqrt{\frac{\frac{1}{n} \sum_{i=1}^{n} (\hat{X}_i - X_i)^2}{\sum_{i=1}^{n} X_i^2}}
+\end{align} 
+$$
+
+with $\hat{X}$ representing the predicted value and $X$ being the measured value. Relatively good agreement between predictions and measurements is achieved and even the intensities are correctly predicted. A notable improvement is the ability to include 'negative' contributions in the predictions. E.g. in the "air duster" and "ethylene" interferograms there are points at which the netto flux is less than when the SFPI is completely closed resulting in the interferograms dropping below 0. The combined result of the spectral response (Fig. 17) and the transmission matrix (Fig. 16) can be seen in Fig. 18.  
+
+
+<center><img src="/HSTI/images/Estimating_system_matrix/scaled_system_matrix_and_overlay.png" alt="Sensor response and overlay" width="80%" height="80%">
+<figcaption><b>Fig 18:</b> SFPI transmission with the sensor response applied. This is also overlayed on top of one of the solutions to the system matrix found previously. </figcaption></center>
+
+
