@@ -13,9 +13,9 @@ date:   2024-01-08
 <figcaption><b>Fig 1:</b> Animation of Scanning Fabry-Pérot assembly. </figcaption></center>
 
 
-<center><img src="/HSTI/images/fpi_animation/0.png" alt="Experimental setup" width="100%" height="100%">
+<center><img src="/HSTI/images/fpi_animation/beginning.png" alt="Experimental setup" width="100%" height="100%">
 <figcaption><b>Fig 2:</b> Assembly completely closed. </figcaption></center>
 
 
-<center><img src="/HSTI/images/fpi_animation/1.png" alt="Experimental setup" width="100%" height="100%">
+<center><img src="/HSTI/images/fpi_animation/end.png" alt="Experimental setup" width="100%" height="100%">
 <figcaption><b>Fig 3:</b> Assembly exploated view. </figcaption></center>
