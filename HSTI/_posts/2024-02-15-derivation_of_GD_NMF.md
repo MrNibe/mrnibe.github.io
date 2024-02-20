@@ -54,7 +54,7 @@ Properties of the trace:
 
 $$
 \begin{align} \label{eq:trace_props}
-  \textrm{tr}[\mathbf{A} +\mathbf{B}] &=\textrm{tr}[\mathbf{A}] + \textrm{tr}[\mathbf{B}] \\ 
+  \textrm{tr}[\mathbf{A} +\mathbf{B}] &=\textrm{tr}[\mathbf{A}] + \textrm{tr}[\mathbf{B}] \\[1.2em] 
   \textrm{tr}[\mathbf{ABC}] &= \textrm{tr}[\mathbf{CAB}] = \textrm{tr}[\mathbf{BCA}]
 \end{align} 
 $$
@@ -63,10 +63,10 @@ From [The Matrix Cookbook](https://www2.imm.dtu.dk/pubdb/edoc/imm3274.pdf):
 
 $$
 \begin{align} \label{eq:M_cook_book}
-  \mathbf{\nabla_X} \textrm{tr}[\mathbf{AX}] &= \mathbf{A}^T \\ 
-  \mathbf{\nabla_X} \textrm{tr}[\mathbf{X}^T\mathbf{A}] &= \mathbf{A}\\
-  \mathbf{\nabla_X} \textrm{tr}[\mathbf{X}^T\mathbf{AX}] &= (\mathbf{A} + \mathbf{A}^T)\mathbf{X}\\
-  \mathbf{\nabla_X} \textrm{tr}[\mathbf{XA}\mathbf{X}^T] &= \mathbf{X}(\mathbf{A}^T + \mathbf{A})\\
+  \mathbf{\nabla_X} \textrm{tr}[\mathbf{AX}] &= \mathbf{A}^T \\[1.2em] 
+  \mathbf{\nabla_X} \textrm{tr}[\mathbf{X}^T\mathbf{A}] &= \mathbf{A}\\[1.2em]
+  \mathbf{\nabla_X} \textrm{tr}[\mathbf{X}^T\mathbf{AX}] &= (\mathbf{A} + \mathbf{A}^T)\mathbf{X}\\[1.2em]
+  \mathbf{\nabla_X} \textrm{tr}[\mathbf{XA}\mathbf{X}^T] &= \mathbf{X}(\mathbf{A}^T + \mathbf{A})\\[1.2em]
 \end{align} 
 $$
 
@@ -74,9 +74,9 @@ Firstly, we are only interested in the derivative with respect to $\mathbf{W}$. 
 
 $$
 \begin{align} \label{eq:W_deriv_1}
-  \mathbf{\nabla_W} \textrm{tr}[\mathbf{X}^T\mathbf{WH}] &= \mathbf{\nabla_W} \textrm{tr}[\mathbf{HX}^T\mathbf{W}] = (\mathbf{HX}^T)^T = \mathbf{XH}^T \\
-  \mathbf{\nabla_W} \textrm{tr}[\mathbf{H}^T\mathbf{W}^T\mathbf{X}] &= \mathbf{\nabla_W} \textrm{tr}[\mathbf{W}^T\mathbf{XH}^T] = \mathbf{XH}^T \\
-  \mathbf{\nabla_W} \textrm{tr}[\mathbf{H}^T\mathbf{W}^T\mathbf{WH}] &= \mathbf{\nabla_W} \textrm{tr}[\mathbf{WHH}^T\mathbf{W}^T] = \mathbf{W}((\mathbf{HH}^T)^T + (\mathbf{HH}^T)) =  2\mathbf{W}\mathbf{HH}^T\\
+  \mathbf{\nabla_W} \textrm{tr}[\mathbf{X}^T\mathbf{WH}] &= \mathbf{\nabla_W} \textrm{tr}[\mathbf{HX}^T\mathbf{W}] = (\mathbf{HX}^T)^T = \mathbf{XH}^T \\[1.2em]
+  \mathbf{\nabla_W} \textrm{tr}[\mathbf{H}^T\mathbf{W}^T\mathbf{X}] &= \mathbf{\nabla_W} \textrm{tr}[\mathbf{W}^T\mathbf{XH}^T] = \mathbf{XH}^T \\[1.2em]
+  \mathbf{\nabla_W} \textrm{tr}[\mathbf{H}^T\mathbf{W}^T\mathbf{WH}] &= \mathbf{\nabla_W} \textrm{tr}[\mathbf{WHH}^T\mathbf{W}^T] = \mathbf{W}((\mathbf{HH}^T)^T + (\mathbf{HH}^T)) =  2\mathbf{W}\mathbf{HH}^T\\[1.2em]
 \end{align} 
 $$
 
@@ -116,7 +116,7 @@ The update step therefore becomes:
 
 $$
 \begin{align} 
- \mathbf{W} &\leftarrow  \mathbf{W} -  \alpha\nabla_\mathbf{W} f(\mathbf{W,H}) \\
+ \mathbf{W} &\leftarrow  \mathbf{W} -  \alpha\nabla_\mathbf{W} f(\mathbf{W,H}) \\[1.2em]
  \mathbf{W} &\leftarrow  \mathbf{W} -  \alpha(\mathbf{W}\mathbf{HH}^T - \mathbf{XH}^T + \lambda\mathbf{M}^T\mathbf{MW})\label{eq:W_update}
 \end{align} 
 $$
@@ -171,7 +171,7 @@ Using $\|\|\mathbf{P} + \mathbf{Q}\|\|_2^2 \leq (\|\|\mathbf{P}\|\|_2 + \|\|\mat
 
 $$
 \begin{align} \label{eq:lipschitz_final}
- 2||\mathbf{HH}^T + \lambda\mathbf{M}^T\mathbf{M}||_2 \leq 2(||\mathbf{\mathbf{HH}^T}||_2 + ||\mathbf{\lambda\mathbf{M}^T\mathbf{M}}||_2)) \leq L^2  
+ 2||\mathbf{HH}^T + \lambda\mathbf{M}^T\mathbf{M}||_2 \leq 2(||\mathbf{\mathbf{HH}^T}||_2 + ||\mathbf{\lambda\mathbf{M}^T\mathbf{M}}||_2) \leq L^2  
 \end{align} 
 $$ 
 
@@ -182,9 +182,9 @@ In the case of $\mathbf{H}$, there is only one term, where the gradient needs to
 
 $$
 \begin{align} \label{eq:H_deriv_1}
-  \mathbf{\nabla_H} \textrm{tr}[\mathbf{X}^T\mathbf{WH}] &= (\mathbf{X}^T\mathbf{W})^T = \mathbf{W}^T\mathbf{X} \\
-  \mathbf{\nabla_H} \textrm{tr}[\mathbf{H}^T\mathbf{W}^T\mathbf{X}] &= \mathbf{W}^T\mathbf{X} \\
-  \mathbf{\nabla_H} \textrm{tr}[\mathbf{H}^T\mathbf{W}^T\mathbf{WH}] &= (\mathbf{W}^T\mathbf{W}^T + (\mathbf{W}^T\mathbf{W}^T)^T)\mathbf{H} =  2\mathbf{WW}^T\mathbf{H}\\
+  \mathbf{\nabla_H} \textrm{tr}[\mathbf{X}^T\mathbf{WH}] &= (\mathbf{X}^T\mathbf{W})^T = \mathbf{W}^T\mathbf{X} \\[1.2em]
+  \mathbf{\nabla_H} \textrm{tr}[\mathbf{H}^T\mathbf{W}^T\mathbf{X}] &= \mathbf{W}^T\mathbf{X} \\[1.2em]
+  \mathbf{\nabla_H} \textrm{tr}[\mathbf{H}^T\mathbf{W}^T\mathbf{WH}] &= (\mathbf{W}^T\mathbf{W}^T + (\mathbf{W}^T\mathbf{W}^T)^T)\mathbf{H} =  2\mathbf{WW}^T\mathbf{H}\\[1.2em]
 \end{align} 
 $$
 
@@ -195,3 +195,22 @@ $$
  \nabla_\mathbf{H} f(\mathbf{W,H}) =  2\mathbf{WW}^T\mathbf{H} - 2\mathbf{W}^T\mathbf{X} 
 \end{align} 
 $$
+
+The update step for $\mathbf{H}$ then becomes:
+
+$$
+\begin{align} \label{eq:update_H}
+  \mathbf{H} &\leftarrow  \mathbf{H} -  \alpha(\mathbf{WW}^T\mathbf{H} - \mathbf{W}^T\mathbf{X})
+\end{align} 
+$$
+
+As it was proposed by D. Lee and H. Seung in their paper [Algorithms for Non-negative Matrix Factorization](https://proceedings.neurips.cc/paper_files/paper/2000/file/f9d1152547c0bde01830b7e8bd60024c-Paper.pdf), it is possible to pick a step size, which ensures that $\mathbf{H}$ stays positive. Setting $\alpha = \mathbf{H}/\mathbf{WW}^T\mathbf{H}$ we get:
+
+$$
+\begin{align} \label{eq:update_H_w_step}
+  \mathbf{H} &\leftarrow  \mathbf{H} - \frac{\mathbf{H}}{\mathbf{WW}^T\mathbf{H}} \odot \mathbf{WW}^T\mathbf{H} + \frac{\mathbf{H}}{\mathbf{WW}^T\mathbf{H}} \odot \mathbf{W}^T\mathbf{X} \\[1.2em]
+  \mathbf{H} &\leftarrow \mathbf{H} \odot \frac{\mathbf{W}^T\mathbf{X}}{\mathbf{WW}^T\mathbf{H}} 
+\end{align} 
+$$
+
+

@@ -239,3 +239,84 @@ We can then use Tikhonov regularization as usual when solving for $\mathbf{y}^{(
 <center><img src="/HSTI/images/calculating_frequency_spectrum/dichloromethane_krylov_w_tikhonov.png" alt="Krylov solutions with tikhonov" width="80%" height="80%">
 <figcaption><b>Fig 9:</b> Tikhonov regularization has been applied to one of the solutions from Fig. 8. 25 components are included in the model and $\gamma = 1\times 10^7$.  </figcaption></center>
 
+
+## Nonnegative matrix factorization
+
+The idea is similar to what has just been shown in the section about Krylov spaces, but here we are going to introduce a couple of additional constraints. We are going to factorize the original spectra into a linear combination of atoms. We are essentially constructing a dictionary of possible solutions. That means that when reconstructing a spectrum from an interferogram, instead of having infinitely many possible solutions, we require the solution to be some combination of the "solutions" in the dictionary. We train a model to only propose more or less physical spectra when solving. For this part we don't need interferograms to compare against nor do we need a perfect system matrix - we are just looking for possible solutions to the reconstruction problem. Therefore, the more spectra the better - but firstly, we are only going to consider the relevant ones from these experiments.  
+
+We are out to find an algorithm which can calculate a dictionary, $\mathbf{W}$, which fit the training data, and a coefficient matrix, $\mathbf{H}$ which is used to combine the atoms of the dictionary to best match the original signal. The spectra are kept in the columns of the matrix $\mathbf{X}$ and is factorized following.
+
+$$
+\begin{align} \label{eq:NMF}
+	\mathbf{X} \approx \mathbf{WH}, \qquad \mathbf{X} \in \mathbb{R}^{M \times N}, \qquad \mathbf{W} \in \mathbb{R}^{M \times R}, \qquad \mathbf{H} \in \mathbb{R}^{R \times N}
+\end{align}
+$$
+
+We want the atoms to all be positive as negative spectra does note really make sense. Similarly, the coefficients i $\mathbf{H}$ should also all be positive. We can therefore set up the following minimization problem. 
+
+$$
+\begin{align} \label{eq:arg_min}
+  \arg \min_{\mathbf{W,H}} ||\mathbf{X} - \mathbf{WH}||_F^2 + \lambda||\mathbf{MW}||_F^2  + \gamma||\mathbf{H}||_\textrm{1, columns} \qquad \textrm{s.t.} \quad \mathbf{W,H} \geq 0
+\end{align} 
+$$
+
+where the additional regularization term $\|\|\mathbf{MW}\|\|\_F^2$ has been added to smooth the atoms of $\mathbf{W}$, as they otherwise become very noisy. $\mathbf{M}$ is therefore an $M \times M$ matrix similar to what is shown in Eq. (\ref{eq:M_reg}). Furthermore, we want the columns of $\mathbf{H}$ to be sparse which is encuraged by the $\|\|\mathbf{H}\|\|\_\textrm{1, columns}$ regularization term.
+
+We are going to minimize the cost function using a gradient decent algorithm. This requires us to take the partial derivative of Eq. (\ref{eq:arg_min}) with respect to both $\mathbf{W}$ and $\mathbf{H}$ separately. A more thorough derivation can be seen [here]({% link HSTI/_posts/2024-02-15-derivation_of_GD_NMF.md %}), but it essentially boils down to this: 
+
+The update functions are defined as:
+
+$$
+\begin{align} \label{eq:W_update}
+ \mathbf{W} &\leftarrow  \mathbf{W} -  \alpha_\mathbf{W}\nabla_\mathbf{W} f(\mathbf{W,H}) \\[1.2em]
+ \mathbf{H} &\leftarrow  \mathbf{H} -  \alpha_\mathbf{H}\nabla_\mathbf{H} f(\mathbf{W,H})\label{eq:H_update}
+\end{align} 
+$$
+
+where $\alpha_\mathbf{W}$ and $\alpha_\mathbf{H}$ are step sizes and $f(\mathbf{W,H})$ is the cost function defined as:
+
+$$
+\begin{align} \label{eq:cost_function}
+  f(\mathbf{W,H}) = ||\mathbf{X} - \mathbf{WH}||_F^2 + \lambda||\mathbf{MW}||_F^2  + \gamma||\mathbf{H}||_\textrm{1, columns} 
+\end{align} 
+$$
+
+Calculating the gradient of $f(\mathbf{W,H})$ w.r.t. both $\mathbf{W}$ and $\mathbf{H}$ leads to the update functions being: 
+
+$$
+\begin{align} \label{eq:W_update2}
+ \mathbf{W} &\leftarrow  \mathbf{W} -  \alpha_\mathbf{W}(\mathbf{WWH}^T - \mathbf{XH}^T + \lambda\mathbf{M}^T\mathbf{MW}) \\[1.2em]
+ \mathbf{h} &\leftarrow  \mathbf{h} -  \alpha_\mathbf{h}(\mathbf{W}^T\mathbf{Wh} - \mathbf{W}^T\mathbf{x} - \gamma\mathbf{1})\label{eq:H_update2}
+\end{align} 
+$$
+
+The update function for $\mathbf{H}$ only operates on a single column $(\mathbf{h})$ at a time, while the update function for $\mathbf{W}$ updates the entire matrix at once. As for the step sizes, then theory predicts that the step sizes should lie in the interval $0 \leq \alpha \leq \frac{2}{L}$ where $L$ is the Lipschitz constant. From this it follows that  
+
+
+$$
+\begin{align} \label{eq:stepsize_W}
+ 0\leq \alpha_\mathbf{W} & \leq  \frac{1}{||\mathbf{\mathbf{HH}^T}||_2 + \lambda||\mathbf{\mathbf{M}^T\mathbf{M}}||_2} = \frac{1}{\sigma_1(\mathbf{H}) + \lambda \sigma_1(\mathbf{M})} \\[1.2em]
+ 0\leq \alpha_\mathbf{h} & \leq  \frac{1}{||\mathbf{\mathbf{W}^T\mathbf{W}}||_2} = \frac{1}{\sigma_1(\mathbf{W})} \label{eq:stepsize_H}
+\end{align} 
+$$
+
+where $\sigma_1(\mathbf{A})$ is the largest singular value of the matrix $\mathbf{A}$. The singular values are related to the eigenvalue following $\sigma_i^2 = \lambda_i$ following $\sigma_i^2(\mathbf{A}) = \lambda_i(\mathbf{A}^*\mathbf{A})$. Caution, here $\lambda_i$ refers to the $i^\textrm{th}$ eigenvalue and NOT the regularization parameter. 
+
+$\mathbf{W}$ and $\mathbf{H}$ are initialized as random numbers between 0 and 1, after which the update functions are run multiple times (in this case 18). The regularization parameters are $\gamma = 1\times10^{-2}$ and $\lambda = 1\times10^{-3}$ while the step sizes are set to $1/L$ (not $2/L$).  
+
+<center><img src="/HSTI/images/calculating_frequency_spectrum/nmf_dictionary.png" alt="Dictionary learning" width="80%" height="80%">
+<figcaption><b>Fig 10:</b> NOT RECONSTRUCTIONS FROM INTERFEROGRAMS. This shows how the original spectrum of dichloromethane can be constructed from a positive combination of the atoms of $\mathbf{W}$. A single atom is shown (column 126) which is the largest entry in $\mathbf{h_{25}}$.  </figcaption></center>
+
+That was only the first part of the problem. We still need to reconstruct one of the interferograms - that is, solve $\mathbf{Ax} = \mathbf{b}$. $\mathbf{A}$ is still the system matrix and $\mathbf{b}$ is the corrected interferogram as in Eq. (\ref{eq:rhs}). However, we want to solve the problem in terms of the sparse basis. That means that the minimization problem can be reformulated
+
+$$
+\begin{align} \label{eq:arg_min_sparse}
+  &\arg \min_{\mathbf{x}} ||\mathbf{b} - \mathbf{Ax}||_F^2 \\[1.2em]
+  &\arg \min_{\mathbf{z}} ||\mathbf{b} - \mathbf{ADz}||_F^2 + \gamma||\mathbf{z}||_1 \\[1.2em]
+ \end{align} 
+$$
+
+This allows us to use the same update function as presented in Eq. (\ref{eq:H_update2}) to calculate the sparse solution $\mathbf{z}$. The original spectrum can then be recovered by $\mathbf{Dz}$. The final reconstruction can be seen in Fig. 11 below.  
+
+<center><img src="/HSTI/images/calculating_frequency_spectrum/nmf_dictionary_reconstruction.png" alt="Dictionary learning" width="80%" height="80%">
+<figcaption><b>Fig 11:</b> Reconstruction of dichloromethane interferogram. The atom corresponding to the largest entry in $\mathbf{z}$ is also shown along with the reconstruction error as a function of iterations.  </figcaption></center>
