@@ -320,3 +320,18 @@ This allows us to use the same update function as presented in Eq. (\ref{eq:H_up
 
 <center><img src="/HSTI/images/calculating_frequency_spectrum/nmf_dictionary_reconstruction.png" alt="Dictionary learning" width="80%" height="80%">
 <figcaption><b>Fig 11:</b> Reconstruction of dichloromethane interferogram. The atom corresponding to the largest entry in $\mathbf{z}$ is also shown along with the reconstruction error as a function of iterations.  </figcaption></center>
+
+
+
+
+#### An argument to describe the incident spectrum with negative terms (only relevant for spectral reconstruction)
+
+Even though light intensity cannot be negative, I could make the argument that the emission spectrum of any given object in a scene can be treated as a perfect black-body emitter at a given temperature. The deviations from a perfect black-body are then determined by its emissivity (which is a spectral property). The emissivity $\varepsilon(\lambda)$ is a number between 0 and 1 and changes with the wavelength:
+
+$$
+\begin{align} \label{eq:emissivity}
+	\varepsilon(\lambda) = \frac{M_{obj}(T, \lambda)}{M_{BB}(T, \lambda)}
+\end{align} 
+$$ 
+
+The signal can still not become negative, but if the black-body is the "baseline", then "subsignals" can be subtracted until the true spectrum is recovered. This way the proposed solution should never overshoot the black body eliminating non-physical solutions from the space of possible solutions. 
