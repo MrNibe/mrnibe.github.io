@@ -11,7 +11,7 @@ Since the FTIR spectra are measures of transmission, when we have multiple gasse
 
 $$
 \begin{align} \label{eq:ftir_cmb}
-	\mathbf{t} = \mathbf{t}^{(1)}\odot\mathbf{t}^{(2)}\odot... = \prod_{i=1}^{K}\mathbf{t}^{(i)}, 
+	\mathbf{t} = \mathbf{t}^{(1)}\circ\mathbf{t}^{(2)}\circ... = \prod_{i=1}^{K}\mathbf{t}^{(i)}, 
 \end{align} 
 $$  
 
@@ -46,7 +46,7 @@ There does not seem to be an easy method of combining individual interferograms,
 
 <!---
 
-We see that if we know the interferograms for the individual gasses, we cannot quite add them nor multiply them together to arrive at the same solution as $\mathbf{s_{cmb}}$. However, we need not much adjustment to do so. Addition clearly does not work, but if we multiply two interferograms together $\mathbf{s}^{(1)}\odot\mathbf{s}^{(2)}$, then we realize that the contribution of the system matrix is included twice. To account for this we need to know the contribution of each row in $\mathbf{A}$ to the interferogram. We'll define
+We see that if we know the interferograms for the individual gasses, we cannot quite add them nor multiply them together to arrive at the same solution as $\mathbf{s_{cmb}}$. However, we need not much adjustment to do so. Addition clearly does not work, but if we multiply two interferograms together $\mathbf{s}^{(1)}\circ\mathbf{s}^{(2)}$, then we realize that the contribution of the system matrix is included twice. To account for this we need to know the contribution of each row in $\mathbf{A}$ to the interferogram. We'll define
 
 $$
 \begin{align} \label{eq:interferogram_ones}

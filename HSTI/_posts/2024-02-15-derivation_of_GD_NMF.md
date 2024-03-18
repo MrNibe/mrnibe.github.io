@@ -33,10 +33,10 @@ Here, $l$ denotes the iteration of this iterative update scheme and $\alpha$ is 
 
 $$
 \begin{align} \label{eq:f_update_elementwise}
- \mathbf{θ}_{l+1} = \mathbf{θ}_{l} - \mathbf{α} \odot \nabla f(\mathbf{θ}_{l})
+ \mathbf{θ}_{l+1} = \mathbf{θ}_{l} - \mathbf{α} \circ \nabla f(\mathbf{θ}_{l})
 \end{align} 
 $$
-where $\odot$ denotes element wise multiplication. 
+where $\circ$ denotes element wise multiplication. 
 
 Now, the gradient $\nabla f(\mathbf{W,H})$ is derived. We must find the gradient both with respect to $\mathbf{W}$ and $\mathbf{H}$ as we want to minimize them both. Firstly, we start by deriving $\nabla_\mathbf{W} f(\mathbf{W,H})$
 
@@ -147,7 +147,7 @@ To find the Lipschitz constant, we should therefore differentiate $\nabla_\mathb
 
 $$
 \begin{align} \label{eq:f_2nd_deriv}
- \nabla^2_\mathbf{W} f(\mathbf{W,H}) =  2\nabla^2_\mathbf{W}(\mathbf{WHH}^T - \mathbf{XH}^T + \lambda \mathbf{M}^T\mathbf{MW}) = 2(\mathbf{HH}^T + \lambda\mathbf{M}^T\mathbf{M})
+ \nabla^2_\mathbf{W} f(\mathbf{W,H}) =  2\nabla_\mathbf{W}(\mathbf{WHH}^T - \mathbf{XH}^T + \lambda \mathbf{M}^T\mathbf{MW}) = 2(\mathbf{HH}^T + \lambda\mathbf{M}^T\mathbf{M})
 \end{align} 
 $$
 
@@ -208,8 +208,8 @@ As it was proposed by D. Lee and H. Seung in their paper [Algorithms for Non-neg
 
 $$
 \begin{align} \label{eq:update_H_w_step}
-  \mathbf{H} &\leftarrow  \mathbf{H} - \frac{\mathbf{H}}{\mathbf{WW}^T\mathbf{H}} \odot \mathbf{WW}^T\mathbf{H} + \frac{\mathbf{H}}{\mathbf{WW}^T\mathbf{H}} \odot \mathbf{W}^T\mathbf{X} \\[1.2em]
-  \mathbf{H} &\leftarrow \mathbf{H} \odot \frac{\mathbf{W}^T\mathbf{X}}{\mathbf{WW}^T\mathbf{H}} 
+  \mathbf{H} &\leftarrow  \mathbf{H} - \frac{\mathbf{H}}{\mathbf{WW}^T\mathbf{H}} \circ \mathbf{WW}^T\mathbf{H} + \frac{\mathbf{H}}{\mathbf{WW}^T\mathbf{H}} \circ \mathbf{W}^T\mathbf{X} \\[1.2em]
+  \mathbf{H} &\leftarrow \mathbf{H} \circ \frac{\mathbf{W}^T\mathbf{X}}{\mathbf{WW}^T\mathbf{H}} 
 \end{align} 
 $$
 

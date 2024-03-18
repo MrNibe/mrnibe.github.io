@@ -11,11 +11,11 @@ Now, lets start by defining the flux incident on the sensor
 
 $$
 \begin{align} \label{eq:fpi_flux}
-	\mathbf{\Phi_{in}} = \mathbf{T_{SFPI}}\circ[\mathbf{t_{samp}}\odot\mathbf{m_{BB}}(T_{BB}) + \mathbf{r_{samp}}\odot\mathbf{m_{env}}(T_{env})] + \mathbf{R_{SFPI}} \circ \mathbf{m_{sens}}(T_{sens}) 
+	\mathbf{\Phi_{in}} = \mathbf{T_{SFPI}}\diamond[\mathbf{t_{samp}}\circ\mathbf{m_{BB}}(T_{BB}) + \mathbf{r_{samp}}\circ\mathbf{m_{env}}(T_{env})] + \mathbf{R_{SFPI}} \diamond \mathbf{m_{sens}}(T_{sens}) 
 \end{align} 
 $$ 
 
-Here, $\circ$ and $\odot$ refer to element wise and row wise multiplication respectively.  $\mathbf{T\_{SFPI}}$ and $\mathbf{R\_{SFPI}}$ are matrices describing the transmittance and reflectance of the SFPI respectively. Each row of the matrices is denoted to a specific mirror separation, with each column ascribed to a specific wavelength/wavenumber. $T_{BB}$, $T_{env}$, and $T_{sens}$ are the temperatures of the black body behind the sample and the temperature of the environment. $\mathbf{m}$ is a vector describing the black-body emission spectrum where the subscripts refer to the source of radiation (black-body, environment, and sensor). $\mathbf{t_{samp}}$ and $\mathbf{r_{samp}}$ are the transmission and reflectance spectrum of the sample respectively. The length of the vectors are the same as the number of columns in $\mathbf{T\_{SFPI}}$ and $\mathbf{R\_{SFPI}}$. 
+Here, $\diamond$ and $\circ$ refer to element wise and row wise multiplication respectively.  $\mathbf{T\_{SFPI}}$ and $\mathbf{R\_{SFPI}}$ are matrices describing the transmittance and reflectance of the SFPI respectively. Each row of the matrices is denoted to a specific mirror separation, with each column ascribed to a specific wavelength/wavenumber. $T_{BB}$, $T_{env}$, and $T_{sens}$ are the temperatures of the black body behind the sample and the temperature of the environment. $\mathbf{m}$ is a vector describing the black-body emission spectrum where the subscripts refer to the source of radiation (black-body, environment, and sensor). $\mathbf{t_{samp}}$ and $\mathbf{r_{samp}}$ are the transmission and reflectance spectrum of the sample respectively. The length of the vectors are the same as the number of columns in $\mathbf{T\_{SFPI}}$ and $\mathbf{R\_{SFPI}}$. 
 
 An argument could be made for also including a flux term from the sensor housing, objective, lenses and SFPI itself as they also have a temperature, which is most often different from the sensor temperature. A good estimate would probably be to approximate this term by another $\mathbf{m_{env}}(T_{env})$ or ideally by knowing the temperature inside the lens itself, but it has initially been left out.
 
@@ -23,7 +23,7 @@ What we want to solve for in the end is
 
 $$
 \begin{align} \label{eq:x}
-	\mathbf{x} = \mathbf{t_{samp}}\odot\mathbf{m_{BB}}(T_{BB}) + \mathbf{r_{samp}}\odot\mathbf{m_{env}}(T_{env})
+	\mathbf{x} = \mathbf{t_{samp}}\circ\mathbf{m_{BB}}(T_{BB}) + \mathbf{r_{samp}}\circ\mathbf{m_{env}}(T_{env})
 \end{align} 
 $$ 
 
@@ -45,7 +45,7 @@ The first way to rearrange the terms into an $\mathbf{Ax}=\mathbf{b}$ problem is
 
 $$
 \begin{align} \label{eq:sys_matrix_1}
-	\mathbf{A} = \mathbf{T_{SFPI}}\circ\mathbf{s}
+	\mathbf{A} = \mathbf{T_{SFPI}}\diamond\mathbf{s}
 \end{align} 
 $$ 
 
@@ -53,21 +53,21 @@ The other terms not part of $\mathbf{x}$ is moved to the left-hand side of Eq. (
 
  $$
 \begin{align} \label{eq:Ax=b1}
-	\mathbf{i} - [(\mathbf{R_{SFPI}} - \mathbf{1}) \circ \mathbf{m_{sens}}(T_{sens})]\mathbf{s}  = \mathbf{Ax}
+	\mathbf{i} - [(\mathbf{R_{SFPI}} - \mathbf{1}) \diamond \mathbf{m_{sens}}(T_{sens})]\mathbf{s}  = \mathbf{Ax}
 \end{align} 
 $$ 
 
-In this variation there are no negative terms in neither $\mathbf{A}$ nor $\mathbf{x}$ as it is moved to $\mathbf{b}$ instead. Note that $[(\mathbf{R_{SFPI}} - \mathbf{1}) \circ \mathbf{m_{sens}}(T_{sens})]\mathbf{s}$ is exclusively negative since $\mathbf{R_{SFPI}}$ cannot be greater than 1. This way $\mathbf{A}$, $\mathbf{x}$, and $\mathbf{b}$ are all exclusively nonnegative.
+In this variation there are no negative terms in neither $\mathbf{A}$ nor $\mathbf{x}$ as it is moved to $\mathbf{b}$ instead. Note that $[(\mathbf{R_{SFPI}} - \mathbf{1}) \diamond \mathbf{m_{sens}}(T_{sens})]\mathbf{s}$ is exclusively negative since $\mathbf{R_{SFPI}}$ cannot be greater than 1. This way $\mathbf{A}$, $\mathbf{x}$, and $\mathbf{b}$ are all exclusively nonnegative.
 
 
 ## Ax=b Configuration 2
 
-Here, we are going to work with the same system matrix as before, namely $\mathbf{A} = \mathbf{T_{SFPI}}\circ\mathbf{s}$. Additionally, it is assumed that the SFPI is lossless meaning $\mathbf{R\_{SFPI}} = \mathbf{1} - \mathbf{T\_{SFPI}}$. Eq. (\ref{eq:fpi_flux}) then becomes
+Here, we are going to work with the same system matrix as before, namely $\mathbf{A} = \mathbf{T_{SFPI}}\diamond\mathbf{s}$. Additionally, it is assumed that the SFPI is lossless meaning $\mathbf{R\_{SFPI}} = \mathbf{1} - \mathbf{T\_{SFPI}}$. Eq. (\ref{eq:fpi_flux}) then becomes
 
 $$
 \begin{align} \label{eq:fpi_flux2}
-	\mathbf{\Phi_{in}} &= \mathbf{T_{SFPI}}\circ[\mathbf{t_{samp}}\odot\mathbf{m_{BB}}(T_{BB}) + \mathbf{r_{samp}}\odot\mathbf{m_{env}}(T_{env})] + (\mathbf{1} - \mathbf{T_{SFPI}}) \circ \mathbf{m_{sens}}(T_{sens}) \\[1.2em]
-	&= \mathbf{T_{SFPI}}\circ[\mathbf{x} - \mathbf{m_{sens}}(T_{sens})] + \mathbf{m_{sens}}(T_{sens}) 
+	\mathbf{\Phi_{in}} &= \mathbf{T_{SFPI}}\diamond[\mathbf{t_{samp}}\circ\mathbf{m_{BB}}(T_{BB}) + \mathbf{r_{samp}}\circ\mathbf{m_{env}}(T_{env})] + (\mathbf{1} - \mathbf{T_{SFPI}}) \diamond \mathbf{m_{sens}}(T_{sens}) \\[1.2em]
+	&= \mathbf{T_{SFPI}}\diamond[\mathbf{x} - \mathbf{m_{sens}}(T_{sens})] + \mathbf{m_{sens}}(T_{sens}) 
 \end{align} 
 $$  
 
@@ -76,7 +76,7 @@ Eq. (\ref{eq:signal}) then becomes
 
 $$
 \begin{align} \label{eq:signal2}
-	\mathbf{i} \propto (\mathbf{T_{SFPI}}\circ[\mathbf{x} - \mathbf{m_{sens}}(T_{sens})])\mathbf{s} = \mathbf{A}[\mathbf{x} - \mathbf{m_{sens}}(T_{sens})] = \mathbf{A}\mathbf{\chi}
+	\mathbf{i} \propto (\mathbf{T_{SFPI}}\diamond[\mathbf{x} - \mathbf{m_{sens}}(T_{sens})])\mathbf{s} = \mathbf{A}[\mathbf{x} - \mathbf{m_{sens}}(T_{sens})] = \mathbf{A}\mathbf{\chi}
 \end{align} 
 $$ 
 

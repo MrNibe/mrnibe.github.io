@@ -239,11 +239,11 @@ We assume that Fig. 16 as an (approximately) accurate description of the transmi
 
 $$
 \begin{align} \label{eq:fpi_flux}
-	\mathbf{\Phi} = \mathbf{T_{SFPI}}\circ(\mathbf{t_{samp}}\odot\mathbf{m_{BB}}(T_{BB}) + (\mathbf{1} - \mathbf{t_{samp}})\odot\mathbf{m_{env}}(T_{env})) + \mathbf{R_{SFPI}} \circ \mathbf{m_{sens}}(T_{sens}) 
+	\mathbf{\Phi} = \mathbf{T_{SFPI}}\diamond(\mathbf{t_{samp}}\circ\mathbf{m_{BB}}(T_{BB}) + (\mathbf{1} - \mathbf{t_{samp}})\circ\mathbf{m_{env}}(T_{env})) + \mathbf{R_{SFPI}} \diamond \mathbf{m_{sens}}(T_{sens}) 
 \end{align} 
 $$
 
-Here, $\odot$ and $\circ$ represent element-wise and row/element-wise multiplication respectively. By row/element-wise I mean that each row of the matrix is multiplied element-wise by each element in the vector. $\mathbf{T_{SFPI}}$ and $\mathbf{R_{SFPI}}$ are the transmission and reflection matrices of the SFPI calculated using TMM. $\mathbf{t_{samp}}$ is the FTIR transmission spectrum of the sample. Since I do not have the reflectance spectra of the samples, these are estimated simply by $(\mathbf{1} - \mathbf{r_{samp}})$ (assuming the samples are loss-less). $\mathbf{m_{BB}}(T_{BB})$, $\mathbf{m_{env}}(T_{env})$, and $\mathbf{m_{sens}}(T_{sens})$ are the black body spectra of the black body behind the sample, the environmental background emission and the sensor. $T_{BB}$, $T_{env}$, and $T_{sens}$ are the temperatures of the black body, the environment, and the sensor respectively. 
+Here, $\circ$ and $\diamond$ represent element-wise and row/element-wise multiplication respectively. By row/element-wise I mean that each row of the matrix is multiplied element-wise by each element in the vector. $\mathbf{T_{SFPI}}$ and $\mathbf{R_{SFPI}}$ are the transmission and reflection matrices of the SFPI calculated using TMM. $\mathbf{t_{samp}}$ is the FTIR transmission spectrum of the sample. Since I do not have the reflectance spectra of the samples, these are estimated simply by $(\mathbf{1} - \mathbf{r_{samp}})$ (assuming the samples are loss-less). $\mathbf{m_{BB}}(T_{BB})$, $\mathbf{m_{env}}(T_{env})$, and $\mathbf{m_{sens}}(T_{sens})$ are the black body spectra of the black body behind the sample, the environmental background emission and the sensor. $T_{BB}$, $T_{env}$, and $T_{sens}$ are the temperatures of the black body, the environment, and the sensor respectively. 
 
 This expression does not include the emission spectrum of the sample itself. Also, $(\mathbf{1} - \mathbf{r_{samp}})$ is probably not a correct estimation of the sample reflectance. Furthermore, the sensor is probably not a true black body, but this works for the estimation. 
 

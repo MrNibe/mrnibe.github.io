@@ -12,11 +12,11 @@ Firstly, we must setup the model by calculating the total radiation flux both in
 
 $$
 \begin{align} \label{eq:fpi_flux}
-	\mathbf{\Phi} = \mathbf{T_{SFPI}}\circ(\mathbf{t_{samp}}\odot\mathbf{m_{BB}}(T_{BB}) + (\mathbf{1} - \mathbf{t_{samp}})\odot\mathbf{m_{env}}(T_{env})) + \mathbf{R_{SFPI}} \circ \mathbf{m_{sens}}(T_{sens}) 
+	\mathbf{\Phi} = \mathbf{T_{SFPI}}\diamond(\mathbf{t_{samp}}\circ\mathbf{m_{BB}}(T_{BB}) + (\mathbf{1} - \mathbf{t_{samp}})\circ\mathbf{m_{env}}(T_{env})) + \mathbf{R_{SFPI}} \diamond \mathbf{m_{sens}}(T_{sens}) 
 \end{align} 
 $$
 
-Here, $\odot$ and $\circ$ represent element-wise (Hadamard product) and row/element-wise multiplication respectively. By row/element-wise I mean that each row of the matrix is multiplied element-wise by each element in the vector. $\mathbf{T_{SFPI}}$ and $\mathbf{R_{SFPI}}$ are the transmission and reflection matrices of the SFPI calculated using TMM. $\mathbf{t_{samp}}$ is the FTIR transmission spectrum of the sample. Since I do not have the reflectance spectra of the samples, these are estimated simply by $(\mathbf{1} - \mathbf{r_{samp}})$ (assuming the samples are loss-less). $\mathbf{m_{BB}}(T_{BB})$, $\mathbf{m_{env}}(T_{env})$, and $\mathbf{m_{sens}}(T_{sens})$ are the black body spectra of the black body behind the sample, the environmental background emission and the sensor. $T_{BB}$, $T_{env}$, and $T_{sens}$ are the temperatures of the black body, the environment, and the sensor respectively. 
+Here, $\circ$ and $\diamond$ represent element-wise (Hadamard product) and row/element-wise multiplication respectively. By row/element-wise I mean that each row of the matrix is multiplied element-wise by each element in the vector. $\mathbf{T_{SFPI}}$ and $\mathbf{R_{SFPI}}$ are the transmission and reflection matrices of the SFPI calculated using TMM. $\mathbf{t_{samp}}$ is the FTIR transmission spectrum of the sample. Since I do not have the reflectance spectra of the samples, these are estimated simply by $(\mathbf{1} - \mathbf{r_{samp}})$ (assuming the samples are loss-less). $\mathbf{m_{BB}}(T_{BB})$, $\mathbf{m_{env}}(T_{env})$, and $\mathbf{m_{sens}}(T_{sens})$ are the black body spectra of the black body behind the sample, the environmental background emission and the sensor. $T_{BB}$, $T_{env}$, and $T_{sens}$ are the temperatures of the black body, the environment, and the sensor respectively. 
 
 Since the signal measured by the microbolometer is related to the difference in $\mathbf{\Phi}$ and the flux of the sensor itself. 
 
@@ -38,7 +38,7 @@ We know $\mathbf{i}$ (because we measured it), we have an estimate of $\mathbf{s
 
 $$
 \begin{align} \label{eq:unknown_part}
-	\mathbf{x}=\mathbf{t_{samp}}\odot\mathbf{m_{BB}}(T_{BB}) + (\mathbf{1} - \mathbf{t_{samp}})\odot\mathbf{m_{env}}(T_{env})
+	\mathbf{x}=\mathbf{t_{samp}}\circ\mathbf{m_{BB}}(T_{BB}) + (\mathbf{1} - \mathbf{t_{samp}})\circ\mathbf{m_{env}}(T_{env})
 \end{align} 
 $$
 
@@ -46,15 +46,15 @@ From here it is possible to rewrite and combine Eq. \ref{eq:fpi_signal}, \ref{eq
 
 $$
 \begin{align} \label{eq:rhs}
-	\mathbf{b}=\mathbf{i} - [\mathbf{R_{SFPI}} \circ \mathbf{m_{sens}}(T_{sens}) - \mathbf{m_{sens}}(T_{sens})]\mathbf{s}
+	\mathbf{b}=\mathbf{i} - [\mathbf{R_{SFPI}} \diamond \mathbf{m_{sens}}(T_{sens}) - \mathbf{m_{sens}}(T_{sens})]\mathbf{s}
 \end{align} 
 $$
 
-Note here that $\mathbf{m_{sens}}(T_{sens})$ is subtracted from each row in $\mathbf{R_{SFPI}} \circ \mathbf{m_{sens}}(T_{sens})$ before the dotproduct of the entire thing and $\mathbf{s}$ is calculated. $\mathbf{A}$ then becomes:
+Note here that $\mathbf{m_{sens}}(T_{sens})$ is subtracted from each row in $\mathbf{R_{SFPI}} \diamond \mathbf{m_{sens}}(T_{sens})$ before the dotproduct of the entire thing and $\mathbf{s}$ is calculated. $\mathbf{A}$ then becomes:
 
 $$
 \begin{align} \label{eq:A}
-	\mathbf{A} = \mathbf{T_{SFPI}}\circ\mathbf{s}
+	\mathbf{A} = \mathbf{T_{SFPI}}\diamond\mathbf{s}
 \end{align} 
 $$
 
