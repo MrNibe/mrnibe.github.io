@@ -1,5 +1,6 @@
 ---
-layout: home
+layout: archive
+classes: wide
 permalink: /HSTI/
 title: "Hyperspectral Thermal Imaging"
 author_profile: true

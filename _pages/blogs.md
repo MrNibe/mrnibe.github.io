@@ -1,6 +1,7 @@
 ---
-layout: home
+layout: archive
 permalink: /blogs/
+classes: wide
 title: "Blog posts"
 author_profile: true
 ---
