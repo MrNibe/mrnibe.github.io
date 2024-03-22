@@ -97,7 +97,7 @@ Here, we want to solve for $\mathbf{x}$ which is the input spectrum and we know 
 
 $$
 \begin{align} \label{eq:arg_min1}
-  &\arg \min_{\mathbf{x}, \: \psi} ||\mathbf{b} + \psi - \mathbf{Ax}||_F^2 + \gamma||\mathbf{Mx}||_F^2 , \quad \textrm{s.t.} \quad \mathbf{x} \geq 0 \\[1.2em]
+  &\arg \min_{\mathbf{x}, \: \psi} ||\mathbf{b} + \psi - \mathbf{Ax}||_2^2 + \gamma||\mathbf{Mx}||_2^2 , \quad \textrm{s.t.} \quad \mathbf{x} \geq 0 \\[1.2em]
   &\mathbf{b} =  \mathbf{i} - [(\mathbf{R_{SFPI}} - \mathbf{1}) \diamond \mathbf{m_{sens}}(T_{sens})]\mathbf{s} 
  \end{align} 
 $$
@@ -138,7 +138,7 @@ The cost function for this variation of the minimization problem then becomes:
 
 $$
 \begin{align} \label{eq:arg_min2}
-  &\arg \min_{\mathbf{\chi}, \: \psi} ||\mathbf{i} + \psi - \mathbf{A\chi}||_F^2 + \gamma||\mathbf{M\chi}||_F^2 , \quad \textrm{s.t.} \quad \mathbf{\chi} \geq 0
+  &\arg \min_{\mathbf{\chi}, \: \psi} ||\mathbf{i} + \psi - \mathbf{A\chi}||_2^2 + \gamma||\mathbf{M\chi}||_2^2
  \end{align} 
 $$
 
