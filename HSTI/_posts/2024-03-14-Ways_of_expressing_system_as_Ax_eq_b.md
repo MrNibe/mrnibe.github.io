@@ -283,7 +283,7 @@ Performing 1000 iterations of this algorithm yields the reconstructions which ar
 <center><img src="/HSTI/images/Ways_of_expressing_system_as_Ax_eq_b/nmf_gauss.png" alt="Dictionary" width="100%" height="100%">
 <figcaption><b>Figure 7:</b> Reconstructions of different signals based on a dictionary of Gaussians. THIS IS NOT RECONSTRUCTED INTERFEROGRAMS, BUT RATHER THE BEST OBTAINABLE RECONSTRUCTION OF THE INPUT SIGNALS BASED ON THE GAUSSIAN DICTIONERY. The coefficients of each reconstruction is indicated in the rightmost column.</figcaption></center>
 
-Now we have seen how good the reconstructions can potentially be, we are going to take a look at reconstructions of real signals from the interferometer. We're going to solve (almost) the same problem as in __Configuration 1__ as stated in Eq. (\ref{eq:argmin1}). Only here, we are going to ignore the offset, $\psi$ for a moment, and also, we can forego the smoothness regularization since the dictionary itself is already smooth. The reconstructed signal, $\mathbf{x}$, is however still subject to be nonnegative. That means that the new minimization problem can be written as
+Now we have seen how good the reconstructions can potentially be, we are going to take a look at reconstructions of real signals from the interferometer. We're going to solve (almost) the same problem as in __Configuration 1__ as stated in Eq. (\ref{eq:arg_min1}). Only here, we are going to ignore the offset, $\psi$ for a moment, and also, we can forego the smoothness regularization since the dictionary itself is already smooth. The reconstructed signal, $\mathbf{x}$, is however still subject to be nonnegative. That means that the new minimization problem can be written as
 
 $$
 \begin{align} \label{eq:arg_min3}
