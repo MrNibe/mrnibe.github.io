@@ -20,6 +20,17 @@ And derivatives of $\|\|\mathbf{MW}\|\|_F^2$ can be expressed as:
 $$
 \begin{align} \label{eq:deriv2}
  &\nabla_{W}||\mathbf{MW}||_F^2 = 2\mathbf{M}^T\mathbf{MW} \\[1.2em]
- &\nabla_{H}||\mathbf{MW}||_F^2 = 2\mathbf{MWW}^T
+ &\nabla_{M}||\mathbf{MW}||_F^2 = 2\mathbf{MWW}^T
 \end{align} 
 $$ 
+
+
+Also
+
+$$
+\begin{align} \label{eq:matrix_norm_eigen_values}
+ &||\mathbf{A}||_F = \sqrt{\lambda_\textrm{max}(\mathbf{A}^\dagger\mathbf{A})} = \sigma_\textrm{max}(\mathbf{A}) \\[1.2em]
+ &||\mathbf{A}^\dagger\mathbf{A}||_F = ||\mathbf{A}\mathbf{A}^\dagger||_F = ||\mathbf{A}||_F^2 = \sigma_\textrm{max}(\mathbf{A})^2 = \lambda_\textrm{max}(\mathbf{A}^\dagger\mathbf{A})
+\end{align} 
+$$ 
+Where $\mathbf{A}^\dagger$ is the conjugate transpose of $\mathbf{A}$.
