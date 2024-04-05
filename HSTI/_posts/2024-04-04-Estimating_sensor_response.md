@@ -95,8 +95,8 @@ def Ax_minus_b_w_reg(A, x, b, M, gamma, itermax):
 
 Running this 5000 times with $\gamma_{reg} = 50$ yields similar results to FNNLS as depicted in Fig. 2. 
 
-<center><img src="/HSTI/images/estimating_sensor_response/sensor_response_no_offset_GD.png" alt="Sensor response GD" width="80%" height="80%">
-<figcaption><b>Fig 2:</b> Sensor responses calculated using both FNNLS and gradient decent with no allowed offset in cost function. </figcaption></center>
+<center><img src="/HSTI/images/estimating_sensor_response/sensor_response_with_offset_GD.png" alt="Sensor response GD" width="80%" height="80%">
+<figcaption><b>Fig 2:</b> Sensor responses calculated using both FNNLS and gradient decent. The FNNLS prediction is performed without any offsets. </figcaption></center>
 
 ### Now let's add an offset
 
@@ -108,7 +108,7 @@ $$
 \end{align} 
 $$
 
-where $\psi$ is a constant scalar offset and $\mathbf{1}$ is a vector of 1's with the same dimension as $\mathbf{b}$ (and $\mathbf{c}$ for that matter).
+where $\psi$ is a constant scalar offset and $\mathbf{1}$ is a vector of 1's with the same dimension as $\mathbf{b}$ (and $\mathbf{c}$ for that matter). The offset is mostly associated with $\mathbf{b}$ as it describes an offset to the interferograms. 
 
 The objective function can be expanded yielding
 
@@ -136,5 +136,12 @@ $$
 \end{align} 
 $$
 
-which is simply just the mean of $\mathbf{c}$. 
+which is simply just the mean of $\mathbf{c}$.
+
+But the offset is individual for each of the interferograms, so we cannot just concatenate all measurements as we have done previously. Instead, the sensor response should be calculated for all measurements (I know that's what we have just done). Then, an offset should be calculated for each measurement separately before the sensor response is then once again calculated now including the offset in $\mathbf{b}$. 
+
+__And to my own surprise, this actually appears to be working as depicted in Fig. 2 and by the reconstructions in Fig. 3.__
+
+<center><img src="/HSTI/images/estimating_sensor_response/interferogram_reconstruction.png" alt="interferogram reconstruction" width="100%" height="100%">
+<figcaption><b>Fig 3:</b> Reconstructed interferograms without the offset (a) and with the offset (b). </figcaption></center>
 
