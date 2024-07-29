@@ -5,7 +5,7 @@ title:  "Heated carbon composite samples"
 date:   2024-07-24
 ---
 
-The heating characteristics of six different carbon composite samples have been investigated by time series thermography. As depicted in Fig. 1, the samples are suspended in front of the thermal camera (not hyperspectral), and heated by a heat gun for 30 s after which the cooling is observed for 20 minutes. Initial experiments using a hot plate to heat one end of the samples were not suitable to detect the defect. This might be caused by the samples dissipate most of the heat energy before it can travel from the heated end to the defect. 
+The heating characteristics of six different carbon composite samples have been investigated by time series thermography. As depicted in Fig. 1, the samples are suspended in front of the thermal camera (not hyperspectral), and heated by a heat gun for 30 s after which the cooling is observed for 2 minutes. Initial experiments using a hot plate to heat one end of the samples were not suitable to detect the defect. This might be caused by the samples dissipate most of the heat energy before it can travel from the heated end to the defect. 
 
 <center><img src="/HSTI/images/carbon_samples/IMG_1527.jpeg" alt="Signal reconstructions" width="70%" height="70%">
 <figcaption><b>Fig 1:</b> Spectral reconstructions of incident spectrum based on NMF gradient decent. </figcaption></center>
