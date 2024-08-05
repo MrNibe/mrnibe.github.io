@@ -29,7 +29,7 @@ Videos of all samples can be observed in Fig. 3.
 
 ## Additional measurements
 
-### Front view
+### Front view (Impactor side)
 <center>
 <video autoplay loop muted playsinline width="100%" height="100%" controls>
   <source src="/HSTI/images/carbon_samples/Heated_carbon_samples_front.mp4" type="video/mp4">
