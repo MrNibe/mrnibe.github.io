@@ -34,18 +34,18 @@ Videos of all samples can be observed in Fig. 3.
 <video autoplay loop muted playsinline width="100%" height="100%" controls>
   <source src="/HSTI/images/carbon_samples/Heated_carbon_samples_front.mp4" type="video/mp4">
 </video>
-<figcaption><b>Fig 4:</b> Heating sequence for all carbon samples. </figcaption></center>
+<figcaption><b>Fig 4:</b> Heating sequence for all carbon samples. The color scale is measured in ºC </figcaption></center>
 
 ### Back view
 <center>
 <video autoplay loop muted playsinline width="100%" height="100%" controls>
   <source src="/HSTI/images/carbon_samples/Heated_carbon_samples_back.mp4" type="video/mp4">
 </video>
-<figcaption><b>Fig 5:</b> Heating sequence for all carbon samples. </figcaption></center>
+<figcaption><b>Fig 5:</b> Heating sequence for all carbon samples. The color scale is measured in ºC</figcaption></center>
 
 ### Side view
 <center>
 <video autoplay loop muted playsinline width="100%" height="100%" controls>
   <source src="/HSTI/images/carbon_samples/Heated_carbon_samples_side.mp4" type="video/mp4">
 </video>
-<figcaption><b>Fig 6:</b> Heating sequence for all carbon samples. </figcaption></center>
+<figcaption><b>Fig 6:</b> Heating sequence for all carbon samples. The color scale is measured in ºC</figcaption></center>
