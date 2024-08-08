@@ -80,9 +80,9 @@ Firstly, no additional filters are used besides the scanning Fabry-Pérot interf
 
 <center><img src="/HSTI/images/flame_experiments/bp_filter/hydrogen_flame.png" alt="Flame" width="100%" height="100%">
 
-  ## Band pass and long pass filter
+## Band pass and long pass filter
 
-<center><img src="/HSTI/images/flame_experiments/transmission_matrix_bp.png" alt="Signal reconstructions" width="60%" height="60%">
+<center><img src="/HSTI/images/flame_experiments/transmission_matrix_bp_and_lwp.png" alt="Signal reconstructions" width="60%" height="60%">
 <figcaption><b>Fig 22:</b> Transmission profile of SFPI with band pass and long wave pass filter </figcaption></center>
 
 <center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/methane_flame.png" alt="Flame" width="100%" height="100%">
