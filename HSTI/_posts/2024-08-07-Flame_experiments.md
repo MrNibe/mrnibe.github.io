@@ -79,26 +79,28 @@ Firstly, no additional filters are used besides the scanning Fabry-Pérot interf
 <figcaption><b>Fig 21:</b>  </figcaption></center>
 
 <center><img src="/HSTI/images/flame_experiments/bp_filter/hydrogen_flame.png" alt="Flame" width="100%" height="100%">
+<figcaption><b>Fig 22:</b>  </figcaption></center>
 
-### Band pass and long pass filter
+
+## Band pass and long pass filter
 
 <center><img src="/HSTI/images/flame_experiments/transmission_matrix_bp_and_lwp.png" alt="Signal reconstructions" width="60%" height="60%">
-<figcaption><b>Fig 22:</b> Transmission profile of SFPI with band pass and long wave pass filter </figcaption></center>
+<figcaption><b>Fig 23:</b> Transmission profile of SFPI with band pass and long wave pass filter </figcaption></center>
 
 <center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/methane_flame.png" alt="Flame" width="100%" height="100%">
-<figcaption><b>Fig 23:</b> </figcaption></center>
+<figcaption><b>Fig 24:</b> </figcaption></center>
 
 <center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/ethane_flame.png" alt="Flame" width="100%" height="100%">
-<figcaption><b>Fig 24:</b>  </figcaption></center>
-
-<center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/propane_flame.png" alt="Flame" width="100%" height="100%">
 <figcaption><b>Fig 25:</b>  </figcaption></center>
 
-<center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/butane_flame.png" alt="Flame" width="100%" height="100%">
+<center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/propane_flame.png" alt="Flame" width="100%" height="100%">
 <figcaption><b>Fig 26:</b>  </figcaption></center>
 
-<center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/ethylene_flame.png" alt="Flame" width="100%" height="100%">
+<center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/butane_flame.png" alt="Flame" width="100%" height="100%">
 <figcaption><b>Fig 27:</b>  </figcaption></center>
 
-<center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/hydrogen_flame.png" alt="Flame" width="100%" height="100%">
+<center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/ethylene_flame.png" alt="Flame" width="100%" height="100%">
 <figcaption><b>Fig 28:</b>  </figcaption></center>
+
+<center><img src="/HSTI/images/flame_experiments/bp_and_lwp_filter/hydrogen_flame.png" alt="Flame" width="100%" height="100%">
+<figcaption><b>Fig 29:</b>  </figcaption></center>
