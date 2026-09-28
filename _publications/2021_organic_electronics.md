@@ -5,6 +5,7 @@ permalink: /publication/2021_organic_electronics
 excerpt: 'The performance of organic semiconductor devices is strongly affected by the interface energetics at the junctions between the constituent materials. A large group of organic semiconductors consists of rodlike small molecules that crystallize upon deposition with a molecular orientation dependent on the specifics of the molecule–molecule and molecule–substrate interactions. By means of Kelvin probe force microscopy (KPFM), this work studies naphthyl end-capped oligothiophene, 5,50-bis(naphth-2-yl)-2,20-bithiophene (NaT2), deposited on samples of pristine SiO<sub>2</sub> and samples of graphene-covered SiO<sub>2</sub>.'
 date: 2021-02-01
 venue: 'Organic Electronics'
+pubtype: 'journal'
 paperurl: 'https://doi.org/10.1016/j.orgel.2020.106060'
 citation: 'Mads Nibe Larsen, Mads Svanborg Peters, Rodrigo Lemos-Silva, Demetrio A. Da Silva Filho, Bjarke Jørgensen, Ole Albrektsen, Jakob Kjelstrup-Hansen, "Work function difference of naphthyl end-capped oligothiophene in different crystal alignments studied by Kelvin probe force microscopy", Organic Electronics, 89, 106060 (2021)'
 ---

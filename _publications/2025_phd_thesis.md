@@ -4,7 +4,8 @@ collection: publications
 permalink: /publication/2025_phd_thesis
 excerpt: 'This industrial PhD project represents a collaboration between Newtec Engineering A/S and NanoSYD at the University of Southern Denmark, with financial support from the Innovation Fund Denmark. The project focuses on the development and application of a hyperspectral imaging system that combines a microbolometer-based thermal camera and a low-order scanning Fabry-Pérot interferometer (SFPI).'
 date: 2025-01-31
-venue: 'University of Southern Denmark (Ph.D. thesis)'
+venue: 'University of Southern Denmark'
+pubtype: 'thesis'
 paperurl: '/assets/other_files/nibe_thesis_reduced_size.pdf'
 citation: 'Mads Nibe Larsen, "Advances in Hyperspectral Long Wave Infrared Imaging: System Modeling and Applications," Ph.D. thesis, Mads Clausen Institute, University of Southern Denmark (2025)'
 ---

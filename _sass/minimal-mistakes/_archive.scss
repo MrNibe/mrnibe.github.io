@@ -461,3 +461,9 @@
 		display: inline-block;
 	}
 }
+
+/* Publication type icon (journal article vs. thesis) */
+.pub-type-icon {
+  margin-right: 0.25em;
+  color: $primary-color;
+}
