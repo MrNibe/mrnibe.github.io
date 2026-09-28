@@ -13,4 +13,4 @@ author_profile: true
 
 
 ### July 2024, Conference on Spectral Imaging - IASIM 2024
-[<img src="/assets/images/IASIM2024_poster.jpg" alt="IASIM 2022 Poster" width="75%" height="75%" title="IASIM Poster">](/assets/other_files/IASIM2024_poster.pdf)
+[<img src="/assets/images/IASIM2024_poster.jpg" alt="IASIM 2024 Poster" width="75%" height="75%" title="IASIM Poster">](/assets/other_files/IASIM2024_poster.pdf)

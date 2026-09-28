@@ -14,7 +14,7 @@ Another challenge is how to interpret the data and what we are "allowed" to do d
 <center><img src="/HSTI/images/Ways_of_expressing_system_as_Ax_eq_b/NUC.png" alt="non-uniformity correction" width="100%" height="100%">
 <figcaption><b>Figure 1:</b> a) Raw image out of the data cube. b) Same image as in a) but after non-uniformity correction.  </figcaption></center>
 
-In some instances, it is not possible to perform the NUC because the sensor temperature is outside the temperature range at which it has been calibrated (17 ºC to 30 ºC). Here, it is convenient to use the first image of the data cube as a form of "dark frame" as almost no light (at least within the sensitive range of the sensor) is let through the SFPI at this mirror separation. The first image is then subtracted from all layers of the cube, effectively setting the first layer to $\mathbf{0}$. However, the assumption of "No light is getting through" is not quite correct. If we ignore the sensitivity of the sensor and purely focus on the transmission of the SFPI calculated using the Transfer Matrix Method (TMM) in the range from from ≈ 1250 cm<sup>-1</sup> ($\lambda = 8$ µm) to ≈ 650 cm<sup>-1</sup> ($\lambda = 15.38$ µm), the transmission is at most 9.9 % at a single frame. Above mirror separations of 5 µm, the average is about 7 %. So generally not much light to collect in the first place. When the mirrors are completely together, there is still 0.7 % of the light getting through and onto the sensor. It does not sound like much, but this is still about 7% of the signal at maximum transmission. Performing NUC on the first image of the data cube (when the mirrors are completely closes) reveal that there is still plenty of information to extract (Fig. 2). However, the residual errors from the NUC are now much more noticeable due to the smaller signal fluctuations across the frame.       
+In some instances, it is not possible to perform the NUC because the sensor temperature is outside the temperature range at which it has been calibrated (17 ºC to 30 ºC). Here, it is convenient to use the first image of the data cube as a form of "dark frame" as almost no light (at least within the sensitive range of the sensor) is let through the SFPI at this mirror separation. The first image is then subtracted from all layers of the cube, effectively setting the first layer to $\mathbf{0}$. However, the assumption of "No light is getting through" is not quite correct. If we ignore the sensitivity of the sensor and purely focus on the transmission of the SFPI calculated using the Transfer Matrix Method (TMM) in the range from ≈ 1250 cm<sup>-1</sup> ($\lambda = 8$ µm) to ≈ 650 cm<sup>-1</sup> ($\lambda = 15.38$ µm), the transmission is at most 9.9 % at a single frame. Above mirror separations of 5 µm, the average is about 7 %. So generally not much light to collect in the first place. When the mirrors are completely together, there is still 0.7 % of the light getting through and onto the sensor. It does not sound like much, but this is still about 7% of the signal at maximum transmission. Performing NUC on the first image of the data cube (when the mirrors are completely closed) reveal that there is still plenty of information to extract (Fig. 2). However, the residual errors from the NUC are now much more noticeable due to the smaller signal fluctuations across the frame.       
 
 <center><img src="/HSTI/images/Ways_of_expressing_system_as_Ax_eq_b/transmission@zero.png" alt="Total transmission" width="100%" height="100%">
 <figcaption><b>Figure 2:</b> a) Light transmission compared to if there was no SFPI b) First image of the data cube corrected using NUC.  </figcaption></center>
@@ -160,7 +160,7 @@ $$
 
 ## Dictionary of Gaussians
 
-There is a limit to how fine details can be resolved using the SFPI. We're going to use the criterion that two adjacent features should be at least on Full Width at Half Maximum (FWHM) apart to be resolvable. For this discussion we're going to start by looking at the theoretical expression for the transmission through the SFPI described by the Airy function
+There is a limit to how fine details can be resolved using the SFPI. We're going to use the criterion that two adjacent features should be at least one Full Width at Half Maximum (FWHM) apart to be resolvable. For this discussion we're going to start by looking at the theoretical expression for the transmission through the SFPI described by the Airy function
 
 $$
 \begin{align} \label{eq:airy}
@@ -170,7 +170,7 @@ $$
 
 where $\tilde{\nu}$ is the wavenumber, $\lambda$ the wavelength, $d$ is the mirror separation, $\mathcal{F}$ is the finesse of the SFPI, and $r$ is the mirror reflectance. 
 
-Eq. (\ref{eq:airy}) reaches a maximum whenever the phase $\delta = m\pi, \quad m = 1, 2, 3, \dots$. That meas the distance between two neighboring maxima (Free spectral range - FSR) can be expressed as
+Eq. (\ref{eq:airy}) reaches a maximum whenever the phase $\delta = m\pi, \quad m = 1, 2, 3, \dots$. That means the distance between two neighboring maxima (Free spectral range - FSR) can be expressed as
 
 $$
 \begin{align} \label{eq:fsr}
@@ -239,7 +239,7 @@ $$
 \end{align} 
 $$
 
-Where $\mathbf{X}$ is a matrix containing the signals we want to reconstruct in its columns. This can be solved using gradient decent, where the gradient of the cost function is
+Where $\mathbf{X}$ is a matrix containing the signals we want to reconstruct in its columns. This can be solved using gradient descent, where the gradient of the cost function is
 
 $$
 \begin{align} \label{eq:grad_H}
@@ -247,7 +247,7 @@ $$
 \end{align} 
 $$
 
-The update scheme of the gradient decent then becomes
+The update scheme of the gradient descent then becomes
 
 $$
 \begin{align} \label{eq:update_H}
@@ -255,7 +255,7 @@ $$
 \end{align} 
 $$
 
-This is implemented in the following python function, which utilize AN ACCELERATED DECENT STEP, WHICH I HAVE FOGOTTEN THE NAME OF AND WOULD LIKE A REFERENCE TO BY ANDERSEN ANG. 
+This is implemented in the following python function, which utilize AN ACCELERATED DESCENT STEP, WHICH I HAVE FORGOTTEN THE NAME OF AND WOULD LIKE A REFERENCE TO BY ANDERSEN ANG. 
 
 
 ```python
@@ -281,7 +281,7 @@ def fastGD_H(W, H, X, itermax):
 Performing 1000 iterations of this algorithm yields the reconstructions which are presented in Fig. 7. Here, pretty good reconstructions are observed, while it is clear that the resolution of the Gaussians does inhibit the ability to reconstruct the finer details of the original signal. __Also notice that larger deviations and oscillations can be observed at the edges of the signal__.
 
 <center><img src="/HSTI/images/Ways_of_expressing_system_as_Ax_eq_b/nmf_gauss.png" alt="Dictionary" width="100%" height="100%">
-<figcaption><b>Figure 7:</b> Reconstructions of different signals based on a dictionary of Gaussians. THIS IS NOT RECONSTRUCTED INTERFEROGRAMS, BUT RATHER THE BEST OBTAINABLE RECONSTRUCTION OF THE INPUT SIGNALS BASED ON THE GAUSSIAN DICTIONERY. The coefficients of each reconstruction is indicated in the rightmost column.</figcaption></center>
+<figcaption><b>Figure 7:</b> Reconstructions of different signals based on a dictionary of Gaussians. THIS IS NOT RECONSTRUCTED INTERFEROGRAMS, BUT RATHER THE BEST OBTAINABLE RECONSTRUCTION OF THE INPUT SIGNALS BASED ON THE GAUSSIAN DICTIONARY. The coefficients of each reconstruction is indicated in the rightmost column.</figcaption></center>
 
 Now we have seen how good the reconstructions can potentially be, we are going to take a look at reconstructions of real signals from the interferometer. We're going to solve (almost) the same problem as in __Configuration 1__ as stated in Eq. (\ref{eq:arg_min1}). Only here, we are going to ignore the offset, $\psi$ for a moment, and also, we can forego the smoothness regularization since the dictionary itself is already smooth. The reconstructed signal, $\mathbf{x}$, is however still subject to be nonnegative. That means that the new minimization problem can be written as
 

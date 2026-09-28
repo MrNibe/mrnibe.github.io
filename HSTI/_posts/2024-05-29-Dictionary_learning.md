@@ -4,10 +4,10 @@ classes: wide
 title:  "Summary of NMF-based reconstructions"
 date:   2024-05-29
 ---
-This is going to be a broader overview of my different efforts in the attempt to reconstruct the incident spectra based on the interferograms recorded by the hyperspectral camera. The setup has been described in further detail [previously]({% link HSTI/_posts/2024-03-14-Ways_of_expressing_system_as_Ax_eq_b.md %})_ so here is just a very short introduction of the problem in terms of an $\mathbf{AX}= \mathbf{B}$ problem. The system matrix, $\mathbf{A}$ describes the transmission through the Fabry-Pérot interferometer at different combinations of wavelengths and mirror separations. A sensor response has been fitted an multiplied with each row of $\mathbf{A}$ (each row represent the transmission spectrum in terms of wavelengths/wavenumbers at a specific mirror separation). Each column of $\mathbf{X}$ contains the incident spectrum of the sample. This spectrum is a combination of the light source being transmitted through the material sample along with a reflection component coming from the environment. Both the transmission and reflection measurements are obtained by FTIR spectroscopy (not ATR, but two separate measurements). Finally, $\mathbf{B}$ contains the measured interferograms from the camera. However it is not the raw measurements, but a term including the reflection of imaging sensor off the backside of the scanning Fabry-Pérot interferometer (SFPI) has also been included. 
+This is going to be a broader overview of my different efforts in the attempt to reconstruct the incident spectra based on the interferograms recorded by the hyperspectral camera. The setup has been described in further detail [previously]({% link HSTI/_posts/2024-03-14-Ways_of_expressing_system_as_Ax_eq_b.md %})_ so here is just a very short introduction of the problem in terms of an $\mathbf{AX}= \mathbf{B}$ problem. The system matrix, $\mathbf{A}$ describes the transmission through the Fabry-Pérot interferometer at different combinations of wavelengths and mirror separations. A sensor response has been fitted and multiplied with each row of $\mathbf{A}$ (each row represent the transmission spectrum in terms of wavelengths/wavenumbers at a specific mirror separation). Each column of $\mathbf{X}$ contains the incident spectrum of the sample. This spectrum is a combination of the light source being transmitted through the material sample along with a reflection component coming from the environment. Both the transmission and reflection measurements are obtained by FTIR spectroscopy (not ATR, but two separate measurements). Finally, $\mathbf{B}$ contains the measured interferograms from the camera. However it is not the raw measurements, but a term including the reflection of imaging sensor off the backside of the scanning Fabry-Pérot interferometer (SFPI) has also been included. 
 
 ## Comparison between theoretical and fit system matrix
-The system matrix $\mathbf{A}$ is calculated based on the Transfer Matrix Method (TMM). Just as a kind of sanity check, lets see of it is possible to estimate $\mathbf{A}$ based on the measurement data alone and get a similar result. We can pretty easily treat this as an NMF problem where we are only fitting in terms of the "dictionary" - in this case the system matrix. The only thin is that we will need some of the usual smoothness regularization - and this is both along the rows and the columns. The minimization problem then becomes
+The system matrix $\mathbf{A}$ is calculated based on the Transfer Matrix Method (TMM). Just as a kind of sanity check, let's see if it is possible to estimate $\mathbf{A}$ based on the measurement data alone and get a similar result. We can pretty easily treat this as an NMF problem where we are only fitting in terms of the "dictionary" - in this case the system matrix. The only thing is that we will need some of the usual smoothness regularization - and this is both along the rows and the columns. The minimization problem then becomes
 
 $$
 \begin{align} \label{eq:min_prob_A}
@@ -15,7 +15,7 @@ $$
 \end{align} 
 $$ 
 
-Here, $\mathbf{M}$ and $\mathbf{N}$ are square matrices containing $2$'s along their diagonal and $-1$ on the off diagonals. $\lambda$ and $\gamma$ are the regularization parameters controlling the regularization along the columns and rows respectively. The update step for the gradient decent algorithm then becomes
+Here, $\mathbf{M}$ and $\mathbf{N}$ are square matrices containing $2$'s along their diagonal and $-1$ on the off diagonals. $\lambda$ and $\gamma$ are the regularization parameters controlling the regularization along the columns and rows respectively. The update step for the gradient descent algorithm then becomes
 
 $$
 \begin{align} \label{eq:A_GD}
@@ -23,7 +23,7 @@ $$
 \end{align} 
 $$ 
 
-The animation in Fig. 1 show a comparison between the result of the gradient decent algorithm and the TMM result. The percentages indicate the blending relationship between the two. Though the NMF solution is more noisy than the TMM, the location of the transmission bands are the same indicating that TMM is a good estimate of the system matrix. __The TMM based system matrix will therefore be used as $\mathbf{A}$ for the remaining part of this post.__  
+The animation in Fig. 1 show a comparison between the result of the gradient descent algorithm and the TMM result. The percentages indicate the blending relationship between the two. Though the NMF solution is more noisy than the TMM, the location of the transmission bands are the same indicating that TMM is a good estimate of the system matrix. __The TMM based system matrix will therefore be used as $\mathbf{A}$ for the remaining part of this post.__  
 
 <center>
 <video autoplay loop muted playsinline width="65%" height="65%">
@@ -38,7 +38,7 @@ The overall goal of this is to reconstruct the wavelength/wavenumber dependent s
 
 ### Solve $\mathbf{AX} - \mathbf{B}$ for $\mathbf{X}$ using NMF
 
-The most obvious starting step would be to use Eq. (\ref{eq:min_prob_A}) and minimize $\mathbf{X}$ instead of $\mathbf{A}$. The gradient decent step then becomes
+The most obvious starting step would be to use Eq. (\ref{eq:min_prob_A}) and minimize $\mathbf{X}$ instead of $\mathbf{A}$. The gradient descent step then becomes
 
 $$
 \begin{align} \label{eq:X_GD}
@@ -50,7 +50,7 @@ Notice that the smoothness regularization is now limited to be along each column
 
 
 <center><img src="/HSTI/images/Dictionary_learning/NMF_X.png" alt="Signal reconstructions" width="90%" height="90%">
-<figcaption><b>Fig 2:</b> Spectral reconstructions of incident spectrum based on NMF gradient decent. </figcaption></center>
+<figcaption><b>Fig 2:</b> Spectral reconstructions of incident spectrum based on NMF gradient descent. </figcaption></center>
 
 
 ## Using dictionaries to aid in reconstruction
@@ -67,7 +67,7 @@ where $\mathbf{W}$ is referred to as the dictionary and $\mathbf{\hat{X}}$ is th
 
 
 ### Gaussian dictionary
-This section will document the results of using a dictionary consisting of Gaussians. A theoretically best resolution of the Fabry-Pérot is determined for each wavelength, and a Gaussian profile is constructed. That means that each column of $\mathbf{W}$ contains a single Gaussian at a given wavelength with a FWHM corresponding to the determined resolution. There are there regions of the dictionary which is depicted in Fig. 3, which correspond to the first three transmission orders of the SFPI. The lower orders have lower (worse) resolution which is why the Gaussians in this part is broader. 
+This section will document the results of using a dictionary consisting of Gaussians. A theoretically best resolution of the Fabry-Pérot is determined for each wavelength, and a Gaussian profile is constructed. That means that each column of $\mathbf{W}$ contains a single Gaussian at a given wavelength with a FWHM corresponding to the determined resolution. There are three regions of the dictionary which is depicted in Fig. 3, which correspond to the first three transmission orders of the SFPI. The lower orders have lower (worse) resolution which is why the Gaussians in this part is broader. 
 
 <center><img src="/HSTI/images/Dictionary_learning/Dictionary.png" alt="Gaussian dictionary" width="100%" height="100%">
 <figcaption><b>Fig 3:</b> a) Dictionary containing Gaussians. b) Line plots of selected atoms of the dictionary </figcaption></center>
@@ -80,7 +80,7 @@ $$
 \end{align} 
 $$
 
-After gradient decent we get the following result for the reconstructions $\mathbf{WH}$
+After gradient descent we get the following result for the reconstructions $\mathbf{WH}$
 
 <center><img src="/HSTI/images/Dictionary_learning/nmf_gauss.png" alt="Gaussian reconstructions" width="100%" height="100%">
 <figcaption><b>Fig 4:</b> THIS IS NOT RECONSTRUCTION BASED ON INTERFEROGRAMS, but rather a test to see, if the Gaussian dictionary can be used to reconstruct the ground truth input spectra. </figcaption></center>
@@ -88,18 +88,18 @@ After gradient decent we get the following result for the reconstructions $\math
 Now we can look at solving the problem stated in Eq. (\ref{eq:dictionary_learning}). We are going to solve it using NMF where we combine the system matrix and the dictionary into a new variable: $\mathbf{\hat{A}} = \mathbf{AW}$. At first we are not going to add any further regularization - only constraint is that $\mathbf{H}$ must be nonnegative. The final estimate of the spectrum is then simply $\mathbf{\hat{X}} = \mathbf{WH}$. Using this we get reconstructions as depicted in Fig. 5
 
  <center><img src="/HSTI/images/Dictionary_learning/spectral_reconstruction_gauss_nonneg.png" alt="Reconstruction based on Gaussians" width="100%" height="100%">
-<figcaption><b>Fig 5:</b> RECONSTRUCTION BASED ON GAUSSIONS - NO REGULARIZATION </figcaption></center>
+<figcaption><b>Fig 5:</b> RECONSTRUCTION BASED ON GAUSSIANS - NO REGULARIZATION </figcaption></center>
 
 
 Since the atoms of the dictionary are correlated, we try to add smoothness regularization to the columns of $\mathbf{H}$ (but $\lambda$ needs to be on the order of $10^{12}$). This yields the result presented in Fig. 6
 
  <center><img src="/HSTI/images/Dictionary_learning/spectral_reconstruction_gauss_nonneg_Mreg.png" alt="Reconstruction based on Gaussians with smoothness regularization" width="100%" height="100%">
-<figcaption><b>Fig 6:</b> RECONSTRUCTION BASED ON GAUSSIONS - WITH SMOOTHNESS REGULARIZATION </figcaption></center>
+<figcaption><b>Fig 6:</b> RECONSTRUCTION BASED ON GAUSSIANS - WITH SMOOTHNESS REGULARIZATION </figcaption></center>
 
 Finally we are going to see what will happen if we also relieve the nonnegativity constraint of NMF. Fig. 7 depicts the result with no regularization or constraint on $\mathbf{H}$ of any kind
 
  <center><img src="/HSTI/images/Dictionary_learning/spectral_reconstruction_gauss_nonneg_NOreg.png" alt="Reconstruction based on Gaussians with smoothness regularization" width="100%" height="100%">
-<figcaption><b>Fig 7:</b> RECONSTRUCTION BASED ON GAUSSIONS - NO REGULARIZATION ON $\mathbf{H}$ WHATSOEVER - NOT EVEN NONNEGATIVITY</figcaption></center>
+<figcaption><b>Fig 7:</b> RECONSTRUCTION BASED ON GAUSSIANS - NO REGULARIZATION ON $\mathbf{H}$ WHATSOEVER - NOT EVEN NONNEGATIVITY</figcaption></center>
 
 ### Using TMM to determine dictionary
 In this section we are going to use a different dictionary, which is based on the transmission of the FPI at various mirror separation. That means that each atom of the dictionary represents the transmission of the SFPI at a given mirror separation. Note that unlike for the system matrix, $\mathbf{A}$, the spectral response of the sensor and optics have not been included. This is purely the transmission of the SFPI itself and is depicted in Fig. 8.
@@ -140,7 +140,7 @@ $$
 
 In other words, we want to find a linear combination of the atoms in the dictionary $\mathbf{W}$ which best describes $\mathbf{X}$... So far nothing new. But now we have a compound constraint where we allow entries in $\mathbf{H}$ to be negative as long as the inner product with $\mathbf{W}$ remains nonnegative - that is because we know the signal we are trying to reconstruct (columns of $\mathbf{X}$) is nonnegative.
 
-We already know that the gradient decent step of Eq. (\ref{eq:min_prob}) without the constraint is 
+We already know that the gradient descent step of Eq. (\ref{eq:min_prob}) without the constraint is 
 
 $$
 \begin{align} \label{eq:H_step}
@@ -200,7 +200,7 @@ $$
 \end{align} 
 $$
 
-The complete update scheme of the gradient decent algorithm can be seen implemented in pseudo code below
+The complete update scheme of the gradient descent algorithm can be seen implemented in pseudo code below
 
 $$
 \begin{align} \label{eq:for_loop}

@@ -5,7 +5,7 @@ title:  "Using optics to compensate spectral bending"
 date:   2023-08-18
 ---
 
-Two additional lenses was placed in front of the Fabry-Pérot to "colimate" the light in order to reduce the effects of spectral bending. A hyperspectral data cube of a 60 °C hotplate has been acquired both with and without compensating optics. SNV has been applied to the data cubes and a single layer of each are presented in Fig. 1. 
+Two additional lenses was placed in front of the Fabry-Pérot to "collimate" the light in order to reduce the effects of spectral bending. A hyperspectral data cube of a 60 °C hotplate has been acquired both with and without compensating optics. SNV has been applied to the data cubes and a single layer of each are presented in Fig. 1. 
 
 <center><img src="/HSTI/images/compensating_spectral_bending/imgs_snv.png" alt="Bloom spot on bolometer after 5 minutes" width="80%" height="80%">
 <figcaption><b>Fig 1</b> </figcaption></center>
