@@ -7,7 +7,7 @@ date:   2024-04-04
 
 
 ### Using fast nonnegative least squares (FNNLS)
-I have previously had some luck with with using fast nonnegative least squares (FNNLS) to estimate the sensor response based on empirical measurements. For this I need for formulate an $\mathbf{Ax} = \mathbf{b}$ problem for the solver. [It has previously been described how to set up this problem, so I will not go into much detail here]({% link HSTI/_posts/2023-10-25-Estimating_system_matrix.md %})_. Just know that the $\mathbf{A}$ matrix expresses the known (estimated from FTIR) net flux (incident minus emitted), $\mathbf{b}$ is the measured interferogram (without offset - we'll discuss that later), and $\mathbf{x}$ is the sensor response we need to solve for.  
+I have previously had some luck with using fast nonnegative least squares (FNNLS) to estimate the sensor response based on empirical measurements. For this I need to formulate an $\mathbf{Ax} = \mathbf{b}$ problem for the solver. [It has previously been described how to set up this problem, so I will not go into much detail here]({% link HSTI/_posts/2023-10-25-Estimating_system_matrix.md %})_. Just know that the $\mathbf{A}$ matrix expresses the known (estimated from FTIR) net flux (incident minus emitted), $\mathbf{b}$ is the measured interferogram (without offset - we'll discuss that later), and $\mathbf{x}$ is the sensor response we need to solve for.  
 
 $$
 \begin{align} \label{eq:fpi_flux}
@@ -43,7 +43,7 @@ where $\gamma_{reg}$ is the regularization parameter, and $\mathbf{M}$ is the sm
 <center><img src="/HSTI/images/estimating_sensor_response/sensor_response_no_offset.png" alt="Sensor response" width="80%" height="80%">
 <figcaption><b>Fig 1:</b> Calculated sensor and optics response based on FNNLS solution of Eq. (\ref{eq:soe}) </figcaption></center>
 
-### Finding my own gradient decent solution
+### Finding my own gradient descent solution
 
 But I want more control - in particular, I want to be able to account for the unknown offset, there is for every separate interferogram. But firstly, let's see if we can't get a similar solution to the FNNLS without the offset. The objective function is then formulated as follows
 
@@ -61,7 +61,7 @@ $$
 \end{align} 
 $$
 
-The gradient decent algorithm is defined as
+The gradient descent algorithm is defined as
 
 $$
 \begin{align} \label{eq:update_x}
@@ -79,7 +79,7 @@ def Ax_minus_b_w_reg(A, x, b, M, gamma, itermax):
     MtM = gamma * (M.T @ M)
     U, S_A, Vh = np.linalg.svd(AtA, full_matrices=True)
     U, S_M, Vh = np.linalg.svd(MtM, full_matrices=True)
-    stepsize = 5e1/(S_A[0] + gamma * S_M[0])
+    stepsize = 5e1/(S_A[0] + S_M[0])
    
     cost_func = []    
     v = np.copy(x)
@@ -88,7 +88,7 @@ def Ax_minus_b_w_reg(A, x, b, M, gamma, itermax):
         x_old = x
         x = np.maximum(0, v-stepsize*grad_v) 
         v = x + (i/(i+3)) * (x - x_old)
-        cost_func.append(0.5 * np.linalg.norm(A @ x - b)**2)
+        cost_func.append(0.5 * np.linalg.norm(A @ x - b)**2 + 0.5 * gamma * np.linalg.norm(M @ x)**2)
     return x, cost_func
 ```
 
@@ -96,7 +96,7 @@ def Ax_minus_b_w_reg(A, x, b, M, gamma, itermax):
 Running this 5000 times with $\gamma_{reg} = 50$ yields similar results to FNNLS as depicted in Fig. 2. 
 
 <center><img src="/HSTI/images/estimating_sensor_response/sensor_response_with_offset_GD.png" alt="Sensor response GD" width="80%" height="80%">
-<figcaption><b>Fig 2:</b> Sensor responses calculated using both FNNLS and gradient decent. The FNNLS prediction is performed without any offsets. </figcaption></center>
+<figcaption><b>Fig 2:</b> Sensor responses calculated using both FNNLS and gradient descent. The FNNLS prediction is performed without any offsets. </figcaption></center>
 
 ### Now let's add an offset
 

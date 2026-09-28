@@ -18,4 +18,4 @@ date:   2024-01-08
 
 
 <center><img src="/HSTI/images/fpi_animation/end.png" alt="Experimental setup" width="100%" height="100%">
-<figcaption><b>Fig 3:</b> Assembly exploated view. </figcaption></center>
+<figcaption><b>Fig 3:</b> Assembly exploded view. </figcaption></center>

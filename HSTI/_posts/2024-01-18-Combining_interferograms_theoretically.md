@@ -5,7 +5,7 @@ title:  "How to combine interferograms of different gasses... Theoretically at l
 date:   2024-01-18
 ---
 
-What happens if we use the hyperspectral LWIR camera to measure a mixture of gasses? Let's say that we know the interferograms of the gasses individually, but not their combination. We are only going to work with this theoretically, meaning that we a just going to use a system matrix calculated from TMM and only considering how different FTIR spectra will be recorded into interferograms. 
+What happens if we use the hyperspectral LWIR camera to measure a mixture of gasses? Let's say that we know the interferograms of the gasses individually, but not their combination. We are only going to work with this theoretically, meaning that we are just going to use a system matrix calculated from TMM and only considering how different FTIR spectra will be recorded into interferograms. 
 
 Since the FTIR spectra are measures of transmission, when we have multiple gasses combined, we need to multiply their transmission.
 
@@ -75,7 +75,7 @@ $$
 \end{align} 
 $$
 
-$\alpha$ is the extinction coefficient $[\textrm{L}\cdot\textrm{mol}^{-1}\cdot\textrm{cm}^{-1}]$, $d$ is the pathlenght, and $c$ is the concentration. In many of the experiments we have performed the gases have been in the same gas cell, and therefore the only parameter that changes for each gas is its concentration. The transmission can then be calculated as
+$\alpha$ is the extinction coefficient $[\textrm{L}\cdot\textrm{mol}^{-1}\cdot\textrm{cm}^{-1}]$, $d$ is the path length, and $c$ is the concentration. In many of the experiments we have performed the gases have been in the same gas cell, and therefore the only parameter that changes for each gas is its concentration. The transmission can then be calculated as
 
 $$
 \begin{align} \label{eq:transmission}
@@ -83,7 +83,7 @@ $$
 \end{align} 
 $$
 
-This off course can be expanded to be applicable for an entire spectrum. We therefore see, that a linear change in $c$ does not result in a linear change in $t$ and therefore not a linear change in $\mathbf{s}$ either. 
+This of course can be expanded to be applicable for an entire spectrum. We therefore see, that a linear change in $c$ does not result in a linear change in $t$ and therefore not a linear change in $\mathbf{s}$ either. 
 
 But can't we just try converting $\mathbf{s}$ to absorbance? That would look something like this: 
 

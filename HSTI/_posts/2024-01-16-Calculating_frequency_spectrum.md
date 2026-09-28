@@ -50,7 +50,7 @@ $$
 \end{align} 
 $$
 
-Note here that $\mathbf{m_{sens}}(T_{sens})$ is subtracted from each row in $\mathbf{R_{SFPI}} \diamond \mathbf{m_{sens}}(T_{sens})$ before the dotproduct of the entire thing and $\mathbf{s}$ is calculated. $\mathbf{A}$ then becomes:
+Note here that $\mathbf{m_{sens}}(T_{sens})$ is subtracted from each row in $\mathbf{R_{SFPI}} \diamond \mathbf{m_{sens}}(T_{sens})$ before the dot product of the entire thing and $\mathbf{s}$ is calculated. $\mathbf{A}$ then becomes:
 
 $$
 \begin{align} \label{eq:A}
@@ -62,7 +62,7 @@ We are then left to find a method of calculating $\mathbf{x}$ from $\mathbf{A}$ 
 
 
 ## Tikhonov regularization
-The first attempt is calculating $\mathbf{x}$ directly from the pseudoinverse and tikhonov regularization. We define the regularization matrix $\mathbf{M}$ as
+The first attempt is calculating $\mathbf{x}$ directly from the pseudoinverse and Tikhonov regularization. We define the regularization matrix $\mathbf{M}$ as
 
 $$
 \begin{align} \label{eq:M_reg}
@@ -163,7 +163,7 @@ $$
 \end{align} 
 $$
 
-For these calculations I have not set a convergence criterion but rather just an upper limit to the number of iterations. There are therefore two parameters to tweek the solver: The regularization parameter, $\gamma$ and the number of iterations - both of which have quite an impact on the solutions. 
+For these calculations I have not set a convergence criterion but rather just an upper limit to the number of iterations. There are therefore two parameters to tweak the solver: The regularization parameter, $\gamma$ and the number of iterations - both of which have quite an impact on the solutions. 
 
 Of course the computation takes longer the more iterations are performed. 1000 iterations take around 15 seconds. Fig. 4 illustrate how the reconstructions are influenced by the number of iterations and Fig. 5 show how the regularization parameter affects the results. 
 
@@ -234,7 +234,7 @@ Fig 8 illustrates how $k$ influences the solutions. The more components are incl
 <figcaption><b>Fig 8:</b> Influence of $k$ in the solutions. No other regularization is added.  </figcaption></center>
 
 
-We can then use Tikhonov regularization as usual when solving for $\mathbf{y}^{(k)}$. This has the expected effect off lowering the amount of oscillations as depicted in Fig. 9.
+We can then use Tikhonov regularization as usual when solving for $\mathbf{y}^{(k)}$. This has the expected effect of lowering the amount of oscillations as depicted in Fig. 9.
 
 <center><img src="/HSTI/images/calculating_frequency_spectrum/dichloromethane_krylov_w_tikhonov.png" alt="Krylov solutions with tikhonov" width="80%" height="80%">
 <figcaption><b>Fig 9:</b> Tikhonov regularization has been applied to one of the solutions from Fig. 8. 25 components are included in the model and $\gamma = 1\times 10^7$.  </figcaption></center>
@@ -252,7 +252,7 @@ $$
 \end{align}
 $$
 
-We want the atoms to all be positive as negative spectra does note really make sense. Similarly, the coefficients i $\mathbf{H}$ should also all be positive. We can therefore set up the following minimization problem. 
+We want the atoms to all be positive as negative spectra does not really make sense. Similarly, the coefficients in $\mathbf{H}$ should also all be positive. We can therefore set up the following minimization problem. 
 
 $$
 \begin{align} \label{eq:arg_min}
@@ -260,9 +260,9 @@ $$
 \end{align} 
 $$
 
-where the additional regularization term $\|\|\mathbf{MW}\|\|\_F^2$ has been added to smooth the atoms of $\mathbf{W}$, as they otherwise become very noisy. $\mathbf{M}$ is therefore an $M \times M$ matrix similar to what is shown in Eq. (\ref{eq:M_reg}). Furthermore, we want the columns of $\mathbf{H}$ to be sparse which is encuraged by the $\|\|\mathbf{H}\|\|\_\textrm{1, columns}$ regularization term.
+where the additional regularization term $\|\|\mathbf{MW}\|\|\_F^2$ has been added to smooth the atoms of $\mathbf{W}$, as they otherwise become very noisy. $\mathbf{M}$ is therefore an $M \times M$ matrix similar to what is shown in Eq. (\ref{eq:M_reg}). Furthermore, we want the columns of $\mathbf{H}$ to be sparse which is encouraged by the $\|\|\mathbf{H}\|\|\_\textrm{1, columns}$ regularization term.
 
-We are going to minimize the cost function using a gradient decent algorithm. This requires us to take the partial derivative of Eq. (\ref{eq:arg_min}) with respect to both $\mathbf{W}$ and $\mathbf{H}$ separately. A more thorough derivation can be seen [here]({% link HSTI/_posts/2024-02-15-derivation_of_GD_NMF.md %}), but it essentially boils down to this: 
+We are going to minimize the cost function using a gradient descent algorithm. This requires us to take the partial derivative of Eq. (\ref{eq:arg_min}) with respect to both $\mathbf{W}$ and $\mathbf{H}$ separately. A more thorough derivation can be seen [here]({% link HSTI/_posts/2024-02-15-derivation_of_GD_NMF.md %}), but it essentially boils down to this: 
 
 The update functions are defined as:
 

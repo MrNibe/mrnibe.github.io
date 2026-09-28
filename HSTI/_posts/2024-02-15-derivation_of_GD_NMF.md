@@ -1,7 +1,7 @@
 ---
 layout: single
 classes: wide
-title:  "Derivation of update rules for gradient decent for non-negative matrix factorization"
+title:  "Derivation of update rules for gradient descent for non-negative matrix factorization"
 date:   2024-02-15
 ---
 
@@ -13,7 +13,7 @@ $$
 \end{align} 
 $$
 
-For the gradient decent algorithm we need to define a cost function, $f(\mathbf{W,H})$ which we in this case want to minimize:
+For the gradient descent algorithm we need to define a cost function, $f(\mathbf{W,H})$ which we in this case want to minimize:
 
 $$
 \begin{align} \label{eq:cost_f}
@@ -29,7 +29,7 @@ $$
 \end{align} 
 $$
 
-Here, $l$ denotes the iteration of this iterative update scheme and $\alpha$ is the step length. Usually, $\alpha$ is just a constant step length, but it can also change during the decent. In that case it would be denoted $\alpha_l$. Similarly, the step size can also be specific for each parameter. In that case Eq. (\ref{eq:f_update}) becomes: 
+Here, $l$ denotes the iteration of this iterative update scheme and $\alpha$ is the step length. Usually, $\alpha$ is just a constant step length, but it can also change during the descent. In that case it would be denoted $\alpha_l$. Similarly, the step size can also be specific for each parameter. In that case Eq. (\ref{eq:f_update}) becomes: 
 
 $$
 \begin{align} \label{eq:f_update_elementwise}
@@ -125,7 +125,7 @@ Here, the 2's are omitted as they can be "absorbed" by the step size.
 
 
 ### Choosing the right step size
-We try to solve, $\arg \min f(\mathbf{θ})$ using gradient decent: $\mathbf{θ} = \mathbf{θ} - \alpha \nabla f(\mathbf{θ})$. The step size can bee chosen to be $0 \leq \alpha \leq 2/L$, where $L$ is the Lipschitz constant. It is stated that
+We try to solve, $\arg \min f(\mathbf{θ})$ using gradient descent: $\mathbf{θ} = \mathbf{θ} - \alpha \nabla f(\mathbf{θ})$. The step size can be chosen to be $0 \leq \alpha \leq 2/L$, where $L$ is the Lipschitz constant. It is stated that
 
 $$
 \begin{align} \label{eq:lipschitz}

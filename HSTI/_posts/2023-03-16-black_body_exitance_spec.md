@@ -5,7 +5,7 @@ title:  "Black body exitance spectrum both in terms of wavelengths and wavenumbe
 date:   2023-03-16
 ---
 
-A _black body_ is an idealized object, which absorbs all incident radiation. As described by Kirchhoff's radiation law, a black body also emits radiation at all wavelengths following Planck's law of thermal radiation. At any given temperature and wavelength, the black body emits the highest amount of radiation possibly by any object. The spectral exitance is an expression for the total power emitted into the hemisphere per area emitter: here described in terms of wavelengths
+A _black body_ is an idealized object, which absorbs all incident radiation. As described by Kirchhoff's radiation law, a black body also emits radiation at all wavelengths following Planck's law of thermal radiation. At any given temperature and wavelength, the black body emits the highest amount of radiation possible by any object. The spectral exitance is an expression for the total power emitted into the hemisphere per area emitter: here described in terms of wavelengths
 
 \begin{align} \label{eq:BB_exitance_lam}
     M_{BB, \lambda}(T) = \frac{2\pi hc^2}{\lambda^5} \frac{1}{\exp{\frac{hc}{k_B \lambda T}} - 1}, 
@@ -63,7 +63,7 @@ This function describes the fraction of the exitance is contained between $\lamb
     F_{\lambda_1\rightarrow \lambda_2}(T) = F_{\lambda_2}(T) - F_{\lambda_1}(T) 
 \end{align}
 
-To solve the otherwise "unsolvable" black body intergral from Eq. (6), it is noted from Wien's displacement law that $\lambda T$ is constant for all wavelengths and temperatures. It is therefore only necessary to integrate with respect to $(\lambda T)$ instead of just $\lambda$. This allows us to rewrite Eq. (6):
+To solve the otherwise "unsolvable" black body integral from Eq. (6), it is noted from Wien's displacement law that $\lambda T$ is constant for all wavelengths and temperatures. It is therefore only necessary to integrate with respect to $(\lambda T)$ instead of just $\lambda$. This allows us to rewrite Eq. (6):
 \begin{align} \label{eq:black_body_radiation_func_long}
     F_{\lambda_1}(T) = \frac{1}{\sigma T^4} \int_{0}^{\lambda_1} \frac{2\pi hc^2}{\lambda^5} \frac{1}{\exp{\frac{hc}{k_B \lambda T}} - 1} d\lambda = \frac{1}{\sigma} \int_{0}^{\lambda_1} \frac{2\pi hc^2}{(\lambda T)^5} \frac{1}{\exp{\frac{hc}{k_B (\lambda T)}} - 1} T d\lambda 
 \end{align}
