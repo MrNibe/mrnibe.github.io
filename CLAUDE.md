@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Mads Nibe Larsen's personal/research website, served at **madsnibe.com** (see `CNAME`) via GitHub Pages. It is a fork of the **Minimal Mistakes** Jekyll theme (v4.24.0) with the theme source vendored directly into the repo — there is no `remote_theme`, so theme customisations are made by editing `_includes/`, `_layouts/` and `_sass/` in place.
 
+The color scheme is a custom `nibe` skin, a light version of the CV's palette (yellow `#fdcb36`, charcoal `#2c2d30`, paper `#f8f7f7`). Colors are set as variables in `_sass/minimal-mistakes/skins/_nibe.scss`; rules the variables can't reach (yellow masthead, link underlines, buttons, footer) are in `_sass/_nibe-theme.scss`, imported after the theme in `assets/css/main.scss`. Yellow has too little contrast to be used as text on the light background, so it only appears as fills, underlines and markers.
+
 Upstream-theme leftovers that are not part of the site: `README.md`, `CHANGELOG.md`, `docs/`, `test/`, `screenshot*.png`, `staticman.yml`, and `.github/` (including the `bad-pr.yml` workflow). `docs/` and `test/` are excluded from the build in `_config.yml`.
 
 ## Commands

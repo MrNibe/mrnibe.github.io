@@ -1,0 +1,48 @@
+/* ==========================================================================
+   Nibe skin: light version of the colors used in the CV
+   (assets/other_files/MadsNibeCV.pdf). Yellow is only used as a fill or
+   marker on light backgrounds, never as text, since it has too little
+   contrast there. Rule overrides that variables can't reach live in
+   _sass/_nibe-theme.scss.
+   ========================================================================== */
+
+/* CV palette */
+$nibe-yellow: #fdcb36 !default;
+$nibe-yellow-pale: mix(#fff, $nibe-yellow, 65%) !default;
+$nibe-charcoal: #2c2d30 !default;
+$nibe-paper: #f8f7f7 !default;
+$nibe-ink: #231f20 !default;
+$nibe-muted: #6d6e71 !default;
+
+/* Colors */
+$background-color: $nibe-paper !default;
+$text-color: $nibe-ink !default;
+$muted-text-color: $nibe-muted !default;
+$primary-color: $nibe-charcoal !default;
+$border-color: #e3e1e0 !default;
+$code-background-color: #efeeed !default;
+$footer-background-color: $nibe-charcoal !default;
+$link-color: $nibe-ink !default;
+$link-color-hover: $nibe-ink !default;
+$link-color-visited: $nibe-ink !default;
+$masthead-link-color: $nibe-ink !default;
+$masthead-link-color-hover: $nibe-ink !default;
+$navicon-link-color-hover: $nibe-yellow-pale !default;
+
+/* syntax highlighting (base16), on the CV's charcoal */
+$base00: $nibe-charcoal !default;
+$base01: #36373b !default;
+$base02: #45464b !default;
+$base03: #8a8b8f !default;
+$base04: #b4b5b8 !default;
+$base05: #e0dfdf !default;
+$base06: #efeeee !default;
+$base07: $nibe-paper !default;
+$base08: #f2777a !default;
+$base09: #f99157 !default;
+$base0a: $nibe-yellow !default;
+$base0b: #99cc99 !default;
+$base0c: #66cccc !default;
+$base0d: #6699cc !default;
+$base0e: #cc99cc !default;
+$base0f: #d27b53 !default;

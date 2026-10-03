@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Nibe theme overrides (pairs with skins/_nibe.scss)
+   Imported after the theme so these rules win over its defaults.
+   ========================================================================== */
+
+/* Masthead: a yellow band, like the yellow block at the top of the CV */
+.masthead {
+  background-color: $nibe-yellow;
+  border-bottom: 0;
+}
+
+.greedy-nav {
+  background: $nibe-yellow;
+}
+
+/* Links in body text: ink with a yellow underline */
+.page__content a:not(.btn),
+.archive__item p a {
+  text-decoration: underline;
+  text-decoration-color: $nibe-yellow;
+  text-decoration-thickness: 0.15em;
+  text-underline-offset: 0.2em;
+
+  &:hover {
+    text-decoration-color: $nibe-charcoal;
+  }
+
+  /* archive-single.html wraps paper links in <u>, which would draw a
+     second, ink-colored underline */
+  u {
+    text-decoration: none;
+  }
+}
+
+.archive__item-title a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: $nibe-yellow;
+    text-decoration-thickness: 0.15em;
+    text-underline-offset: 0.2em;
+  }
+}
+
+/* Author photo ringed in yellow, as on the CV */
+.author__avatar img {
+  @include breakpoint($large) {
+    border: 3px solid $nibe-yellow;
+  }
+}
+
+/* Buttons: yellow fill with ink text */
+.btn--primary,
+.page__hero--overlay .btn--light-outline {
+  border: 1px solid $nibe-yellow;
+  background-color: $nibe-yellow;
+  color: $nibe-ink;
+  text-shadow: none;
+
+  &:hover {
+    border-color: $nibe-charcoal;
+    background-color: $nibe-charcoal;
+    color: $nibe-yellow;
+  }
+}
+
+.pagination li a.current,
+.pagination li a.current.disabled {
+  background: $nibe-yellow;
+  color: $nibe-ink;
+}
+
+/* Footer: charcoal, like the CV sidebar, with yellow icons */
+.page__footer {
+  color: rgba($nibe-paper, 0.75);
+
+  a:hover {
+    color: $nibe-yellow;
+  }
+
+  .fas,
+  .fab,
+  .far,
+  .fal {
+    color: $nibe-yellow;
+  }
+}
+
+::selection {
+  background: $nibe-yellow;
+  color: $nibe-ink;
+}
