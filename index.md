@@ -9,5 +9,5 @@ header:
   actions:
     - label: "Read more about me here"
       url: /about/
-excerpt: "Welcome to my website. Here you can read about who I am and my personal projects as well as my work on hyperspectral thermal imaging related to my studies as an industrial PhD student."
+excerpt: "Welcome to my website. Here you can read about who I am, my PhD work on hyperspectral thermal imaging, and my projects in AI, data processing and visualization."
 ---
