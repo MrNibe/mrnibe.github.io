@@ -3,6 +3,71 @@
    Imported after the theme so these rules win over its defaults.
    ========================================================================== */
 
+/* Fonts (variable woff2, Latin subset, SIL OFL; see assets/fonts/OFL-*.txt) */
+$nibe-latin-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+  U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+  U+2212, U+2215, U+FEFF, U+FFFD;
+
+@font-face {
+  font-family: "Alegreya";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("../fonts/alegreya-latin.woff2") format("woff2");
+  unicode-range: $nibe-latin-range;
+}
+
+@font-face {
+  font-family: "Alegreya";
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("../fonts/alegreya-italic-latin.woff2") format("woff2");
+  unicode-range: $nibe-latin-range;
+}
+
+@font-face {
+  font-family: "Antonio";
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+  src: url("../fonts/antonio-latin.woff2") format("woff2");
+  unicode-range: $nibe-latin-range;
+}
+
+/* Alegreya has a small x-height, so lift the theme's root sizes on medium
+   (13px) and large (15px) screens; small and x-large stay as they are */
+html {
+  @include breakpoint($medium) {
+    font-size: 15px;
+  }
+
+  @include breakpoint($large) {
+    font-size: 16px;
+  }
+
+  @include breakpoint($x-large) {
+    font-size: 18px;
+  }
+}
+
+/* Antonio at regular weight, as on the CV, rather than the theme's bold */
+h1, h2, h3, h4, h5, h6,
+.page__title,
+.archive__item-title {
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Navigation set like the CV's section headings: tracked capitals */
+.site-title,
+.greedy-nav .visible-links a,
+.greedy-nav .hidden-links a {
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 /* Masthead: a yellow band, like the yellow block at the top of the CV */
 .masthead {
   background-color: $nibe-yellow;

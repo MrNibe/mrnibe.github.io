@@ -14,6 +14,16 @@ $nibe-paper: #f8f7f7 !default;
 $nibe-ink: #231f20 !default;
 $nibe-muted: #6d6e71 !default;
 
+/* Typography: the CV's two typefaces, self-hosted in assets/fonts
+   (@font-face rules are in _sass/_nibe-theme.scss) */
+$nibe-antonio: "Antonio", "Arial Narrow", "Helvetica Neue", Arial, sans-serif !default;
+$nibe-alegreya: "Alegreya", Georgia, Times, serif !default;
+$sans-serif: $nibe-alegreya !default;
+$sans-serif-narrow: $nibe-antonio !default;
+$global-font-family: $nibe-alegreya !default;
+$header-font-family: $nibe-antonio !default;
+$caption-font-family: $nibe-alegreya !default;
+
 /* Colors */
 $background-color: $nibe-paper !default;
 $text-color: $nibe-ink !default;

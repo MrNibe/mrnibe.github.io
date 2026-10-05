@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Mads Nibe Larsen's personal/research website, served at **madsnibe.com** (see `CNAME`) via GitHub Pages. It is a fork of the **Minimal Mistakes** Jekyll theme (v4.24.0) with the theme source vendored directly into the repo — there is no `remote_theme`, so theme customisations are made by editing `_includes/`, `_layouts/` and `_sass/` in place.
 
-The color scheme is a custom `nibe` skin, a light version of the CV's palette (yellow `#fdcb36`, charcoal `#2c2d30`, paper `#f8f7f7`). Colors are set as variables in `_sass/minimal-mistakes/skins/_nibe.scss`; rules the variables can't reach (yellow masthead, link underlines, buttons, footer) are in `_sass/_nibe-theme.scss`, imported after the theme in `assets/css/main.scss`. Yellow has too little contrast to be used as text on the light background, so it only appears as fills, underlines and markers.
+The color scheme is a custom `nibe` skin, a light version of the CV's palette (yellow `#fdcb36`, charcoal `#2c2d30`, paper `#f8f7f7`). Colors are set as variables in `_sass/minimal-mistakes/skins/_nibe.scss`; rules the variables can't reach (yellow masthead, link underlines, buttons, footer) are in `_sass/_nibe-theme.scss`, imported after the theme in `assets/css/main.scss`. Yellow has too little contrast to be used as text on the light background, so it only appears as fills, underlines and markers. Typography also follows the CV: Antonio (headings, navigation, entry titles) and Alegreya (everything else), self-hosted as variable woff2 files in `assets/fonts/` with their OFL licenses rather than loaded from Google Fonts, which would send visitors' IP addresses to Google.
 
 Upstream-theme leftovers that are not part of the site: `README.md`, `CHANGELOG.md`, `docs/`, `test/`, `screenshot*.png`, `staticman.yml`, and `.github/` (including the `bad-pr.yml` workflow). `docs/` and `test/` are excluded from the build in `_config.yml`.
 
@@ -51,7 +51,7 @@ Post defaults (layout `single`, author profile, read time, share, related) come 
 
 ### Publications
 
-Front matter fields read by the templates: `title`, `collection: publications`, `permalink`, `excerpt`, `date`, `venue`, `pubtype`, `paperurl`, `citation`. `pubtype: 'thesis'` switches the archive entry to a graduation-cap icon and "Ph.D. thesis, <venue>" wording; any other value (currently `'journal'`) renders as a journal article. This logic lives in `_includes/archive-single.html` (styled by `.pub-type-icon` in `_sass/minimal-mistakes/_archive.scss`).
+Front matter fields read by the templates: `title`, `collection: publications`, `permalink`, `excerpt`, `date`, `venue`, `pubtype`, `paperurl`, `citation`. `pubtype: 'thesis'` switches the archive entry to a graduation-cap icon and "Ph.D. thesis, <venue>" wording; `'conference'` gets a people icon labelled "Conference paper"; any other value (normally `'journal'`) renders as a journal article. This logic lives in `_includes/archive-single.html` (styled by `.pub-type-icon` in `_sass/minimal-mistakes/_archive.scss`).
 
 ### Posters, CV and other files
 
