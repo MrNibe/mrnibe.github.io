@@ -1,0 +1,12 @@
+---
+title: "Signatures of flames by long-wave infrared hyperspectral imaging"
+collection: publications
+permalink: /publication/2026_infrared_physics_technology
+excerpt: 'Thermal cameras operating in the long-wave infrared (LWIR) spectral range 8–15 μm/1250–667 cm<sup>−1</sup> are widely used for temperature inspection in fire sciences. This study explores the expansion of thermal imaging by coupling a standard thermal camera with a scanning Fabry-Pérot interferometer to achieve emission-based hyperspectral imaging.'
+date: 2026-01-01
+venue: 'Infrared Physics & Technology'
+pubtype: 'journal'
+paperurl: 'https://doi.org/10.1016/j.infrared.2025.106211'
+citation: 'Mads Nibe Larsen, Iben Hansen-Bruhn, Anders Løchte Jørgensen, Bjarke Jørgensen, and Jakob Kjelstrup-Hansen, "Signatures of flames by long-wave infrared hyperspectral imaging," Infrared Physics & Technology 152, 106211 (2026)'
+---
+***Abstract:*** Thermal cameras operating in the long-wave infrared (LWIR) spectral range 8–15 μm/1250–667 cm<sup>−1</sup> are widely used for temperature inspection in fire sciences. This study explores the expansion of thermal imaging by coupling a standard thermal camera with a scanning Fabry-Pérot interferometer to achieve emission-based hyperspectral imaging. The developed system offers a low-cost, portable solution for capturing both spatial and spectral data compared to existing imaging Fourier transform infrared spectrometer alternatives. The spectral resolution ranges from 24 to 45 cm<sup>−1</sup> across the spectral range. During data acquisition between 148 and 156 images with a resolution of 1024 × 768 pixels are captured while expanding the cavity ≈10 µm. The applicability was evaluated by measurement on diffusion flames of pure hydrocarbon fuels ranging from C<sub>1</sub> to C<sub>4</sub> as well as hydrogen. Despite the complexity and time-shifting nature of flames, the study demonstrates that LWIR hyperspectral data cubes captured on a microbolometer camera reveal distinct spectral differences among fuel flames in a lab setting. Pearson correlation coefficient analysis of three predefined regions of the flames show that the base and inner cone of the flames are most distinct with average ρ = 0.82 compared to the post-flame with ρ = 0.85. This proof-of-concept system highlights a path toward low-overhead spatial-spectral measurements of flames which can potentially improve understanding of fire behavior and enhance fire safety in real-world applications.

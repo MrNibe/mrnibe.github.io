@@ -28,6 +28,8 @@
       {% if post.collection == 'publications' %}
         {% if post.pubtype == 'thesis' %}
           <i class="fas fa-fw fa-graduation-cap pub-type-icon" aria-hidden="true" title="Ph.D. thesis"></i><span class="screen-reader-text">Ph.D. thesis:</span>
+        {% elsif post.pubtype == 'conference' %}
+          <i class="fas fa-fw fa-users pub-type-icon" aria-hidden="true" title="Conference paper"></i><span class="screen-reader-text">Conference paper:</span>
         {% else %}
           <i class="fas fa-fw fa-file-alt pub-type-icon" aria-hidden="true" title="Journal article"></i><span class="screen-reader-text">Journal article:</span>
         {% endif %}
