@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Black body exitance spectrum both in terms of wavelengths and wavenumbers"
 date:   2023-03-16
+thumb: /HSTI/images/thumbs/2023-03-16-black_body_exitance_spec.webp
 ---
 
 A _black body_ is an idealized object, which absorbs all incident radiation. As described by Kirchhoff's radiation law, a black body also emits radiation at all wavelengths following Planck's law of thermal radiation. At any given temperature and wavelength, the black body emits the highest amount of radiation possible by any object. The spectral exitance is an expression for the total power emitted into the hemisphere per area emitter: here described in terms of wavelengths

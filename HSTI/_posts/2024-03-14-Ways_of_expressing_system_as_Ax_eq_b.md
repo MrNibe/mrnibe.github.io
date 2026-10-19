@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Modelling the imaging system"
 date:   2024-03-20
+thumb: /HSTI/images/thumbs/2024-03-14-Ways_of_expressing_system_as_Ax_eq_b.webp
 ---
 
 Modelling the imaging system can be rather complex due to many small something something and technicalities. The light hitting the sensor is dependent on both the wavelength as well as the mirror separation of the scanning Fabry-Pérot interferometer (SFPI). Furthermore, the position on the sensor also has an effect on the spectral profile. That is because the incidence angle increases as we move away from the center of the frame. A larger angle of incidence mean that shorter wavelengths are transmitted compared to normal incidence. The worst case is 17.25 º which results in 95.5 % shorter wavelengths compared to the middle. We are going to ignore this effect in this post in an attempt to reduce the complexity just a bit. 

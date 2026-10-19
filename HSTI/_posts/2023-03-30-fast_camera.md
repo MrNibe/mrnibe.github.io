@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Can a camera really be TOO fast?!"
 date:   2023-03-30
+thumb: /HSTI/images/thumbs/2023-03-30-fast_camera.webp
 ---
 
 A recent update to the thermal camera has drastically improved the speed at which it captures a thermal image. However, it might be a little too fast for it to keep up with itself. Fig. 1 illustrates the spectra of an Acktar Fractal black coated sample as well as a piece of polyoxymethylene (POM). Both Fig. 1a and 1c show the scene recorded at approximately the same mirror separation, but 1a is sampled using the 'high mirror speed', while 1c is captured with the 'slow mirror speed'. The only preprocessing performed on both images is subtraction of the first band from all layers of the cube. The two do not look that dissimilar from each other, but looking at the extracted spectra in Fig. 1b and 1d, we notice a difference. The sampling points in 1b (the fast mirror speed) look more irregularly spaced compared to 1d. 

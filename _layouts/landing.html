@@ -1,0 +1,80 @@
+---
+layout: default
+---
+
+{% assign frame_count = 30 %}
+{% assign pubs = site.publications | sort: "date" | reverse %}
+
+<div id="main" class="landing" role="main">
+
+  <section class="assembly" data-frames="{{ frame_count }}" data-src="{{ '/assets/images/fpi/frame-' | relative_url }}" aria-labelledby="landing-name">
+    <div class="assembly__pin">
+      <div class="assembly__intro">
+        <h1 id="landing-name" class="assembly__name">Mads Nibe <span>Larsen</span></h1>
+        <p class="assembly__role">Research Scientist at Newtec Engineering A/S. PhD in long-wave infrared hyperspectral imaging.</p>
+        <p class="assembly__actions">
+          <a class="btn btn--primary" href="{{ '/cv/' | relative_url }}">Read the CV</a>
+          <a class="btn btn--outline" href="{{ '/publications/' | relative_url }}">Publications</a>
+        </p>
+      </div>
+
+      <figure class="assembly__stage">
+        <img class="assembly__still" src="{{ '/assets/images/fpi/frame-00.webp' | relative_url }}" width="1800" height="755" fetchpriority="high" alt="Exploded view of the scanning Fabry-Pérot interferometer: circuit board, mounting rings and the two mirrors">
+        <canvas class="assembly__canvas" width="1800" height="755" aria-hidden="true"></canvas>
+        <figcaption>Scanning Fabry-Pérot interferometer<span class="assembly__cue">, scroll to assemble</span><span class="assembly__done">, assembled</span></figcaption>
+      </figure>
+
+      <div class="assembly__chain">
+        <div class="assembly__progress" aria-hidden="true"><span></span></div>
+        <ol>
+          <li><b>Optics</b><span>A scanning Fabry-Pérot interferometer in front of an uncooled microbolometer</span></li>
+          <li><b>Experiments</b><span>Flames, plastics, minerals and carbon composites</span></li>
+          <li><b>Modelling</b><span>Transfer matrices, inverse problems and NMF</span></li>
+          <li><b>Software</b><span>Processing pipelines and the hyperspectral viewer</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing__section landing__pubs" aria-labelledby="landing-pubs">
+    <header class="landing__head">
+      <h2 id="landing-pubs">Publications</h2>
+      <a class="landing__more" href="{{ '/publications/' | relative_url }}">All {{ pubs.size }} publications</a>
+    </header>
+    <div class="landing__timeline">
+      {% for pub in pubs limit: 4 %}
+        <article class="entry entry--pub">
+          <header class="entry__head">
+            <h3 class="entry__title"><a href="{{ pub.url | relative_url }}">{{ pub.title }}</a></h3>
+            <time class="entry__date" datetime="{{ pub.date | date_to_xmlschema }}">{{ pub.date | date: "%Y" }}</time>
+          </header>
+          <p class="entry__venue">{% if pub.pubtype == 'thesis' %}Ph.D. thesis, {% endif %}<i>{{ pub.venue }}</i></p>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="landing__section landing__posters" aria-labelledby="landing-posters">
+    <header class="landing__head">
+      <h2 id="landing-posters">Posters</h2>
+      <a class="landing__more" href="{{ '/posters/' | relative_url }}">All posters</a>
+    </header>
+    <ul class="poster-strip">
+      <li>
+        <a href="{{ '/assets/other_files/HSTC_poster_8_DFS.pdf' | relative_url }}"><img src="{{ '/assets/images/posters/HSTC_poster_8_DFS.webp' | relative_url }}" alt="Poster: A new dimension of infrared imaging" loading="lazy"></a>
+        <p><b>Danish Physical Society, 2022</b> <span class="prize">EPJ prize for best experimental poster</span></p>
+      </li>
+      <li>
+        <a href="{{ '/assets/other_files/IASIM2024_poster.pdf' | relative_url }}"><img src="{{ '/assets/images/posters/IASIM2024_poster.webp' | relative_url }}" alt="Poster: IASIM 2024" loading="lazy"></a>
+        <p><b>IASIM, 2024</b> Conference on Spectral Imaging</p>
+      </li>
+      <li>
+        <a href="{{ '/assets/other_files/IASIM_2022_poster_brown_final_version.pdf' | relative_url }}"><img src="{{ '/assets/images/posters/IASIM_2022_poster_brown_final_version.webp' | relative_url }}" alt="Poster: Capturing hyperspectral thermal images utilizing a first order scanning Fabry-Pérot interferometer" loading="lazy"></a>
+        <p><b>IASIM, 2022</b> Conference on Spectral Imaging</p>
+      </li>
+    </ul>
+  </section>
+
+</div>
+
+<script src="{{ '/assets/js/assembly.js' | relative_url }}" defer></script>

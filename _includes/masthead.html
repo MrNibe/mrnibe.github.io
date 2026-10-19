@@ -13,8 +13,9 @@
         </a>
         <ul class="visible-links">
           {%- for link in site.data.navigation.main -%}
+            {%- assign link_url = link.url | relative_url -%}
             <li class="masthead__menu-item">
-              <a href="{{ link.url | relative_url }}"{% if link.description %} title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
+              <a href="{{ link_url }}"{% if link.description %} title="{{ link.description }}"{% endif %}{% if page.url == link_url or page.url contains link_url and link_url != '/' %} aria-current="page"{% endif %}>{{ link.title }}</a>
             </li>
           {%- endfor -%}
         </ul>

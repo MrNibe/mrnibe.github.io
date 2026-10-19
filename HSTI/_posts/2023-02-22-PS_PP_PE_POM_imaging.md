@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Imaging plastics - Preliminary study of PP, PE, PS and POM using hyperspectral thermal imaging"
 date:   2023-02-23
+thumb: /HSTI/images/thumbs/2023-02-22-PS_PP_PE_POM_imaging.webp
 ---
 
 In this experiment, a hyperspectral thermal camera (HSTC) is used to measure different kinds of plastics: Polypropylene (PP, container 1 from *the wall of plastic*, Polyethylene (PE, container 2), Polystyrene (PS, container 165) and Polyoxymethylene (POM, container 63). The aim is to investigate whether it is possible to extract information about their emission spectra using the HSTC and compare to absorption measurements using attenuated total reflection (ATR).  

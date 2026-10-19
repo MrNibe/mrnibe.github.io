@@ -31,3 +31,7 @@ _site
 # InDesign source and lock files
 *.indd
 *.idlk
+
+# Impeccable working files (decision sketches, review captures)
+.impeccable/mocks/
+.impeccable/review/

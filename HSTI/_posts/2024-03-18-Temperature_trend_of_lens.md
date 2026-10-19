@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Temperature trend inside the lens"
 date:   2024-03-18
+thumb: /HSTI/images/thumbs/2024-03-18-Temperature_trend_of_lens.webp
 ---
 
 A measurement series was performed where the temperature was measured inside the lens over the span of a weekend. The K-type thermocouple was placed inside the lens by guiding it through the airgap between the sensor and the frame of the camera. The camera is starting from ambient temperature and is turned on at time 0. Ignoring the first 10 hours (transient), the mean temperature was 24.9 ºC.

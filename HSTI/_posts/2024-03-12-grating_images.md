@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Imaging diffraction grating"
 date:   2024-03-12
+thumb: /HSTI/images/thumbs/2024-03-12-grating_images.webp
 ---
 
 These Friday afternoon experiment show how different transmission spectra behave when reflected off a grating. The black body is set to 500 ºC and pointed towards a reflective grating with 100 lines/mm and 27º blaze angle. The reflected light is then oriented such that most of it makes it onto the sensor. It is however evident that longer wavelengths (above 11.5 µm) are not imaged using this method. No further optics have been added to the setup, meaning that it is just the regular germanium lens, which focus the incoming light onto the sensor. Unfortunately the angle between the black body and the grating was not recorded. Below, you can see two videos scrolling through the layers of a hyperspectral data cube showing how the different wavelengths are transmitted at different mirror separations. The title above each image refer to the mirror separation and **not** the wavelength. This is also only a crop of the original data cube showing only the rows in which the reflected light can be seen. 

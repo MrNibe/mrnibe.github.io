@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Estimating sensor response"
 date:   2024-04-04
+thumb: /HSTI/images/thumbs/2024-04-04-Estimating_sensor_response.webp
 ---
 
 

@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Calculating frequency spectrum from interferograms"
 date:   2024-01-16
+thumb: /HSTI/images/thumbs/2024-01-16-Calculating_frequency_spectrum.webp
 ---
 
 This section will be mostly a selection of assorted notes on some of my findings as I have tried to convert from the mirror separation dependent interferograms to the frequency/wavelength dependent incident spectra. There will for this reason not be any real common thread going through the text. 

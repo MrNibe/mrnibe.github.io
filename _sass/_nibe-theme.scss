@@ -1,6 +1,14 @@
 /* ==========================================================================
    Nibe theme overrides (pairs with skins/_nibe.scss)
    Imported after the theme so these rules win over its defaults.
+
+   The site follows the grammar of the CV (assets/other_files/MadsNibeCV.pdf):
+   Antonio capitals for headings with an ink rule running out to the right,
+   a ruled timeline with yellow nodes for entries, muted italic venues, a
+   yellow block for identity and charcoal for the closing band.
+
+   Must stay libsass-compatible: GitHub Pages compiles with sassc, so no
+   Sass modules or math.div, and no CSS min()/max() (clamp() is fine).
    ========================================================================== */
 
 /* Fonts (variable woff2, Latin subset, SIL OFL; see assets/fonts/OFL-*.txt) */
@@ -35,9 +43,43 @@ $nibe-latin-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA
   unicode-range: $nibe-latin-range;
 }
 
+/* Shared measures */
+$nibe-rule: 2px;                       // the CV's heading and timeline rules
+$nibe-hairline: #dcdad8;               // quiet separators on paper
+$nibe-node: 0.85rem;                   // timeline node diameter
+$nibe-gutter: clamp(1rem, 4vw, 4rem);  // page side margin on the homepage
+$nibe-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+/* Antonio set the way the CV sets its labels */
+@mixin nibe-caps($tracking: 0.06em) {
+  font-family: $nibe-antonio;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: $tracking;
+}
+
+/* CV section heading: capitals, then an ink rule to the right edge */
+@mixin nibe-section-heading {
+  @include nibe-caps(0.05em);
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  line-height: 1.1;
+
+  &::after {
+    content: "";
+    flex: 1 1 auto;
+    min-width: 2rem;
+    height: $nibe-rule;
+    background: currentColor;
+  }
+}
+
 /* Alegreya has a small x-height, so lift the theme's root sizes on medium
    (13px) and large (15px) screens; small and x-large stay as they are */
 html {
+  scrollbar-color: mix($nibe-muted, $nibe-paper, 70%) $nibe-paper;
+
   @include breakpoint($medium) {
     font-size: 15px;
   }
@@ -51,7 +93,11 @@ html {
   }
 }
 
-/* Antonio at regular weight, as on the CV, rather than the theme's bold */
+body {
+  background: $nibe-paper;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
 h1, h2, h3, h4, h5, h6,
 .page__title,
 .archive__item-title {
@@ -59,74 +105,153 @@ h1, h2, h3, h4, h5, h6,
   letter-spacing: 0.01em;
 }
 
-/* Navigation set like the CV's section headings: tracked capitals */
-.site-title,
-.greedy-nav .visible-links a,
-.greedy-nav .hidden-links a {
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+::selection {
+  background: $nibe-yellow;
+  color: $nibe-ink;
 }
 
-/* Masthead: a yellow band, like the yellow block at the top of the CV */
+/* Focus: one visible ring everywhere, ink on light grounds */
+a:focus,
+button:focus,
+summary:focus {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid $nibe-ink;
+  outline-offset: 3px;
+}
+
+/* Avoid the theme's page-load fade on every page */
+#main,
+.page__footer {
+  animation: none;
+}
+
+/* ==========================================================================
+   Masthead: the yellow block at the top of the CV
+   ========================================================================== */
+
 .masthead {
   background-color: $nibe-yellow;
   border-bottom: 0;
+
+  &__inner-wrap {
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+
+    @include breakpoint($x-large) {
+      max-width: none;
+      padding-left: $nibe-gutter;
+      padding-right: $nibe-gutter;
+    }
+  }
 }
 
 .greedy-nav {
   background: $nibe-yellow;
-}
 
-/* Links in body text: ink with a yellow underline */
-.page__content a:not(.btn),
-.archive__item p a {
-  text-decoration: underline;
-  text-decoration-color: $nibe-yellow;
-  text-decoration-thickness: 0.15em;
-  text-underline-offset: 0.2em;
-
-  &:hover {
-    text-decoration-color: $nibe-charcoal;
+  a {
+    @include nibe-caps(0.08em);
   }
 
-  /* archive-single.html wraps paper links in <u>, which would draw a
-     second, ink-colored underline */
-  u {
-    text-decoration: none;
+  .site-title {
+    font-size: 1.15em;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .visible-links a {
+    &::before {
+      height: 2px;
+      bottom: -2px;
+      background: $nibe-ink;
+      transition: transform 0.35s $nibe-ease;
+    }
+
+    &[aria-current="page"]::before {
+      transform: scaleX(1);
+    }
+  }
+
+  .hidden-links {
+    border: $nibe-rule solid $nibe-ink;
+    border-radius: 0;
+    background: $nibe-paper;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    a {
+      @include nibe-caps(0.08em);
+
+      &:hover,
+      &[aria-current="page"] {
+        background: $nibe-yellow;
+      }
+    }
+  }
+
+  .search__toggle {
+    color: $nibe-ink;
   }
 }
 
-.archive__item-title a {
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-    text-decoration-color: $nibe-yellow;
-    text-decoration-thickness: 0.15em;
-    text-underline-offset: 0.2em;
-  }
+.navicon,
+.navicon::before,
+.navicon::after {
+  background: $nibe-ink;
 }
 
-/* Author photo ringed in yellow, as on the CV */
-.author__avatar img {
-  @include breakpoint($large) {
-    border: 3px solid $nibe-yellow;
-  }
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  @include nibe-caps(0.09em);
+  padding: 0.85em 1.5em;
+  border-radius: 0;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: background-color 0.25s $nibe-ease, color 0.25s $nibe-ease,
+    box-shadow 0.25s $nibe-ease;
 }
 
-/* Buttons: yellow fill with ink text */
 .btn--primary,
 .page__hero--overlay .btn--light-outline {
-  border: 1px solid $nibe-yellow;
+  border: 0;
   background-color: $nibe-yellow;
   color: $nibe-ink;
   text-shadow: none;
 
+  &:visited {
+    color: $nibe-ink;
+  }
+
   &:hover {
-    border-color: $nibe-charcoal;
     background-color: $nibe-charcoal;
     color: $nibe-yellow;
+  }
+}
+
+.btn--outline {
+  border: 0;
+  background: transparent;
+  box-shadow: inset 0 0 0 $nibe-rule $nibe-ink;
+  color: $nibe-ink;
+
+  &:visited {
+    color: $nibe-ink;
+  }
+
+  &:hover {
+    background: $nibe-ink;
+    color: $nibe-paper;
   }
 }
 
@@ -136,23 +261,1068 @@ h1, h2, h3, h4, h5, h6,
   color: $nibe-ink;
 }
 
-/* Footer: charcoal, like the CV sidebar, with yellow icons */
-.page__footer {
-  color: rgba($nibe-paper, 0.75);
+/* ==========================================================================
+   Body text and links
+   ========================================================================== */
 
-  a:hover {
-    color: $nibe-yellow;
+.page__content a:not(.btn),
+.entry__excerpt a,
+.entry__links a,
+.entry__cite a,
+.poster-grid p a,
+.page__cite a:not(.btn) {
+  color: $nibe-ink;
+  text-decoration: underline;
+  text-decoration-color: $nibe-yellow;
+  text-decoration-thickness: 0.15em;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.2s $nibe-ease;
+
+  &:hover {
+    text-decoration-color: $nibe-charcoal;
   }
 
-  .fas,
-  .fab,
-  .far,
-  .fal {
-    color: $nibe-yellow;
+  u {
+    text-decoration: none;
   }
 }
 
-::selection {
+/* In-post headings follow the CV: h2 is a section heading with its rule,
+   h3 is an entry title in capitals */
+.page__content {
+  h2 {
+    @include nibe-section-heading;
+    margin-top: 2.2em;
+    padding-bottom: 0;
+    border-bottom: 0;
+    font-size: 1.45em;
+  }
+
+  h3 {
+    @include nibe-caps(0.04em);
+    margin-top: 1.8em;
+    font-size: 1.15em;
+  }
+
+  h4 {
+    font-size: 1em;
+  }
+}
+
+/* Figures written as <center><img><figcaption> in posts */
+.page__content center,
+.page__content figure {
+  margin: 2.2em 0;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+figcaption {
+  margin: 0.8em auto 0;
+  max-width: 44em;
+  color: $nibe-muted;
+  font-family: $nibe-alegreya;
+  font-size: 0.85em;
+  font-style: italic;
+  line-height: 1.45;
+  text-align: center;
+
+  b,
+  strong {
+    @include nibe-caps(0.06em);
+    margin-right: 0.3em;
+    color: $nibe-ink;
+    font-size: 0.95em;
+    font-style: normal;
+  }
+}
+
+/* ==========================================================================
+   Page titles and meta
+   ========================================================================== */
+
+.page__title {
+  @include nibe-caps(0.03em);
+  margin-bottom: 0.4em;
+  font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+/* Archive pages (Publications, Lab notes, Posters): a CV section heading */
+.archive > .page__title {
+  @include nibe-section-heading;
+  margin-bottom: 1.6em;
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+}
+
+.page__meta {
+  @include nibe-caps(0.08em);
+  margin-top: 0;
+  margin-bottom: 2em;
+  color: $nibe-muted;
+  font-size: 0.85rem;
+
+  i {
+    font-family: $nibe-alegreya;
+    font-size: 1.1em;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+}
+
+.page__meta-sep::before {
+  content: "";
+  display: inline-block;
+  padding: 0;
+  width: 0.45em;
+  height: 0.45em;
+  margin: 0 0.8em 0.12em;
+  border-radius: 50%;
   background: $nibe-yellow;
+  box-shadow: 0 0 0 1.5px $nibe-charcoal;
+}
+
+.page__inner-wrap > footer.page__meta:empty {
+  display: none;
+}
+
+/* Citation block on a publication page */
+.page__cite {
+  clear: both;
+  margin-top: 2.5em;
+  padding-top: 1.5em;
+  border-top: $nibe-rule solid $nibe-ink;
+
+  h2 {
+    @include nibe-caps(0.06em);
+    margin: 1.6em 0 0.4em;
+    font-size: 1em;
+  }
+
+  p {
+    font-size: 0.95em;
+  }
+}
+
+/* ==========================================================================
+   Timeline entries (archive-single.html), after the CV
+   ========================================================================== */
+
+.entry--pub,
+.entry--note {
+  position: relative;
+  padding: 0 0 2.4em 2.2rem;
+
+  // the ruled line, running through every entry of the list
+  &::before {
+    content: "";
+    position: absolute;
+    left: ($nibe-node * 0.5) - 0.0625rem;
+    top: 0.35em;
+    bottom: -0.35em;
+    width: $nibe-rule;
+    background: $nibe-charcoal;
+  }
+
+  // the node: yellow, ringed in charcoal
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: $nibe-node;
+    height: $nibe-node;
+    border-radius: 50%;
+    background: $nibe-yellow;
+    box-shadow: inset 0 0 0 3px $nibe-charcoal;
+  }
+
+  &:last-child,
+  &:last-of-type {
+    &::before {
+      bottom: 1.2em;
+    }
+  }
+}
+
+.entry__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5em;
+}
+
+.entry__title {
+  @include nibe-caps(0.03em);
+  margin: 0;
+  font-size: 1.2em;
+  line-height: 1.2;
+  text-wrap: balance;
+
+  a {
+    color: $nibe-ink;
+    text-decoration: none;
+    background-image: linear-gradient($nibe-yellow, $nibe-yellow);
+    background-size: 0 0.18em;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s $nibe-ease;
+
+    &:hover {
+      background-size: 100% 0.18em;
+    }
+  }
+}
+
+.entry__date {
+  @include nibe-caps(0.06em);
+  flex: none;
   color: $nibe-ink;
+  font-size: 1.05em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.entry__venue {
+  margin: 0.3em 0 0;
+  max-width: 68ch;
+  color: $nibe-muted;
+  font-size: 1em;
+
+  i {
+    color: $nibe-muted;
+  }
+}
+
+.entry__excerpt {
+  margin: 0.6em 0 0;
+  max-width: 68ch;
+  color: mix($nibe-ink, $nibe-muted, 60%);
+  font-size: 0.95em;
+  line-height: 1.55;
+
+  p {
+    margin: 0;
+  }
+}
+
+/* Lab-note excerpts are the post's first paragraph: hold them to three lines */
+.entry--note .entry__excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.entry__links {
+  @include nibe-caps(0.08em);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em 1.6em;
+  margin: 0.8em 0 0;
+  font-size: 0.85em;
+}
+
+.entry__cite {
+  margin-top: 0.6em;
+  font-size: 0.9em;
+
+  summary {
+    @include nibe-caps(0.08em);
+    display: inline-block;
+    color: $nibe-muted;
+    font-size: 0.95em;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::before {
+      content: "+";
+      display: inline-block;
+      width: 1em;
+      color: $nibe-ink;
+    }
+
+    &:hover {
+      color: $nibe-ink;
+    }
+  }
+
+  &[open] summary::before {
+    content: "\2212";
+  }
+
+  p {
+    margin: 0.5em 0 0;
+    max-width: 68ch;
+    line-height: 1.5;
+  }
+}
+
+/* A figure shown as a thumbnail: mounted on white, never cropped */
+.figure-mount {
+  display: block;
+  padding: 0.5rem;
+  background: #fff;
+  box-shadow: 0 0 0 1px $nibe-hairline;
+  transition: box-shadow 0.3s $nibe-ease;
+
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+  }
+}
+
+a.figure-mount:hover,
+a:hover > .figure-mount {
+  box-shadow: 0 0 0 1.5px $nibe-ink;
+}
+
+.entry--note.has-thumb {
+  @include breakpoint($medium) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 11rem;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .entry__thumb {
+    margin-top: 1em;
+
+    @include breakpoint($medium) {
+      margin-top: 0.2em;
+    }
+  }
+}
+
+@include breakpoint($medium) {
+  .entry--note .entry__thumb {
+    max-width: none;
+  }
+}
+
+.entry--note .entry__thumb {
+  max-width: 16rem;
+}
+
+/* Related posts at the foot of a post: figure, title, date */
+.page__related {
+  .page__related-title {
+    @include nibe-section-heading;
+    margin-bottom: 1.4em;
+    font-size: 1.2em;
+  }
+
+  .grid__wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: 2rem;
+    margin: 0;
+  }
+}
+
+.entry--tile {
+  .figure-mount {
+    margin-bottom: 0.9em;
+  }
+
+  .entry__title {
+    font-size: 1em;
+  }
+
+  .entry__date {
+    display: block;
+    margin-top: 0.3em;
+    color: $nibe-muted;
+    font-size: 0.85em;
+  }
+}
+
+/* The grid wrapper used to float its items */
+.page__related .grid__item {
+  float: none;
+  width: auto;
+  margin: 0;
+}
+
+/* Share buttons and the previous/next links at the foot of a post */
+.page__share {
+  border-top: 1px solid $nibe-hairline;
+
+  .page__share-title {
+    @include nibe-caps(0.08em);
+    color: $nibe-muted;
+    font-size: 0.8rem;
+  }
+
+  .btn {
+    margin-right: 0.4rem;
+    background: transparent;
+    box-shadow: inset 0 0 0 1.5px $nibe-ink;
+    color: $nibe-ink;
+    font-size: 0.8rem;
+
+    &:hover {
+      background: $nibe-ink;
+      color: $nibe-paper;
+    }
+  }
+}
+
+.pager {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  margin-top: 2.5em;
+  padding-top: 0;
+  border-top: $nibe-rule solid $nibe-ink;
+
+  &__link {
+    display: block;
+    padding: 1rem 0 0;
+    color: $nibe-ink;
+    text-decoration: none;
+
+    &:visited {
+      color: $nibe-ink;
+    }
+
+    &:hover .pager__title {
+      background-size: 100% 0.18em;
+    }
+  }
+
+  &__link--next {
+    text-align: right;
+    grid-column: -2;
+  }
+
+  &__label {
+    @include nibe-caps(0.08em);
+    display: block;
+    color: $nibe-muted;
+    font-size: 0.8rem;
+  }
+
+  &__title {
+    @include nibe-caps(0.03em);
+    font-size: 1.1rem;
+    line-height: 1.25;
+    background-image: linear-gradient($nibe-yellow, $nibe-yellow);
+    background-size: 0 0.18em;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s $nibe-ease;
+  }
+}
+
+/* ==========================================================================
+   Author sidebar: the yellow identity block of the CV, in miniature
+   ========================================================================== */
+
+.sidebar {
+  opacity: 1;
+
+  .author__avatar img {
+    border: 0;
+    padding: 0;
+    max-width: 150px;
+  }
+
+  @include breakpoint($large) {
+    .h-card {
+      padding: 1.6rem 1.2rem 1.4rem;
+      background: $nibe-yellow;
+      text-align: center;
+    }
+
+    .author__avatar {
+      display: block;
+      margin-bottom: 1rem;
+
+      img {
+        max-width: 7.5rem;
+      }
+    }
+
+    .author__content {
+      display: block;
+      padding: 0;
+    }
+
+    .author__urls-wrapper {
+      margin-top: 1.2rem;
+      text-align: left;
+    }
+  }
+
+  .author__name {
+    @include nibe-caps(0.08em);
+    margin: 0;
+    font-size: 1.25rem;
+
+    a {
+      color: $nibe-ink;
+    }
+  }
+
+  .author__bio {
+    margin-top: 0.4em;
+    color: $nibe-ink;
+    font-size: 0.85rem;
+    line-height: 1.4;
+
+    p {
+      margin: 0;
+      font-size: inherit;
+    }
+  }
+
+  .author__urls {
+    @include breakpoint($large) {
+      padding: 0;
+      border: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    li {
+      @include nibe-caps(0.08em);
+      font-size: 0.85rem;
+      line-height: 2.2;
+      white-space: nowrap;
+    }
+
+    a {
+      color: $nibe-ink;
+      margin: 0;
+    }
+
+    .fas,
+    .fab,
+    .far {
+      color: $nibe-charcoal;
+    }
+  }
+}
+
+/* ==========================================================================
+   Footer: charcoal, like the CV's sidebar
+   ========================================================================== */
+
+.page__footer {
+  margin-top: 5em;
+  color: rgba($nibe-paper, 0.78);
+
+  footer {
+    margin-top: 0;
+    padding: 3.5rem 0 2.5rem;
+
+    @include breakpoint($x-large) {
+      max-width: none;
+    }
+  }
+
+  a {
+    color: $nibe-paper;
+
+    &:hover {
+      color: $nibe-yellow;
+      text-decoration: none;
+    }
+  }
+
+  a:focus-visible {
+    outline-color: $nibe-yellow;
+  }
+}
+
+.site-foot {
+  display: grid;
+  gap: 1.8rem 4rem;
+  padding: 0 $nibe-gutter;
+
+  @include breakpoint($medium) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: end;
+  }
+
+  &__name {
+    @include nibe-section-heading;
+    margin: 0;
+    color: $nibe-paper;
+    font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+    letter-spacing: 0.06em;
+
+    &::after {
+      background: $nibe-yellow;
+    }
+  }
+
+  &__bio {
+    margin: 0.6em 0 0;
+    font-size: 1rem;
+  }
+
+  &__links {
+    @include nibe-caps(0.1em);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em 1.8em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.95rem;
+  }
+
+  &__legal {
+    grid-column: 1 / -1;
+    margin: 1.4rem 0 0;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba($nibe-paper, 0.16);
+    color: rgba($nibe-paper, 0.6);
+    font-size: 0.8rem;
+  }
+}
+
+/* ==========================================================================
+   Posters and CV pages
+   ========================================================================== */
+
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 3rem 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 0 0 1px $nibe-hairline;
+    transition: transform 0.4s $nibe-ease, box-shadow 0.4s $nibe-ease;
+  }
+
+  a:hover img {
+    box-shadow: 0 0 0 1.5px $nibe-ink;
+  }
+
+  h2 {
+    @include nibe-caps(0.04em);
+    margin: 1.1em 0 0.3em;
+    font-size: 1.05em;
+    line-height: 1.25;
+  }
+
+  p {
+    margin: 0.3em 0 0;
+    font-size: 0.95em;
+  }
+}
+
+/* The EPJ prize, marked with the CV's yellow node */
+.prize {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+  font-style: italic;
+
+  &::before {
+    content: "";
+    flex: none;
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    background: $nibe-yellow;
+    box-shadow: 0 0 0 2px $nibe-charcoal;
+  }
+}
+
+.cv-actions {
+  margin-bottom: 1.8em;
+}
+
+.cv-sheet {
+  display: block;
+  max-width: 52rem;
+
+  img {
+    display: block;
+    width: 100%;
+    box-shadow: 0 0 0 1px $nibe-hairline;
+  }
+}
+
+/* ==========================================================================
+   Homepage (layout: landing)
+   ========================================================================== */
+
+#main.landing {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+
+  @include breakpoint($x-large) {
+    max-width: none;
+  }
+}
+
+.landing__section {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vw, 7rem) $nibe-gutter 0;
+}
+
+.landing__head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2em;
+  margin-bottom: 2.4rem;
+
+  h2 {
+    @include nibe-section-heading;
+    flex: 1 1 auto;
+    margin: 0;
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+  }
+}
+
+.landing__more {
+  @include nibe-caps(0.08em);
+  flex: none;
+  color: $nibe-ink;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-decoration-color: $nibe-yellow;
+  text-decoration-thickness: 0.18em;
+  text-underline-offset: 0.35em;
+
+  &:visited {
+    color: $nibe-ink;
+  }
+
+  &:hover {
+    color: $nibe-ink;
+    text-decoration-color: $nibe-charcoal;
+  }
+}
+
+.landing__timeline {
+  max-width: 56rem;
+
+  .entry__title {
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  }
+
+  .entry--pub {
+    padding-bottom: 2em;
+  }
+}
+
+/* Posters: three sheets on the paper */
+.poster-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 3rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include breakpoint(max-width $small - 1px) {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 22rem;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 0 0 1px $nibe-hairline;
+    transition: transform 0.4s $nibe-ease, box-shadow 0.4s $nibe-ease;
+  }
+
+  a:hover img {
+    box-shadow: 0 0 0 1.5px $nibe-ink;
+  }
+
+  p {
+    margin: 1rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  b {
+    @include nibe-caps(0.06em);
+    display: block;
+    margin-bottom: 0.2em;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   The assembly: name, instrument and the chain of the work
+   -------------------------------------------------------------------------- */
+
+.assembly {
+  position: relative;
+}
+
+.assembly__pin {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  padding: clamp(2.5rem, 6vw, 4.5rem) $nibe-gutter 0;
+  overflow: hidden;
+
+  @include breakpoint($large) {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    column-gap: 0;
+    row-gap: 2.5rem;
+    min-height: 38rem;
+    height: calc(100vh - 3.6rem);
+    padding-bottom: 2rem;
+  }
+}
+
+/* With scripting and motion allowed, the section grows and the pin holds
+   the stage still while the scroll drives the assembly */
+@include breakpoint($large) {
+  .assembly.is-live {
+    height: calc(200vh - 3.6rem);
+
+    .assembly__pin {
+      position: sticky;
+      top: 0;
+      height: calc(100vh - 3.6rem);
+      padding-top: clamp(1.5rem, 5vh, 4rem);
+    }
+  }
+}
+
+.assembly__intro {
+  position: relative;
+  z-index: 2;
+  align-self: center;
+}
+
+.assembly__name {
+  @include nibe-caps(0.035em);
+  margin: 0;
+  font-size: clamp(3.2rem, 7.4vw, 8.6rem);
+  line-height: 0.88;
+
+  span {
+    display: block;
+  }
+}
+
+.assembly__role {
+  max-width: 24em;
+  margin: 1.3rem 0 0;
+  font-size: clamp(1.1rem, 1.5vw, 1.45rem);
+  line-height: 1.4;
+}
+
+.assembly__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 2rem 0 0;
+}
+
+.assembly__stage {
+  position: relative;
+  align-self: center;
+  margin: 0 -18vw 0 -2vw;
+
+  figcaption {
+    padding-left: 2vw;
+    text-align: left;
+  }
+
+  @include breakpoint($large) {
+    margin-right: -6vw;
+    margin-left: -2vw;
+
+    figcaption {
+      padding-left: 0;
+      text-align: right;
+    }
+  }
+
+  img,
+  canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1800 / 755;
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    transform-origin: 43.6% 38%;
+    will-change: transform;
+  }
+
+  figcaption {
+    margin: 0.6rem 0 0;
+    max-width: none;
+    padding-right: 6vw;
+  }
+}
+
+.assembly.is-live {
+  .assembly__still {
+    visibility: hidden;
+  }
+
+  .assembly__canvas {
+    visibility: visible;
+  }
+}
+
+.assembly__done {
+  display: none;
+
+  .assembly.is-assembled & {
+    display: inline;
+  }
+}
+
+.assembly__cue {
+  display: none;
+
+  .assembly.is-live & {
+    display: inline;
+    transition: opacity 0.4s $nibe-ease;
+  }
+
+  .assembly.is-assembled & {
+    display: none;
+  }
+}
+
+.assembly__chain {
+  position: relative;
+  grid-column: 1 / -1;
+
+  ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem 1.5rem;
+    margin: 0;
+    padding: 1.6rem 0 0;
+    list-style: none;
+
+    @include breakpoint($medium) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  li {
+    position: relative;
+    margin: 0;
+    padding-right: 1rem;
+    transition: color 0.5s $nibe-ease;
+
+    // node on the rule, as on the CV timeline
+    &::before {
+      content: "";
+      position: absolute;
+      top: -1.6rem - ($nibe-node * 0.5) + 0.0625rem;
+      left: 0;
+      width: $nibe-node;
+      height: $nibe-node;
+      border-radius: 50%;
+      background: $nibe-yellow;
+      box-shadow: inset 0 0 0 3px $nibe-charcoal;
+      transition: background-color 0.4s $nibe-ease, box-shadow 0.4s $nibe-ease;
+
+      @include breakpoint(max-width $medium - 1px) {
+        display: none;
+      }
+    }
+  }
+
+  b {
+    @include nibe-caps(0.06em);
+    display: block;
+    font-size: 1.2rem;
+  }
+
+  span {
+    display: block;
+    margin-top: 0.2em;
+    color: mix($nibe-ink, $nibe-muted, 50%);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+}
+
+/* The rule the nodes sit on, and the charcoal progress drawn along it */
+.assembly__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: $nibe-rule;
+  background: $nibe-hairline;
+
+  span {
+    display: block;
+    height: 100%;
+    background: $nibe-charcoal;
+    transform-origin: 0 50%;
+  }
+}
+
+/* Until scripting takes over, every step is shown lit */
+.assembly:not(.is-live) .assembly__progress span {
+  transform: none;
+}
+
+.assembly.is-live .assembly__chain li:not(.is-lit) {
+  color: $nibe-muted;
+
+  span {
+    color: $nibe-muted;
+  }
+
+  &::before {
+    background: $nibe-paper;
+    box-shadow: inset 0 0 0 2px mix($nibe-muted, $nibe-paper, 60%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .entry__title a,
+  .figure-mount,
+  .poster-strip img,
+  .poster-grid img,
+  .assembly__chain li,
+  .assembly__chain li::before {
+    transition: none;
+  }
 }

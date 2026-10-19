@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "How to combine interferograms of different gasses... Theoretically at least"
 date:   2024-01-18
+thumb: /HSTI/images/thumbs/2024-01-18-Combining_interferograms_theoretically.webp
 ---
 
 What happens if we use the hyperspectral LWIR camera to measure a mixture of gasses? Let's say that we know the interferograms of the gasses individually, but not their combination. We are only going to work with this theoretically, meaning that we are just going to use a system matrix calculated from TMM and only considering how different FTIR spectra will be recorded into interferograms. 

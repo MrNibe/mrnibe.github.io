@@ -1,29 +1,14 @@
 # main links
 main:
-  - title: "Posters"
-    url: /posters/
   - title: "Publications"
     url: /publications/
-  #- title: "Blog posts"
-  #  url: /blogs/
-  - title: "Hyperspectral Thermal Imaging"
+  - title: "Posters"
+    url: /posters/
+  - title: "Lab notes"
     url: /HSTI/
-  - title: "Hyperspectral viewer"
+  - title: "Viewer"
     url: /HSTI_viewer/
-  #- title: "Photography"
-  #  url: /photography/
-  - title: "All posts"
-    url: /blogs/
   - title: "About"
     url: /about/
   - title: "CV"
     url: /cv/
-
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/

@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Animation of Scanning Fabry-Pérot Assembly"
 date:   2024-01-08
+thumb: /HSTI/images/thumbs/2024-01-08-fpi_animation.webp
 ---
 
 

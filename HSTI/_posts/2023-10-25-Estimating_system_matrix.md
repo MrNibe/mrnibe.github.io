@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Chasing the system response matrix"
 date:   2023-10-25
+thumb: /HSTI/images/thumbs/2023-10-25-Estimating_system_matrix.webp
 ---
 
 A reoccurring issue is not knowing the exact response matrix of the hyperspectral camera. This matrix should describe the relationship between the mirror separation of the scanning Fabry-Pérot interferometer (SFPI), the wavelength of the incident light and the output of the camera. Knowing this would aid in reconstructing the wavelength/wavenumber dependent spectra of the incident light, which at the moment are obscured and hidden in the interferograms. 

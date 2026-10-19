@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Flame experiments"
 date:   2024-08-07
+thumb: /HSTI/images/thumbs/2024-08-07-Flame_experiments.webp
 ---
 
 Hyperspectral images of flames have been acquired using the hyperspectral LWIR camera. The hope is to be able to distinguish between different kinds of fuel and identify different reaction regimes within the flames. The fuels are __not__ premixed, meaning pure fuel is expelled from the nozzle where it then mixes with the air in order to maintain a sustaining flame (Fig. 1). Only simple and pure fuels are used in the hope that the reactions (and hereby the spectral components) are simpler. 

@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T19:55:18+00:00",
+  "title": "Design System: Mads Nibe Larsen",
+  "extensions": {
+    "colorMeta": {
+      "signal-yellow": {
+        "role": "primary",
+        "displayName": "Signal Yellow",
+        "canonical": "#fdcb36",
+        "tonalRamp": [
+          "#3f330e",
+          "#725b18",
+          "#a48423",
+          "#d7ad2e",
+          "#fdd55e",
+          "#fee290",
+          "#feefc3",
+          "#fff9e7"
+        ]
+      },
+      "pale-yellow": {
+        "role": "primary",
+        "displayName": "Pale Yellow",
+        "canonical": "#feedb9",
+        "tonalRamp": [
+          "#403b2e",
+          "#726b53",
+          "#a59a78",
+          "#d8c99d",
+          "#fef1c7",
+          "#fef5d8",
+          "#fffaea",
+          "#fffdf7"
+        ]
+      },
+      "charcoal": {
+        "role": "secondary",
+        "displayName": "Charcoal",
+        "canonical": "#2c2d30",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#141416",
+          "#1d1d1f",
+          "#252629",
+          "#565759",
+          "#8b8c8d",
+          "#c0c0c1",
+          "#e6e6e6"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#f8f7f7",
+        "tonalRamp": [
+          "#3e3e3e",
+          "#706f6f",
+          "#a1a1a1",
+          "#d3d2d2",
+          "#f9f9f9",
+          "#fbfbfb",
+          "#fdfdfd",
+          "#fefefe"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#231f20",
+        "tonalRamp": [
+          "#090808",
+          "#100e0e",
+          "#171415",
+          "#1e1a1b",
+          "#4f4c4d",
+          "#868484",
+          "#bdbcbc",
+          "#e5e4e4"
+        ]
+      },
+      "graphite-muted": {
+        "role": "neutral",
+        "displayName": "Graphite Muted",
+        "canonical": "#6d6e71",
+        "tonalRamp": [
+          "#1b1c1c",
+          "#313133",
+          "#474849",
+          "#5d5e60",
+          "#8a8b8d",
+          "#afafb1",
+          "#d3d4d4",
+          "#edeeee"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#dcdad8",
+        "tonalRamp": [
+          "#373636",
+          "#636261",
+          "#8f8e8c",
+          "#bbb9b8",
+          "#e3e1e0",
+          "#ecebea",
+          "#f4f4f3",
+          "#fbfbfa"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Border",
+        "canonical": "#e3e1e0",
+        "tonalRamp": [
+          "#393838",
+          "#666565",
+          "#949292",
+          "#c1bfbe",
+          "#e9e7e6",
+          "#f0eeee",
+          "#f7f6f6",
+          "#fcfbfb"
+        ]
+      },
+      "code-ground": {
+        "role": "neutral",
+        "displayName": "Code Ground",
+        "canonical": "#efeeed",
+        "tonalRamp": [
+          "#3c3c3b",
+          "#6c6b6b",
+          "#9b9b9a",
+          "#cbcac9",
+          "#f2f1f1",
+          "#f6f6f5",
+          "#fafafa",
+          "#fdfdfd"
+        ]
+      },
+      "mount-white": {
+        "role": "neutral",
+        "displayName": "Mount White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#404040",
+          "#737373",
+          "#a6a6a6",
+          "#d9d9d9",
+          "#ffffff",
+          "#ffffff",
+          "#ffffff",
+          "#ffffff"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name on the homepage only."
+      },
+      "headline": {
+        "displayName": "Section Heading",
+        "purpose": "Archive and homepage section heads, post h2; always with the trailing 2px ink rule."
+      },
+      "title": {
+        "displayName": "Entry Title",
+        "purpose": "Timeline entry, page, tile and pager titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose with old-style proportional figures; root size 16/15/16/18px by breakpoint."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Italic graphite figcaptions and venues."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navigation, buttons, meta, dates, entry links, summaries; uppercase."
+      }
+    },
+    "shadows": [
+      {
+        "name": "hairline-ring",
+        "value": "0 0 0 1px #dcdad8",
+        "purpose": "Figure mounts, poster and CV sheets at rest."
+      },
+      {
+        "name": "ink-ring",
+        "value": "0 0 0 1.5px #231f20",
+        "purpose": "The same surfaces on hover."
+      },
+      {
+        "name": "outline-stroke",
+        "value": "inset 0 0 0 2px #231f20",
+        "purpose": "Outline button stroke (1.5px on share buttons)."
+      },
+      {
+        "name": "node-ring",
+        "value": "inset 0 0 0 3px #2c2d30",
+        "purpose": "Timeline and chain nodes."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-nibe",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every transition in the Nibe layer."
+      },
+      {
+        "name": "duration-control",
+        "value": "0.25s",
+        "purpose": "Button fill and color changes."
+      },
+      {
+        "name": "duration-mark",
+        "value": "0.35s",
+        "purpose": "Underline bars and nav underline growing in."
+      },
+      {
+        "name": "duration-figure",
+        "value": "0.3s–0.4s",
+        "purpose": "Mount and poster ring changes; chain step lighting (0.4–0.5s)."
+      },
+      {
+        "name": "assembly-scrub",
+        "value": "30 frames, scroll-driven",
+        "purpose": "Homepage instrument assembly; off under prefers-reduced-motion and without script."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "small",
+        "value": "600px"
+      },
+      {
+        "name": "medium",
+        "value": "768px"
+      },
+      {
+        "name": "large",
+        "value": "1024px"
+      },
+      {
+        "name": "x-large",
+        "value": "1280px"
+      }
+    ],
+    "constraints": [
+      "_sass/_nibe-theme.scss must stay libsass-compatible (GitHub Pages compiles with sassc): no Sass modules, no math.div, no CSS min()/max(); clamp() is fine.",
+      "Fonts self-hosted in assets/fonts; no third-party font requests."
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main call to action (Read the CV): yellow fill, ink caps, square.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Read the CV</a>",
+      "css": ".ds-btn-primary{display:inline-block;padding:0.85em 1.5em;background:#fdcb36;color:#231f20;font-family:Antonio,'Arial Narrow',Arial,sans-serif;font-weight:400;font-size:0.95rem;line-height:1;letter-spacing:0.09em;text-transform:uppercase;text-decoration:none;border:0;border-radius:0;transition:background-color .25s cubic-bezier(0.16, 1, 0.3, 1),color .25s cubic-bezier(0.16, 1, 0.3, 1);}.ds-btn-primary:hover{background:#2c2d30;color:#fdcb36;}.ds-btn-primary:focus-visible{outline:2px solid #231f20;outline-offset:3px;}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action: 2px inset ink stroke, fills with ink on hover.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Publications</a>",
+      "css": ".ds-btn-outline{display:inline-block;padding:0.85em 1.5em;background:transparent;color:#231f20;box-shadow:inset 0 0 0 2px #231f20;font-family:Antonio,'Arial Narrow',Arial,sans-serif;font-weight:400;font-size:0.95rem;line-height:1;letter-spacing:0.09em;text-transform:uppercase;text-decoration:none;border-radius:0;transition:background-color .25s cubic-bezier(0.16, 1, 0.3, 1),color .25s cubic-bezier(0.16, 1, 0.3, 1);}.ds-btn-outline:hover{background:#231f20;color:#f8f7f7;}.ds-btn-outline:focus-visible{outline:2px solid #231f20;outline-offset:3px;}"
+    },
+    {
+      "name": "Masthead Navigation",
+      "kind": "nav",
+      "refersTo": "masthead",
+      "description": "Slim yellow band; Antonio caps; ink underline scales in for hover and current page.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav__title\" href=\"#\">Mads Nibe Larsen</a><ul><li><a href=\"#\" aria-current=\"page\">Publications</a></li><li><a href=\"#\">Posters</a></li><li><a href=\"#\">Lab notes</a></li><li><a href=\"#\">CV</a></li></ul></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;justify-content:space-between;padding:0.9em 2rem;background:#fdcb36;font-family:Antonio,'Arial Narrow',Arial,sans-serif;text-transform:uppercase;}.ds-nav a{color:#231f20;text-decoration:none;letter-spacing:0.08em;}.ds-nav__title{font-size:1.15em;font-weight:500;letter-spacing:0.1em!important;}.ds-nav ul{display:flex;gap:2em;margin:0;padding:0;list-style:none;}.ds-nav ul a{position:relative;}.ds-nav ul a::before{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:#231f20;transform:scaleX(0);transform-origin:0 50%;transition:transform .35s cubic-bezier(0.16, 1, 0.3, 1);}.ds-nav ul a:hover::before,.ds-nav ul a[aria-current=page]::before{transform:scaleX(1);}.ds-nav a:focus-visible{outline:2px solid #231f20;outline-offset:3px;}"
+    },
+    {
+      "name": "Section Heading",
+      "kind": "custom",
+      "refersTo": "headline",
+      "description": "Antonio caps heading with a 2px ink rule running to the right edge.",
+      "html": "<h2 class=\"ds-section-head\">Publications</h2>",
+      "css": ".ds-section-head{display:flex;align-items:center;gap:0.9em;margin:0;font-family:Antonio,'Arial Narrow',Arial,sans-serif;font-weight:400;font-size:2.4rem;line-height:1.1;letter-spacing:0.05em;text-transform:uppercase;color:#231f20;}.ds-section-head::after{content:'';flex:1 1 auto;min-width:2rem;height:2px;background:currentColor;}"
+    },
+    {
+      "name": "Timeline Entry",
+      "kind": "custom",
+      "refersTo": "timeline-node",
+      "description": "The CV's list: ruled charcoal line, yellow node ringed in charcoal, caps title with year right, muted italic venue.",
+      "html": "<div class=\"ds-timeline\"><article class=\"ds-entry\"><header class=\"ds-entry__head\"><h3 class=\"ds-entry__title\"><a href=\"#\">Long-wave infrared hyperspectral imager</a></h3><time class=\"ds-entry__date\">2025</time></header><p class=\"ds-entry__venue\">Journal article, <i>Review of Scientific Instruments</i></p><p class=\"ds-entry__links\"><a href=\"#\">Read the paper</a><a href=\"#\">Abstract</a></p></article><article class=\"ds-entry\"><header class=\"ds-entry__head\"><h3 class=\"ds-entry__title\"><a href=\"#\">Signatures of flames</a></h3><time class=\"ds-entry__date\">2026</time></header><p class=\"ds-entry__venue\">Journal article, <i>Infrared Physics &amp; Technology</i></p></article></div>",
+      "css": ".ds-timeline{background:#f8f7f7;padding:1rem;font-family:Alegreya,Georgia,serif;color:#231f20;}.ds-entry{position:relative;padding:0 0 2.4em 2.2rem;}.ds-entry::before{content:'';position:absolute;left:0.3625rem;top:0.35em;bottom:-0.35em;width:2px;background:#2c2d30;}.ds-entry:last-child::before{bottom:1.2em;}.ds-entry::after{content:'';position:absolute;left:0;top:0.3em;width:0.85rem;height:0.85rem;border-radius:50%;background:#fdcb36;box-shadow:inset 0 0 0 3px #2c2d30;}.ds-entry__head{display:flex;align-items:baseline;justify-content:space-between;gap:1.5em;}.ds-entry__title{margin:0;font-family:Antonio,'Arial Narrow',Arial,sans-serif;font-weight:400;font-size:1.2em;line-height:1.2;letter-spacing:0.03em;text-transform:uppercase;}.ds-entry__title a{color:#231f20;text-decoration:none;background-image:linear-gradient(#fdcb36,#fdcb36);background-size:0 0.18em;background-position:0 100%;background-repeat:no-repeat;transition:background-size .35s cubic-bezier(0.16, 1, 0.3, 1);}.ds-entry__title a:hover{background-size:100% 0.18em;}.ds-entry__date{flex:none;font-family:Antonio,'Arial Narrow',Arial,sans-serif;letter-spacing:0.06em;font-variant-numeric:lining-nums tabular-nums;}.ds-entry__venue{margin:0.3em 0 0;color:#6d6e71;}.ds-entry__links{display:flex;gap:1.6em;margin:0.8em 0 0;font-family:Antonio,'Arial Narrow',Arial,sans-serif;font-size:0.85em;letter-spacing:0.08em;text-transform:uppercase;}.ds-entry__links a{color:#231f20;text-decoration:underline;text-decoration-color:#fdcb36;text-decoration-thickness:0.15em;text-underline-offset:0.2em;}.ds-entry__links a:hover{text-decoration-color:#2c2d30;}.ds-entry a:focus-visible{outline:2px solid #231f20;outline-offset:3px;}"
+    },
+    {
+      "name": "Figure Mount",
+      "kind": "card",
+      "refersTo": "figure-mount",
+      "description": "Research figure on white with a hairline ring, never cropped; ring turns ink on hover.",
+      "html": "<a class=\"ds-mount\" href=\"#\"><span class=\"ds-mount__img\"></span></a>",
+      "css": ".ds-mount{display:block;width:16rem;padding:0.5rem;background:#fff;box-shadow:0 0 0 1px #dcdad8;transition:box-shadow .3s cubic-bezier(0.16, 1, 0.3, 1);}.ds-mount:hover{box-shadow:0 0 0 1.5px #231f20;}.ds-mount:focus-visible{outline:2px solid #231f20;outline-offset:3px;}.ds-mount__img{display:block;aspect-ratio:4/3;background:linear-gradient(135deg,#efeeed,#dcdad8);}"
+    },
+    {
+      "name": "Body Link",
+      "kind": "custom",
+      "refersTo": "body",
+      "description": "Ink text with a yellow underline that darkens to charcoal on hover.",
+      "html": "<p class=\"ds-prose\">Details are in the <a href=\"#\">full thesis</a> and its appendix.</p>",
+      "css": ".ds-prose{font-family:Alegreya,Georgia,serif;font-size:1.1rem;line-height:1.5;color:#231f20;font-variant-numeric:oldstyle-nums proportional-nums;}.ds-prose a{color:#231f20;text-decoration:underline;text-decoration-color:#fdcb36;text-decoration-thickness:0.15em;text-underline-offset:0.2em;transition:text-decoration-color .2s cubic-bezier(0.16, 1, 0.3, 1);}.ds-prose a:hover{text-decoration-color:#2c2d30;}.ds-prose a:focus-visible{outline:2px solid #231f20;outline-offset:3px;}"
+    },
+    {
+      "name": "Footer Band",
+      "kind": "custom",
+      "refersTo": "footer-band",
+      "description": "Charcoal closing band: name as a section heading with a yellow rule, links in caps turning yellow on hover.",
+      "html": "<footer class=\"ds-foot\"><p class=\"ds-foot__name\">Mads Nibe Larsen</p><ul class=\"ds-foot__links\"><li><a href=\"#\">Email</a></li><li><a href=\"#\">GitHub</a></li><li><a href=\"#\">CV (PDF)</a></li></ul></footer>",
+      "css": ".ds-foot{padding:3.5rem 2rem 2.5rem;background:#2c2d30;color:rgba(248,247,247,.78);font-family:Alegreya,Georgia,serif;}.ds-foot__name{display:flex;align-items:center;gap:0.9em;margin:0 0 1.5rem;font-family:Antonio,'Arial Narrow',Arial,sans-serif;font-size:2.4rem;line-height:1.1;letter-spacing:0.06em;text-transform:uppercase;color:#f8f7f7;}.ds-foot__name::after{content:'';flex:1 1 auto;min-width:2rem;height:2px;background:#fdcb36;}.ds-foot__links{display:flex;flex-wrap:wrap;gap:0.6em 1.8em;margin:0;padding:0;list-style:none;font-family:Antonio,'Arial Narrow',Arial,sans-serif;font-size:0.95rem;letter-spacing:0.1em;text-transform:uppercase;}.ds-foot a{color:#f8f7f7;text-decoration:none;}.ds-foot a:hover{color:#fdcb36;}.ds-foot a:focus-visible{outline:2px solid #fdcb36;outline-offset:3px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The CV, Extended",
+    "overview": "Every page reads as another sheet of the owner's CV. A paper ground carries ink type; Antonio capitals announce sections and entries, Alegreya carries everything a person reads at length. Sections open with a capital heading whose ink rule runs out to the right edge; lists hang from a ruled line with yellow nodes ringed in charcoal, the CV's timeline. Identity is a yellow block (the masthead, the author sidebar); the page closes on a charcoal band. The site should feel like the same person's documents, not a theme with his colors.\n\nThe system is flat and typographic. Depth comes from rules, fills and white figure mounts, never from blurred shadow. Yellow is a material, not a voice: it fills, marks and underlines, and never sets text on a light ground. Real research figures and the instrument render are the imagery; nothing decorative stands in for them.\n\nThe homepage carries one signature motion: the scanning Fabry-Pérot interferometer assembles as the visitor scrolls, with the chain of the work lighting along a ruled progress line beneath it. Without script or with reduced motion, the still exploded render and every chain step stay fully visible.",
+    "keyCharacteristics": [
+      "Paper ground, ink type, yellow as fill and marker only, charcoal for the closing band.",
+      "Antonio uppercase for headings, labels, navigation and entry titles; Alegreya for prose, venues and captions.",
+      "Section headings carry a 2px rule running to the right edge.",
+      "Lists are ruled timelines with yellow, charcoal-ringed nodes.",
+      "Square corners everywhere except the round nodes.",
+      "No blurred or drop shadows; ring outlines only."
+    ],
+    "rules": [
+      {
+        "name": "The Yellow Is Material Rule",
+        "body": "Signal Yellow appears as fill, marker, underline or selection. It never sets text on paper or white (insufficient contrast); on charcoal it may color a hovered footer link.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Blocks Rule",
+        "body": "Yellow blocks say who (masthead, author sidebar); the charcoal band says goodbye (footer). Do not add a third block color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Capitals Speak, the Serif Reads Rule",
+        "body": "Antonio, uppercase and tracked, for anything that names or navigates; Alegreya for anything read as a sentence. Venues and captions are Alegreya italic in graphite.",
+        "section": "typography"
+      },
+      {
+        "name": "The Lining Dates Rule",
+        "body": "Prose uses old-style figures; entry dates switch to lining tabular figures so years align at the right edge.",
+        "section": "typography"
+      },
+      {
+        "name": "The Ring, Not Shadow Rule",
+        "body": "Any edge is a zero-blur ring or a solid rule. A blurred or offset shadow does not belong to this world.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** open every section with an Antonio caps heading and a 2px ink rule running to the right edge.",
+      "**Do** set lists of dated work as the ruled timeline with yellow nodes ringed in charcoal.",
+      "**Do** set venues, captions and secondary lines in graphite (#6d6e71) Alegreya italic.",
+      "**Do** mount research figures on white with a 1px hairline ring and never crop them (`object-fit: contain`).",
+      "**Do** keep every transition on cubic-bezier(0.16, 1, 0.3, 1) and turn transitions off under `prefers-reduced-motion`.",
+      "**Do** keep the Sass libsass-compatible: GitHub Pages compiles with sassc, so no Sass modules, no `math.div`, no CSS `min()`/`max()`; `clamp()` is fine.",
+      "**Do** self-host every font; no third-party font or tracking requests."
+    ],
+    "donts": [
+      "**Don't** set yellow text on paper or white.",
+      "**Don't** use blurred or offset drop shadows; edges are rules and zero-blur rings.",
+      "**Don't** round corners on buttons, blocks, mounts or menus; round forms are reserved for nodes and markers.",
+      "**Don't** uppercase Alegreya or set prose in Antonio.",
+      "**Don't** introduce a block color beyond yellow (identity) and charcoal (closing band).",
+      "**Don't** box text entries in filled or bordered cards or icon tiles; text lists hang from the timeline, and only figures sit on mounts."
+    ]
+  }
+}

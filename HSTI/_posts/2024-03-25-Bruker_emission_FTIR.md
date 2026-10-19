@@ -3,6 +3,7 @@ layout: single
 classes: wide
 title:  "Bruker Emission FTIR measurements"
 date:   2024-03-25
+thumb: /HSTI/images/thumbs/2024-03-25-Bruker_emission_FTIR.webp
 ---
 
 __Short description of results from emission measurements__

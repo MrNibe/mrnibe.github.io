@@ -1,13 +1,6 @@
 ---
-title: "madsnibe.com"
-layout: splash
+title: "Mads Nibe Larsen"
+layout: landing
 permalink: /
-header:
-  overlay_color: "#000"
-  overlay_filter: "0.35"
-  overlay_image: /assets/images/splash_pic.jpg
-  actions:
-    - label: "Read more about me here"
-      url: /about/
-excerpt: "Welcome to my website. Here you can read about who I am, my PhD work on hyperspectral thermal imaging, and my projects in AI, data processing and visualization."
+excerpt: "Research Scientist at Newtec Engineering A/S. PhD in long-wave infrared hyperspectral imaging: optics, experiments, physical modelling and the software that processes the data."
 ---
