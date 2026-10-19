@@ -19,9 +19,12 @@ layout: default
       </div>
 
       <figure class="assembly__stage">
-        <img class="assembly__still" src="{{ '/assets/images/fpi/frame-00.webp' | relative_url }}" width="1800" height="755" fetchpriority="high" alt="Exploded view of the scanning Fabry-Pérot interferometer: circuit board, mounting rings and the two mirrors">
+        <picture>
+          <source media="(prefers-reduced-motion: reduce)" srcset="{{ '/assets/images/fpi/frame-00.webp' | relative_url }}">
+          <img class="assembly__still" src="{{ '/assets/images/fpi/frame-29.webp' | relative_url }}" width="1800" height="755" fetchpriority="high" alt="The scanning Fabry-Pérot interferometer: circuit board, mounting rings and the two mirrors">
+        </picture>
         <canvas class="assembly__canvas" width="1800" height="755" aria-hidden="true"></canvas>
-        <figcaption>Scanning Fabry-Pérot interferometer<span class="assembly__cue">, scroll to assemble</span><span class="assembly__done">, assembled</span></figcaption>
+        <figcaption>Scanning Fabry-Pérot interferometer<span class="assembly__cue">, scroll to take it apart</span><span class="assembly__done">, exploded view</span></figcaption>
       </figure>
 
       <div class="assembly__chain">

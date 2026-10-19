@@ -108,7 +108,7 @@ Every page reads as another sheet of the owner's CV. A paper ground carries ink 
 
 The system is flat and typographic. Depth comes from rules, fills and white figure mounts, never from blurred shadow. Yellow is a material, not a voice: it fills, marks and underlines, and never sets text on a light ground. Real research figures and the instrument render are the imagery; nothing decorative stands in for them.
 
-The homepage carries one signature motion: the scanning Fabry-Pérot interferometer assembles as the visitor scrolls, with the chain of the work lighting along a ruled progress line beneath it. Without script or with reduced motion, the still exploded render and every chain step stay fully visible.
+The homepage carries one signature motion: the scanning Fabry-Pérot interferometer comes apart, from assembled to exploded, as the visitor scrolls, with the chain of the work lighting along a ruled progress line beneath it. Without script the assembled still shows; with reduced motion the exploded still shows; every chain step stays fully visible either way.
 
 **Key Characteristics:**
 - Paper ground, ink type, yellow as fill and marker only, charcoal for the closing band.

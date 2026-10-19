@@ -13,7 +13,7 @@ Memorable moment: the scanning Fabry-Pérot interferometer assembles itself as y
 
 ## Direction contract
 
-THESIS: The homepage shows the instrument, not a stock hero. A visitor scrolls and the exploded scanning Fabry-Pérot interferometer closes into one part while the chain of his work (optics, experiments, modelling, software) fills in beneath it. It refuses the photo-hero-with-tagline-and-button and the row of equal cards.
+THESIS: The homepage shows the instrument, not a stock hero. A visitor scrolls and the assembled scanning Fabry-Pérot interferometer comes apart into its parts (reversed at the owner's request, 2026-10-19) while the chain of his work (optics, experiments, modelling, software) fills in beneath it. It refuses the photo-hero-with-tagline-and-button and the row of equal cards.
 
 OWN-WORLD: CV identity. Paper #f8f7f7 ground, ink #231f20, yellow #fdcb36 only as fills, markers and underlines, charcoal #2c2d30 for the closing band. Antonio uppercase at poster scale for the name and section heads; Alegreya for prose. Hairline ink rules, a yellow bar as the progress and active marker. No cards, no shadows, no icon tiles.
 

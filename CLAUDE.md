@@ -35,7 +35,7 @@ Permalinks are `/:categories/:title/`, and Jekyll assigns a category automatical
 | `Photography/_posts/` | `Photography` | — | empty; `/photography/` is hidden from nav |
 | `_publications/*.md` | collection | `/publication/<name>` (set per file) | `/publications/` (`site.publications reversed`) |
 
-The homepage (`index.md`) uses `_layouts/landing.html`: the "assembly" hero, where `assets/js/assembly.js` scrubs a canvas through `assets/images/fpi/frame-00…29.webp` (frames of `HSTI/images/fpi_animation/fpi_assembly.mp4` keyed to alpha) as the visitor scrolls, then the four latest publications and the posters. Lab notes are deliberately left off the homepage. With reduced motion or no JavaScript it shows frame 00 as a still. If the frame count changes, update `frame_count` in the layout.
+The homepage (`index.md`) uses `_layouts/landing.html`: the "assembly" hero, where `assets/js/assembly.js` plays `assets/images/fpi/frame-00…29.webp` (frames of `HSTI/images/fpi_animation/fpi_assembly.mp4` keyed to alpha, 00 = exploded, 29 = assembled) backwards on a canvas as the visitor scrolls, so the assembled instrument comes apart over about half a screen of scrolling, then the four latest publications and the posters. Lab notes are deliberately left off the homepage. Without JavaScript it shows the assembled frame 29 as a still; with reduced motion a `<picture>` source swaps in the exploded frame 00. If the frame count changes, update `frame_count` in the layout.
 
 `/blogs/` ("All posts") loops `site.posts`, so it includes HSTI posts too. Top-nav links live in `_data/navigation.yml`; standalone pages (`about`, `cv`, `posters`, `HSTI_viewer`, …) live in `_pages/` with explicit `permalink`s.
 

@@ -230,6 +230,7 @@ summary:focus-visible,
   text-shadow: none;
 
   &:visited {
+    background-color: $nibe-yellow;
     color: $nibe-ink;
   }
 
@@ -246,6 +247,7 @@ summary:focus-visible,
   color: $nibe-ink;
 
   &:visited {
+    background-color: transparent;
     color: $nibe-ink;
   }
 
@@ -1106,7 +1108,7 @@ a:hover > .figure-mount {
    the stage still while the scroll drives the assembly */
 @include breakpoint($large) {
   .assembly.is-live {
-    height: calc(200vh - 3.6rem);
+    height: calc(150vh - 3.6rem);
 
     .assembly__pin {
       position: sticky;
@@ -1168,6 +1170,10 @@ a:hover > .figure-mount {
     }
   }
 
+  picture {
+    display: block;
+  }
+
   img,
   canvas {
     display: block;
@@ -1176,12 +1182,24 @@ a:hover > .figure-mount {
     aspect-ratio: 1800 / 755;
   }
 
+  // the opening state: the assembled instrument, scaled up to hold the stage
+  // (assembly.js eases from this transform back to none as it comes apart)
+  img,
+  canvas {
+    transform-origin: 43.6% 38%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    img {
+      transform: translate(6%, 10%) scale(1.6);
+    }
+  }
+
   canvas {
     position: absolute;
     top: 0;
     left: 0;
     visibility: hidden;
-    transform-origin: 43.6% 38%;
     will-change: transform;
   }
 
@@ -1205,7 +1223,7 @@ a:hover > .figure-mount {
 .assembly__done {
   display: none;
 
-  .assembly.is-assembled & {
+  .assembly.is-done & {
     display: inline;
   }
 }
@@ -1218,7 +1236,7 @@ a:hover > .figure-mount {
     transition: opacity 0.4s $nibe-ease;
   }
 
-  .assembly.is-assembled & {
+  .assembly.is-done & {
     display: none;
   }
 }

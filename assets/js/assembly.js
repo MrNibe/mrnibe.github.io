@@ -1,6 +1,7 @@
-/* Homepage: scroll scrubs the Fabry-Pérot assembly from exploded to assembled.
-   Without JavaScript, or with reduced motion, the still exploded frame stays
-   and every step of the chain is shown at full strength. */
+/* Homepage: scroll takes the Fabry-Pérot interferometer apart, from the
+   assembled part to the exploded view. Without JavaScript the assembled still
+   stays; with reduced motion the page shows the exploded still instead, and
+   every step of the chain is shown at full strength either way. */
 (function () {
   var section = document.querySelector(".assembly");
   if (!section) return;
@@ -13,7 +14,9 @@
   var ctx = canvas.getContext && canvas.getContext("2d");
   if (!ctx) return;
 
+  // Frames run exploded (00) to assembled (last); the scroll plays them backwards
   var count = parseInt(section.getAttribute("data-frames"), 10);
+  var last = count - 1;
   var src = section.getAttribute("data-src");
   var frames = new Array(count);
   var pinned = window.matchMedia("(min-width: 1024px)");
@@ -29,12 +32,8 @@
       var travel = r.height - vh;
       return travel > 0 ? Math.min(1, Math.max(0, -r.top / travel)) : 0;
     }
-    // Stacked layout: start exploded at the top of the page and finish
-    // assembling as the stage rises into the upper part of the viewport
-    var s = canvas.getBoundingClientRect();
-    var mid = s.top + s.height / 2 + window.pageYOffset;
-    var travel = Math.max(mid - vh * 0.25, vh * 0.6);
-    return Math.min(1, Math.max(0, window.pageYOffset / travel));
+    // Stacked layout: come apart over the first half screen of scrolling
+    return Math.min(1, Math.max(0, window.pageYOffset / (vh * 0.45)));
   }
 
   function nearestLoaded(i) {
@@ -48,25 +47,25 @@
   function render() {
     queued = false;
     var p = progress();
-    // hold the exploded view briefly, then assemble over the rest of the scroll
-    var q = Math.min(1, Math.max(0, (p - 0.06) / 0.86));
-    var i = Math.round(q * (count - 1));
+    // hold the assembled part for a moment, then take it apart
+    var q = Math.min(1, Math.max(0, (p - 0.04) / 0.9));
+    var i = Math.round((1 - q) * last);
     var img = nearestLoaded(i);
     if (img && img.index !== current) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       current = img.index;
     }
-    // Close in on the assembled instrument over the last stretch, so the
-    // finished part holds the stage instead of shrinking into it
-    var t = Math.min(1, Math.max(0, (q - 0.55) / 0.45));
+    // The assembled part starts scaled up to hold the stage and settles back
+    // to full-frame size as the pieces spread out (matches the still's CSS)
+    var t = Math.min(1, Math.max(0, (0.45 - q) / 0.45));
     var e = t * t * (3 - 2 * t);
     canvas.style.transform = "translate(" + (6 * e).toFixed(3) + "%, " + (10 * e).toFixed(3) + "%) scale(" + (1 + 0.6 * e).toFixed(4) + ")";
     bar.style.transform = "scaleX(" + p.toFixed(4) + ")";
     for (var k = 0; k < steps.length; k++) {
       steps[k].classList.toggle("is-lit", p >= k / steps.length - 0.001);
     }
-    section.classList.toggle("is-assembled", p > 0.98);
+    section.classList.toggle("is-done", p > 0.98);
   }
 
   function request() {
@@ -82,15 +81,16 @@
     img.src = src + pad(i) + ".webp";
   }
 
-  // Frame 0 is the still already on the page; fetch the rest in order, a few at a time
+  // The last frame is the still already on the page; fetch the rest from the
+  // assembled end outwards, a few at a time
   function start() {
-    still.index = 0;
+    still.index = last;
     still.ready = true;
-    frames[0] = still;
+    frames[last] = still;
     section.classList.add("is-live");
     request();
-    var next = 1;
-    function pump() { if (next < count) load(next++, pump); }
+    var next = last - 1;
+    function pump() { if (next >= 0) load(next--, pump); }
     pump(); pump(); pump();
   }
 
